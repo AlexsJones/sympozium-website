@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import WhySympozium from './components/WhySympozium'
 import WhoItsFor from './components/WhoItsFor'
 import Features from './components/Features'
+import LlmFit from './components/LlmFit'
 import Architecture from './components/Architecture'
 import Comparison from './components/Comparison'
 import Security from './components/Security'
@@ -18,6 +19,7 @@ function App() {
       <WhySympozium />
       <WhoItsFor />
       <Features />
+      <LlmFit />
       <Architecture />
       <Comparison />
       <Security />
