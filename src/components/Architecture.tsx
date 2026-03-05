@@ -182,6 +182,13 @@ export default function Architecture() {
               },
               {
                 step: '5',
+                title: 'Web endpoints expose agents as APIs',
+                desc: 'Instances with the web-endpoint skill get a long-lived Deployment with a web-proxy sidecar. Envoy Gateway routes OpenAI-compatible and MCP requests, creating per-request AgentRun Jobs.',
+                color: 'claw-orange',
+                icon: '\u{1F310}',
+              },
+              {
+                step: '6',
                 title: 'Everything is a K8s resource',
                 desc: 'Instances, runs, policies, skills, and schedules are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
                 color: 'claw-green',
@@ -191,7 +198,7 @@ export default function Architecture() {
               <div key={i} className="flex gap-6 items-start">
                 <div className="flex flex-col items-center shrink-0">
                   <div className={stepStyles[item.color].box}>{item.icon}</div>
-                  {i < 4 && (
+                  {i < 5 && (
                     <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent mt-2" />
                   )}
                 </div>
@@ -234,8 +241,15 @@ export default function Architecture() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="text-xs font-mono text-right">
+                    <div className="text-claw-orange font-bold">HTTP / API Client</div>
+                    <div className="text-slate-500">REST · MCP · OpenAI-compat</div>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-claw-orange/20 border border-claw-orange/40 flex items-center justify-center text-sm">{'\u{1F310}'}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="text-xs font-mono text-right">
                     <div className="text-kube-blue font-bold">Operator / SRE</div>
-                    <div className="text-slate-500">sympozium TUI · kubectl · k9s</div>
+                    <div className="text-slate-500">sympozium TUI · Web UI · kubectl · k9s</div>
                   </div>
                   <div className="w-8 h-8 rounded-full bg-kube-blue/20 border border-kube-blue/40 flex items-center justify-center text-sm">{'\u{1F6E0}'}</div>
                 </div>
@@ -244,12 +258,13 @@ export default function Architecture() {
               {/* connecting arrows from actors */}
               <div className="flex justify-between px-6 mb-2">
                 <Arrow label="messages" />
+                <Arrow label="REST · MCP" />
                 <Arrow label="sympozium TUI / kubectl" />
               </div>
 
-              {/* Row 1: Channel pods + Control Plane */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                <Group title="Channel Pods · one Deployment per type" color="blue" className="md:col-span-1">
+              {/* Row 1: Channel pods + Web Endpoints + Control Plane */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+                <Group title="Channel Pods · one Deployment per type" color="blue">
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node label="Telegram" color="blue" small />
                     <Node label="Slack" color="blue" small />
@@ -258,11 +273,21 @@ export default function Architecture() {
                   </div>
                 </Group>
 
-                <Group title="Control Plane" color="red" className="md:col-span-1">
+                <Group title="Web Endpoints · long-lived Deployments" color="orange">
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Node label="Web Proxy" sub="OpenAI-compat API + MCP" color="orange" />
+                    <Node label="Envoy Gateway" sub="HTTPRoute per instance" color="orange" small />
+                  </div>
+                  <div className="mt-2 text-[10px] font-mono text-slate-500">
+                    Gateway routes traffic → Web Proxy → creates AgentRun Jobs
+                  </div>
+                </Group>
+
+                <Group title="Control Plane" color="red">
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
                       label="Controller Manager"
-                      sub="SympoziumInstance · AgentRun · SympoziumPolicy · SkillPack · SympoziumSchedule"
+                      sub="SympoziumInstance · AgentRun · PersonaPack · SympoziumPolicy · SkillPack · SympoziumSchedule"
                       color="purple"
                     />
                     <Node label="API Server" sub="HTTP + WebSocket" color="orange" />
@@ -315,6 +340,7 @@ export default function Architecture() {
                 <Group title="Scheduled Tasks" color="yellow">
                   <div className="mt-2 space-y-2">
                     <Node label="SympoziumSchedule Controller" sub="Cron-based reconciler" color="yellow" />
+                    <Node label="Schedule Router" sub="NATS → SympoziumSchedule CRD" color="yellow" small />
                     <div className="text-[10px] font-mono text-center text-slate-500">
                       creates AgentRuns on schedule {'→'}
                     </div>
@@ -375,6 +401,9 @@ export default function Architecture() {
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-sm bg-claw-purple/30 border border-claw-purple/50" /> Control Plane
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-sm bg-claw-orange/30 border border-claw-orange/50" /> Web Endpoints
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-sm bg-claw-red/30 border border-claw-red/50" /> Event Bus

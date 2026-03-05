@@ -115,15 +115,14 @@ export default function Hero() {
             </p>
           </div>
           <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-light/70 backdrop-blur-xl shadow-2xl shadow-black/40">
-            <div className="aspect-video">
+            <div style={{ position: 'relative', overflow: 'hidden', paddingTop: '56.25%' }}>
               <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/ZUT60Bopa4s"
-                title="Intro to Sympozium"
+                src="https://share.synthesia.io/embeds/videos/34749f6f-0fa4-448f-a61b-91239b9ae91f"
                 loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
+                title="Synthesia video player - Unlocking the Power of Sympozium: A Feature Overview"
                 allowFullScreen
+                allow="encrypted-media; fullscreen; microphone;"
+                style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0, overflow: 'hidden' }}
               />
             </div>
           </div>
