@@ -110,9 +110,6 @@ export default function Hero() {
             <h3 className="text-2xl sm:text-3xl font-bold text-white">
               Intro to <span className="bg-gradient-to-r from-kube-blue to-claw-purple bg-clip-text text-transparent">Sympozium</span>
             </h3>
-            <p className="text-slate-400 mt-2">
-              A quick primer on the project from the creator.
-            </p>
           </div>
           <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-light/70 backdrop-blur-xl shadow-2xl shadow-black/40">
             <div style={{ position: 'relative', overflow: 'hidden', paddingTop: '56.25%' }}>
