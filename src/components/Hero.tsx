@@ -9,26 +9,6 @@ export default function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-claw-orange/10 rounded-full blur-[150px]" />
       </div>
 
-      {/* Kubernetes wheel decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.03]">
-        <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_60s_linear_infinite]">
-          <circle cx="100" cy="100" r="80" stroke="white" strokeWidth="1" fill="none" />
-          <circle cx="100" cy="100" r="60" stroke="white" strokeWidth="0.5" fill="none" />
-          <circle cx="100" cy="100" r="40" stroke="white" strokeWidth="0.5" fill="none" />
-          {[0, 60, 120, 180, 240, 300].map((angle) => (
-            <line
-              key={angle}
-              x1="100"
-              y1="100"
-              x2={100 + 80 * Math.cos((angle * Math.PI) / 180)}
-              y2={100 + 80 * Math.sin((angle * Math.PI) / 180)}
-              stroke="white"
-              strokeWidth="0.5"
-            />
-          ))}
-        </svg>
-      </div>
-
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24">
         {/* Creator badge */}
         <div className="flex justify-center mb-8">
@@ -47,8 +27,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Main headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-6">
+        {/* Main headline with icon behind */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.9] mb-6">
           <span className="text-white">The </span>
           <span className="bg-gradient-to-r from-kube-blue via-primary to-claw-purple bg-clip-text text-transparent">
             Kubernetes-Native
