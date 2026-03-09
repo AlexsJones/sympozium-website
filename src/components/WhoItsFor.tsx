@@ -137,7 +137,7 @@ export default function WhoItsFor() {
             <h3 className="text-2xl font-bold text-white mb-2">Built-in PersonaPacks</h3>
             <p className="text-sm text-slate-400">Ship with Sympozium — activate via the TUI or <span className="font-mono text-claw-cyan text-xs">kubectl</span></p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* platform-team pack */}
             <div className="relative rounded-2xl border border-claw-cyan/20 bg-surface-light/30 p-8 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-claw-cyan/5 via-transparent to-transparent" />
@@ -191,6 +191,36 @@ export default function WhoItsFor() {
                 <div className="flex flex-wrap gap-2">
                   {['Incident Responder', 'Cost Analyzer'].map((name) => (
                     <span key={name} className="text-xs font-medium px-2.5 py-1 rounded-lg bg-claw-orange/10 text-claw-orange border border-claw-orange/20">
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* developer-team pack */}
+            <div className="relative rounded-2xl border border-claw-purple/20 bg-surface-light/30 p-8 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-claw-purple/5 via-transparent to-transparent" />
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-claw-purple to-kube-blue p-[1px]">
+                    <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-white font-mono">developer-team</h4>
+                    <span className="text-xs text-claw-purple">Software Development</span>
+                  </div>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  A full 7-agent dev team that collaborates on a single GitHub repo — triaging issues, writing code, reviewing PRs, running tests, and shipping docs.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Tech Lead', 'Backend Dev', 'Frontend Dev', 'QA Engineer', 'Code Reviewer', 'DevOps Engineer', 'Docs Writer'].map((name) => (
+                    <span key={name} className="text-xs font-medium px-2.5 py-1 rounded-lg bg-claw-purple/10 text-claw-purple border border-claw-purple/20">
                       {name}
                     </span>
                   ))}
