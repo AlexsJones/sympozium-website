@@ -31,8 +31,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
+            <img src="/icon.png" alt="Sympozium" className="w-8 h-8 rounded-lg object-cover" />
             <span className="text-xl font-bold text-white group-hover:text-primary-light transition-colors">
-              Sympo<span className="text-claw-orange">zium</span>
+              sympozium<span className="text-kube-blue">.ai</span>
             </span>
           </a>
 

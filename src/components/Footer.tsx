@@ -52,7 +52,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img src="/icon.png" alt="Sympozium" className="w-9 h-9 rounded-lg object-cover" />
               <span className="text-xl font-bold text-white">
-                Sympo<span className="text-claw-orange">zium</span>
+                sympozium<span className="text-kube-blue">.ai</span>
               </span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed">
