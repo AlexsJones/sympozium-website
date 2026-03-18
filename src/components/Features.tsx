@@ -141,6 +141,24 @@ const features = [
     ),
   },
   {
+    title: 'MCP Server Integration',
+    subtitle: 'External tool providers',
+    description:
+      'MCPServer CRDs define external tool providers using the Model Context Protocol. The controller deploys managed servers (stdio or HTTP) or connects to pre-existing ones, probes for available tools, and injects an mcp-bridge sidecar into agent pods. Tool names are prefixed to avoid collisions.',
+    highlights: [
+      'Stdio, HTTP, and external server modes',
+      'Auto tool discovery & prefixed namespacing',
+      'Tool filtering with allow/deny lists',
+      'Full CRUD via TUI, Web UI, and kubectl',
+    ],
+    color: 'kube-blue',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+      </svg>
+    ),
+  },
+  {
     title: 'Any AI Provider',
     subtitle: 'Model agnostic',
     description:

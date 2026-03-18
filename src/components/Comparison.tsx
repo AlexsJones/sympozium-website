@@ -55,9 +55,14 @@ const rows = [
     sympozium: 'Dedicated Deployment per channel type',
   },
   {
+    category: 'External tools',
+    openclaw: 'Plugin SDKs, in-process registries',
+    sympozium: 'MCPServer CRD — managed deployments, auto-discovery, prefixed tool namespacing',
+  },
+  {
     category: 'Observability',
     openclaw: 'Application logs',
-    sympozium: 'kubectl logs, events, conditions, k9s TUI',
+    sympozium: 'kubectl logs, events, conditions, OpenTelemetry traces/metrics, k9s TUI, web dashboard',
   },
 ]
 

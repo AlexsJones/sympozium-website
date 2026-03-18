@@ -72,7 +72,7 @@ export default function Hero() {
             </span>
           </a>
           <a
-            href="https://github.com/AlexsJones/sympozium"
+            href="https://github.com/sympozium-ai/sympozium"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 text-lg font-semibold text-white bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all hover:scale-105 flex items-center gap-2"

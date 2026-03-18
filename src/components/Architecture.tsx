@@ -189,8 +189,15 @@ export default function Architecture() {
               },
               {
                 step: '6',
+                title: 'MCP servers extend agent capabilities',
+                desc: 'MCPServer CRDs define external tool providers using the Model Context Protocol. The controller deploys managed servers or connects to external ones, probes for available tools, and injects an mcp-bridge sidecar into agent pods. Tool names are prefixed to avoid collisions across providers.',
+                color: 'claw-cyan',
+                icon: '\u{1F50C}',
+              },
+              {
+                step: '7',
                 title: 'Everything is a K8s resource',
-                desc: 'Instances, runs, policies, skills, and schedules are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
+                desc: 'Instances, runs, policies, skills, schedules, and MCP servers are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
                 color: 'claw-green',
                 icon: '☸️',
               },
@@ -198,7 +205,7 @@ export default function Architecture() {
               <div key={i} className="flex gap-6 items-start">
                 <div className="flex flex-col items-center shrink-0">
                   <div className={stepStyles[item.color].box}>{item.icon}</div>
-                  {i < 5 && (
+                  {i < 6 && (
                     <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent mt-2" />
                   )}
                 </div>
@@ -287,7 +294,7 @@ export default function Architecture() {
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
                       label="Controller Manager"
-                      sub="SympoziumInstance · AgentRun · PersonaPack · SympoziumPolicy · SkillPack · SympoziumSchedule"
+                      sub="SympoziumInstance · AgentRun · PersonaPack · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
                       color="purple"
                     />
                     <Node label="API Server" sub="HTTP + WebSocket" color="orange" />
@@ -348,7 +355,29 @@ export default function Architecture() {
                 </Group>
               </div>
 
-              {/* Row 3: Skill RBAC + Persistent Memory */}
+              {/* Row 3: MCP Servers + Skill RBAC + Persistent Memory */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <Group title="MCP Servers · external tool providers" color="cyan">
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Node
+                      label="MCPServer Controller"
+                      sub="Deployment + Service · tool discovery"
+                      color="cyan"
+                    />
+                    <Node
+                      label="MCP Bridge Sidecar"
+                      sub="SSE/stdio adapter"
+                      color="cyan"
+                      small
+                    />
+                  </div>
+                  <div className="mt-2 text-[10px] font-mono text-slate-500 space-y-0.5">
+                    <div>Controller deploys & probes tools</div>
+                    <div>Bridge injects into Agent Pods</div>
+                  </div>
+                </Group>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <Group title="Skill RBAC · ephemeral, least-privilege" color="green">
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -412,7 +441,7 @@ export default function Architecture() {
               <span className="w-2.5 h-2.5 rounded-sm bg-claw-green/30 border border-claw-green/50" /> RBAC / Security
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-sm bg-claw-cyan/30 border border-claw-cyan/50" /> IPC / Bridge
+              <span className="w-2.5 h-2.5 rounded-sm bg-claw-cyan/30 border border-claw-cyan/50" /> IPC / MCP Bridge
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-sm bg-yellow-500/30 border border-yellow-500/50" /> Scheduling

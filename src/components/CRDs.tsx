@@ -62,6 +62,12 @@ const crds = [
     description: 'Pre-configured agent bundles — activating a pack stamps out instances, schedules, and memory for each persona',
     color: 'claw-cyan',
   },
+  {
+    name: 'MCPServer',
+    analogy: 'Deployment + Service',
+    description: 'External tool providers via Model Context Protocol — managed stdio/HTTP servers or external endpoints, auto-discovery, prefixed tool namespacing',
+    color: 'kube-blue',
+  },
 ]
 
 export default function CRDs() {
