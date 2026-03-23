@@ -84,27 +84,6 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Intro video */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="text-center mb-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white">
-              Intro to <span className="bg-gradient-to-r from-kube-blue to-claw-purple bg-clip-text text-transparent">Sympozium</span>
-            </h3>
-          </div>
-          <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-light/70 backdrop-blur-xl shadow-2xl shadow-black/40">
-            <div style={{ position: 'relative', overflow: 'hidden', paddingTop: '56.25%' }}>
-              <iframe
-                src="https://share.synthesia.io/embeds/videos/34749f6f-0fa4-448f-a61b-91239b9ae91f"
-                loading="lazy"
-                title="Synthesia video player - Unlocking the Power of Sympozium: A Feature Overview"
-                allowFullScreen
-                allow="encrypted-media; fullscreen; microphone;"
-                style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0, overflow: 'hidden' }}
-              />
-            </div>
-          </div>
-        </div>
-
         {/* Terminal preview */}
         <div className="max-w-2xl mx-auto">
           <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-light/80 backdrop-blur-xl shadow-2xl shadow-black/40">
