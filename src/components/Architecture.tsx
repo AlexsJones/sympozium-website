@@ -169,14 +169,14 @@ export default function Architecture() {
               {
                 step: '3',
                 title: 'Agent calls LLM provider',
-                desc: 'The agent container calls OpenAI, Anthropic, Azure, Ollama, or any compatible endpoint — with skills mounted as files, persistent memory injected from ConfigMap, and tool sidecars providing runtime capabilities.',
+                desc: 'The agent container calls OpenAI, Anthropic, Azure, Ollama, or any compatible endpoint — with skills mounted as files, persistent memory provided by a SQLite + FTS5 sidecar on a PersistentVolume, and tool sidecars providing runtime capabilities.',
                 color: 'claw-orange',
                 icon: '\u{1F9E0}',
               },
               {
                 step: '4',
                 title: 'Results flow back through the bus',
-                desc: 'Results travel: IPC bridge → NATS → channel pod → user. The controller extracts structured results and memory updates from pod logs.',
+                desc: 'Results travel: IPC bridge → NATS → channel pod → user. The memory server persists findings to SQLite on a PVC that survives across ephemeral agent runs.',
                 color: 'claw-cyan',
                 icon: '\u{1F4E1}',
               },
@@ -328,6 +328,8 @@ export default function Architecture() {
                       <span className="text-white/30">{'⟷'}</span>
                     </div>
                     <Node label="IPC Bridge" sub="fsnotify → NATS" color="cyan" />
+                    <Node label="Memory Server" sub="SQLite + FTS5 · HTTP API" color="purple" />
+                    <Node label="MCP Bridge" sub="HTTP/stdio adapter" color="cyan" small />
                     <Node label="Sandbox" sub="optional sidecar" color="orange" small />
                     <Node label="Skill Sidecars" sub="kubectl, helm, etc. · auto-RBAC" color="green" />
                   </div>
@@ -339,7 +341,7 @@ export default function Architecture() {
                       <span className="text-claw-purple/60">{'↳'}</span> /skills mounted from ConfigMap
                     </div>
                     <div className="text-[10px] font-mono text-slate-500 flex items-center gap-1">
-                      <span className="text-claw-cyan/60">{'↳'}</span> /memory read-only from ConfigMap
+                      <span className="text-claw-cyan/60">{'↳'}</span> memory_search · memory_store · memory_list via HTTP
                     </div>
                   </div>
                 </Group>
@@ -397,26 +399,51 @@ export default function Architecture() {
                   </div>
                 </Group>
 
-                <Group title="Persistent Memory" color="purple">
+                <Group title="Persistent Memory · two-tier" color="purple">
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
-                      label="ConfigMap"
-                      sub="<instance>-memory · MEMORY.md"
+                      label="SQLite + FTS5"
+                      sub="PVC · memory.db · full-text search"
                       color="purple"
+                    />
+                    <Node
+                      label="ConfigMap"
+                      sub="MEMORY.md · legacy fallback"
+                      color="white"
+                      small
                     />
                   </div>
                   <div className="mt-2 text-[10px] font-mono text-slate-500 space-y-0.5">
-                    <div>Agent reads /memory/MEMORY.md</div>
-                    <div>Controller extracts & patches memory markers</div>
+                    <div>Memory server sidecar → SQLite on PersistentVolume</div>
+                    <div>memory_search (FTS5) · memory_store · memory_list</div>
+                    <div>PVC outlives ephemeral agent pods</div>
                   </div>
                 </Group>
               </div>
 
-              {/* Row 4: Data Layer */}
+              {/* Row 4: Node Probe */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <Group title="Node Probe · DaemonSet (opt-in)" color="yellow">
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Node
+                      label="Node Probe"
+                      sub="Ollama · vLLM · llama-cpp discovery"
+                      color="yellow"
+                    />
+                  </div>
+                  <div className="mt-2 text-[10px] font-mono text-slate-500 space-y-0.5">
+                    <div>Probes localhost for inference providers</div>
+                    <div>Annotates nodes: sympozium.ai/inference-*</div>
+                  </div>
+                </Group>
+              </div>
+
+              {/* Row 5: Data Layer */}
               <Group title="Data Layer" color="white">
                 <div className="flex flex-wrap gap-3 mt-2 justify-center">
                   <Node label="etcd" sub="CRDs, state" color="white" />
                   <Node label="PostgreSQL" sub="sessions, history" color="white" />
+                  <Node label="PersistentVolumes" sub="memory.db per instance" color="white" />
                   <Node label="SkillPack ConfigMaps" sub="mounted at /skills" color="white" />
                 </div>
               </Group>
@@ -444,7 +471,10 @@ export default function Architecture() {
               <span className="w-2.5 h-2.5 rounded-sm bg-claw-cyan/30 border border-claw-cyan/50" /> IPC / MCP Bridge
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-sm bg-yellow-500/30 border border-yellow-500/50" /> Scheduling
+              <span className="w-2.5 h-2.5 rounded-sm bg-claw-purple/30 border border-claw-purple/50" /> Memory
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-sm bg-yellow-500/30 border border-yellow-500/50" /> Scheduling / Node Probe
             </span>
           </div>
         </div>

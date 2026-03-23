@@ -90,12 +90,12 @@ const features = [
     title: 'Persistent Memory',
     subtitle: 'Agents that remember',
     description:
-      'Each SympoziumInstance gets a ConfigMap-backed persistent memory (MEMORY.md). Mounted read-only into every agent pod, prepended as context, and automatically updated after each run. Memory lives in etcd — no external databases, fully declarative.',
+      'Each SympoziumInstance gets a dedicated memory server sidecar backed by SQLite with FTS5 full-text search on a PersistentVolume. Agents call memory_search, memory_store, and memory_list over HTTP — memories survive across ephemeral pod runs. A legacy ConfigMap-based fallback (MEMORY.md) is preserved for migration.',
     highlights: [
-      'ConfigMap-backed MEMORY.md',
-      'Auto-updated after each run',
-      'Injected as agent context',
-      'Lives in etcd alongside cluster state',
+      'SQLite + FTS5 on PersistentVolume',
+      'memory_search · memory_store · memory_list',
+      'PVC outlives ephemeral agent pods',
+      'Legacy ConfigMap fallback for migration',
     ],
     color: 'claw-cyan',
     icon: (
