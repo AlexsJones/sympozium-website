@@ -35,7 +35,9 @@ export default function Footer() {
               </span>
             </a>
             <a
-              href="#get-started"
+              href="https://deploy.sympozium.ai/docs/getting-started/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 text-lg font-semibold text-white bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all hover:scale-105"
             >
               Quick Start Guide
@@ -113,15 +115,15 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Resources</h4>
             <ul className="space-y-3">
               {[
-                { label: 'Getting Started', href: '#get-started' },
-                { label: 'Architecture', href: '#architecture' },
-                { label: 'Skill Authoring Guide', href: 'https://github.com/sympozium-ai/sympozium/blob/main/docs/writing-skills.md' },
+                { label: 'Getting Started', href: 'https://deploy.sympozium.ai/docs/getting-started/' },
+                { label: 'Architecture', href: 'https://deploy.sympozium.ai/docs/architecture/' },
+                { label: 'Skill Authoring Guide', href: 'https://deploy.sympozium.ai/docs/skills/' },
               ].map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target={link.href.startsWith('#') ? undefined : '_blank'}
-                    rel={link.href.startsWith('#') ? undefined : 'noopener noreferrer'}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-slate-400 hover:text-white transition-colors"
                   >
                     {link.label}
