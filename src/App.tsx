@@ -6,6 +6,7 @@ import Features from './components/Features'
 import LlmFit from './components/LlmFit'
 import Architecture from './components/Architecture'
 import Comparison from './components/Comparison'
+import ComparisonKagent from './components/ComparisonKagent'
 import Security from './components/Security'
 import GetStarted from './components/GetStarted'
 import CRDs from './components/CRDs'
@@ -22,6 +23,7 @@ function App() {
       <LlmFit />
       <Architecture />
       <Comparison />
+      <ComparisonKagent />
       <Security />
       <CRDs />
       <GetStarted />

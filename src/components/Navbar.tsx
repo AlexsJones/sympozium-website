@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [versusOpen, setVersusOpen] = useState(false)
+  const versusRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -10,13 +12,28 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (versusRef.current && !versusRef.current.contains(e.target as Node)) {
+        setVersusOpen(false)
+      }
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [])
+
   const links = [
-    { label: 'Who It\'s For', href: '#who' },
+    { label: "Who It's For", href: '#who' },
     { label: 'Features', href: '#features' },
     { label: 'Architecture', href: '#architecture' },
     { label: 'Security', href: '#security' },
-    { label: 'vs OpenClaw', href: '#comparison' },
     { label: 'Get Started', href: '#get-started' },
+  ]
+
+  const versusItems = [
+    { label: 'vs OpenClaw', href: '#comparison' },
+    { label: 'vs kagent', href: '#comparison-kagent' },
   ]
 
   return (
@@ -48,6 +65,38 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+
+            {/* Versus dropdown */}
+            <div ref={versusRef} className="relative">
+              <button
+                onClick={() => setVersusOpen(!versusOpen)}
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-white/5 transition-all"
+              >
+                Versus
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform ${versusOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {versusOpen && (
+                <div className="absolute top-full right-0 mt-1 w-44 py-1 rounded-lg bg-surface-alt/95 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/30">
+                  {versusItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setVersusOpen(false)}
+                      className="block px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* CTA + GitHub */}
@@ -94,6 +143,20 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
+              </a>
+            ))}
+            {/* Mobile versus links - shown inline */}
+            <div className="px-4 pt-3 pb-1">
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Versus</span>
+            </div>
+            {versusItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg pl-6"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
               </a>
             ))}
             <a
