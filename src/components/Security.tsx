@@ -2,7 +2,7 @@ const threats = [
   {
     threat: 'Agent escapes sandbox',
     openclaw: 'Shared process — one rogue tool call can access memory, files, or network of every other agent',
-    sympozium: 'Each agent runs in an ephemeral Pod with deny-all egress NetworkPolicy. Blast radius = one Job.',
+    sympozium: 'Each agent runs in an ephemeral Pod with deny-all egress NetworkPolicy. Opt into kernel-level isolation via Agent Sandbox — gVisor or Kata Containers — for an additional layer between the agent and the host kernel. Blast radius = one Job.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285zM12 15.75h.007v.008H12v-.008z" />
@@ -92,6 +92,11 @@ const layers = [
     detail: 'Namespace-scoped CRDs + Kubernetes RBAC',
     color: 'from-kube-blue to-claw-cyan',
   },
+  {
+    label: 'Kernel Isolation',
+    detail: 'Agent Sandbox — gVisor user-space kernel or Kata lightweight VMs',
+    color: 'from-claw-cyan to-claw-green',
+  },
 ]
 
 export default function Security() {
@@ -130,7 +135,7 @@ export default function Security() {
         {/* Defence-in-depth layers */}
         <div className="mb-20">
           <h3 className="text-2xl font-bold text-white text-center mb-10">
-            Six layers of defence-in-depth
+            Seven layers of defence-in-depth
           </h3>
           <div className="max-w-3xl mx-auto space-y-3">
             {layers.map((layer, i) => (

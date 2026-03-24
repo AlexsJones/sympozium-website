@@ -18,7 +18,7 @@ const reasons = [
     ),
     title: 'Safe by Design',
     description:
-      'Defense-in-depth at every layer: NetworkPolicy deny-all egress, SecurityContext non-root, admission webhooks, ephemeral RBAC per run. No standing god-roles, no leftover permissions.',
+      'Defense-in-depth at every layer: NetworkPolicy deny-all egress, SecurityContext non-root, admission webhooks, ephemeral RBAC per run. Opt into kernel-level isolation via Agent Sandbox (gVisor / Kata). No standing god-roles, no leftover permissions.',
     color: 'from-claw-green to-claw-cyan',
   },
   {

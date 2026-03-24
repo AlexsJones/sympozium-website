@@ -68,6 +68,12 @@ const crds = [
     description: 'External tool providers via Model Context Protocol — managed stdio/HTTP servers or external endpoints, auto-discovery, prefixed tool namespacing',
     color: 'kube-blue',
   },
+  {
+    name: 'Sandbox / SandboxClaim',
+    analogy: 'Job + RuntimeClass',
+    description: 'Upstream K8s Agent Sandbox CRDs (kubernetes-sigs/agent-sandbox) — kernel-level isolation via gVisor or Kata, warm pools for instant starts, fully integrated into AgentRun lifecycle',
+    color: 'claw-green',
+  },
 ]
 
 export default function CRDs() {
