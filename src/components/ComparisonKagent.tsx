@@ -27,7 +27,7 @@ const rows = [
   {
     category: 'Agent packaging',
     kagent: 'Individual Agent CRDs defined one at a time',
-    sympozium: 'PersonaPacks — bundle personas, skills, schedules, and memory seeds in one kubectl apply',
+    sympozium: 'Ensembles — bundle personas, skills, schedules, and memory seeds in one kubectl apply',
   },
   {
     category: 'Policy & gating',
@@ -134,10 +134,10 @@ export default function ComparisonKagent() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <h3 className="text-white font-semibold mb-1">PersonaPacks</h3>
+            <h3 className="text-white font-semibold mb-1">Ensembles</h3>
             <p className="text-sm text-slate-400">
               kagent defines agents one CRD at a time.
-              Sympozium ships <span className="text-claw-purple font-medium">PersonaPacks</span> — declarative bundles that
+              Sympozium ships <span className="text-claw-purple font-medium">Ensembles</span> — declarative bundles that
               stamp out an entire team of agents, skills, schedules, and memory seeds in one apply.
             </p>
           </div>

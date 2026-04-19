@@ -24,7 +24,7 @@ export default function Workflows() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Workflows turn PersonaPacks from static bundles into coordinated teams.
+            Workflows turn Ensembles from static bundles into coordinated teams.
             Define <span className="text-white font-medium">typed relationships</span> between personas &mdash;
             delegation, sequencing, supervision &mdash; and let agents hand off tasks,
             share knowledge, and run pipelines automatically.
@@ -130,7 +130,7 @@ export default function Workflows() {
                 A shared brain for every team
               </h3>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Each PersonaPack gets a dedicated SQLite memory pool that all personas can read and write.
+                Each Ensemble gets a dedicated SQLite memory pool that all personas can read and write.
                 Facts discovered by the Researcher are instantly available to the Writer.
                 Feedback from the Reviewer shapes future research. Knowledge compounds across runs.
               </p>

@@ -70,16 +70,16 @@ export default function WhoItsFor() {
             Who It's For
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Activate a PersonaPack.
+            Activate an Ensemble.
             <br />
             <span className="bg-gradient-to-r from-claw-orange to-claw-purple bg-clip-text text-transparent">
               Get a team of agents instantly.
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Sympozium ships with <span className="text-claw-cyan font-medium">built-in PersonaPacks</span> — pre-configured
+            Sympozium ships with <span className="text-claw-cyan font-medium">built-in Ensembles</span> — pre-configured
             bundles of agent personas, each with its own system prompt, skills, tool policy, schedule, and persistent memory.
-            Activate a pack in the TUI, enter your API key, and the controller stamps out all agents automatically.
+            Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically.
             Think of them as <span className="text-white font-medium">Helm Charts for AI agents</span>.
           </p>
         </div>
@@ -131,10 +131,10 @@ export default function WhoItsFor() {
           ))}
         </div>
 
-        {/* Built-in PersonaPacks */}
+        {/* Built-in Ensembles */}
         <div className="mt-16">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-2">Built-in PersonaPacks</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Built-in Ensembles</h3>
             <p className="text-sm text-slate-400">Ship with Sympozium — activate via the TUI or <span className="font-mono text-claw-cyan text-xs">kubectl</span></p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -229,17 +229,17 @@ export default function WhoItsFor() {
             </div>
           </div>
 
-          {/* PersonaPack TUI demo */}
+          {/* Ensemble TUI demo */}
           <div className="mt-10 max-w-4xl mx-auto">
             <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
               <img
                 src="/personas.gif"
-                alt="PersonaPack activation in the Sympozium TUI — select a pack, enter API key, agents deploy automatically"
+                alt="Ensemble activation in the Sympozium TUI — select an ensemble, enter API key, agents deploy automatically"
                 className="w-full h-auto"
               />
             </div>
             <p className="mt-4 text-sm text-slate-500 font-mono text-center">
-              Activating the platform-team PersonaPack — 3 agents deployed in seconds
+              Activating the platform-team Ensemble — 3 agents deployed in seconds
             </p>
           </div>
 
@@ -273,7 +273,7 @@ export default function WhoItsFor() {
           {/* Custom pack callout */}
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-500">
-              Need something different? <span className="text-white font-medium">Write your own PersonaPack</span> — define personas with custom system prompts, skills, schedules, and memory seeds, then <span className="font-mono text-claw-cyan text-xs">kubectl apply</span>.
+              Need something different? <span className="text-white font-medium">Write your own Ensemble</span> — define personas with custom system prompts, skills, schedules, and memory seeds, then <span className="font-mono text-claw-cyan text-xs">kubectl apply</span>.
             </p>
           </div>
         </div>

@@ -294,7 +294,7 @@ export default function Architecture() {
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
                       label="Controller Manager"
-                      sub="SympoziumInstance · AgentRun · PersonaPack · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
+                      sub="SympoziumInstance · AgentRun · Ensemble · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
                       color="purple"
                     />
                     <Node label="API Server" sub="HTTP + WebSocket" color="orange" />

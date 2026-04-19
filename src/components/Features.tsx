@@ -33,14 +33,14 @@ const colorMap: Record<string, { text: string; gradientLine: string; checkIcon: 
 
 const features = [
   {
-    title: 'PersonaPacks',
+    title: 'Ensembles',
     subtitle: 'Helm Charts for AI agents',
     description:
-      'Pre-configured bundles of agent personas — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate a pack in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team and devops-essentials packs.',
+      'Pre-configured bundles of agent personas — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team and devops-essentials ensembles.',
     highlights: [
       'One-click agent team deployment',
       'Built-in packs: platform-team, devops-essentials',
-      'Custom packs via YAML + kubectl apply',
+      'Custom ensembles via YAML + kubectl apply',
       'Cascading cleanup via ownerReferences',
     ],
     color: 'claw-cyan',

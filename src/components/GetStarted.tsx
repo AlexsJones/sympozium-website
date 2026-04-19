@@ -68,7 +68,7 @@ export default function GetStarted() {
           <div className="rounded-2xl overflow-hidden border border-white/5 bg-surface-light/30">
             <div className="flex items-center gap-3 px-6 py-4 bg-surface-lighter/30 border-b border-white/5">
               <span className="w-7 h-7 rounded-lg bg-claw-orange/20 text-claw-orange text-sm font-bold flex items-center justify-center">3</span>
-              <span className="font-semibold text-white">Activate a PersonaPack</span>
+              <span className="font-semibold text-white">Activate an Ensemble</span>
               <span className="ml-auto px-2 py-0.5 rounded-md bg-claw-green/10 text-claw-green text-xs font-medium border border-claw-green/20">recommended</span>
             </div>
             <div className="p-6">
@@ -110,7 +110,7 @@ export default function GetStarted() {
                   <div><span className="text-claw-green">✓</span> SympoziumSchedule <span className="text-slate-400">×3</span> created</div>
                   <div><span className="text-claw-green">✓</span> Memory ConfigMap <span className="text-slate-400">×3</span> seeded</div>
                 </div>
-                <div className="mt-2 text-slate-400">PersonaPack <span className="text-claw-cyan">platform-team</span> → <span className="text-claw-green">Ready</span> (3/3 personas installed)</div>
+                <div className="mt-2 text-slate-400">Ensemble <span className="text-claw-cyan">platform-team</span> → <span className="text-claw-green">Ready</span> (3/3 personas installed)</div>
               </div>
               <p className="mt-3 text-sm text-slate-500">
                 Each persona runs on its own schedule with dedicated skills, memory, and tool policies.

@@ -57,9 +57,9 @@ const crds = [
     color: 'claw-green',
   },
   {
-    name: 'PersonaPack',
+    name: 'Ensemble',
     analogy: 'Helm Chart',
-    description: 'Pre-configured agent bundles — activating a pack stamps out instances, schedules, and memory for each persona',
+    description: 'Pre-configured agent bundles — activating an ensemble stamps out instances, schedules, and memory for each persona',
     color: 'claw-cyan',
   },
   {
@@ -125,11 +125,11 @@ export default function CRDs() {
 
         {/* Example YAMLs */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* PersonaPack YAML */}
+          {/* Ensemble YAML */}
           <div>
             <div className="text-center mb-6">
-              <h3 className="text-xl font-bold text-white">PersonaPack: One Pack, Many Agents</h3>
-              <p className="text-sm text-slate-400 mt-1">Activate a pack and the controller stamps out all agents automatically</p>
+              <h3 className="text-xl font-bold text-white">Ensemble: One Bundle, Many Agents</h3>
+              <p className="text-sm text-slate-400 mt-1">Activate an ensemble and the controller stamps out all agents automatically</p>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/5 bg-surface-light/50">
               <div className="flex items-center gap-2 px-4 py-3 bg-surface-lighter/50 border-b border-white/5">
@@ -141,7 +141,7 @@ export default function CRDs() {
               <pre className="p-6 font-mono text-sm overflow-x-auto">
                 <code>
                   <span className="text-claw-purple">apiVersion</span><span className="text-slate-500">:</span> <span className="text-claw-green">sympozium.ai/v1alpha1</span>{'\n'}
-                  <span className="text-claw-purple">kind</span><span className="text-slate-500">:</span> <span className="text-claw-green">PersonaPack</span>{'\n'}
+                  <span className="text-claw-purple">kind</span><span className="text-slate-500">:</span> <span className="text-claw-green">Ensemble</span>{'\n'}
                   <span className="text-claw-purple">metadata</span><span className="text-slate-500">:</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">name</span><span className="text-slate-500">:</span> <span className="text-claw-green">platform-team</span>{'\n'}
                   <span className="text-claw-purple">spec</span><span className="text-slate-500">:</span>{'\n'}
