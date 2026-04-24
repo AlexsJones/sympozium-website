@@ -63,6 +63,12 @@ const crds = [
     color: 'claw-cyan',
   },
   {
+    name: 'Model',
+    analogy: 'StatefulSet + Service',
+    description: 'Declarative local GGUF model inference — controller handles download → PVC → llama-server Deployment → ClusterIP Service. Reference by name via modelRef on AgentRuns and Ensembles',
+    color: 'claw-purple',
+  },
+  {
     name: 'MCPServer',
     analogy: 'Deployment + Service',
     description: 'External tool providers via Model Context Protocol — managed stdio/HTTP servers or external endpoints, auto-discovery, prefixed tool namespacing',

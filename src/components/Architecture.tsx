@@ -169,7 +169,7 @@ export default function Architecture() {
               {
                 step: '3',
                 title: 'Agent calls LLM provider',
-                desc: 'The agent container calls OpenAI, Anthropic, Azure, Ollama, or any compatible endpoint — with skills mounted as files, persistent memory provided by a SQLite + FTS5 sidecar on a PersistentVolume, and tool sidecars providing runtime capabilities.',
+                desc: 'The agent container calls OpenAI, Anthropic, Azure, Ollama, a cluster-local Model via modelRef, or any compatible endpoint — with skills mounted as files, persistent memory provided by a SQLite + FTS5 sidecar on a PersistentVolume, and tool sidecars providing runtime capabilities.',
                 color: 'claw-orange',
                 icon: '\u{1F9E0}',
               },
@@ -197,7 +197,7 @@ export default function Architecture() {
               {
                 step: '7',
                 title: 'Everything is a K8s resource',
-                desc: 'Instances, runs, policies, skills, schedules, and MCP servers are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
+                desc: 'Instances, runs, policies, skills, schedules, models, and MCP servers are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
                 color: 'claw-green',
                 icon: '☸️',
               },
@@ -294,7 +294,7 @@ export default function Architecture() {
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
                       label="Controller Manager"
-                      sub="SympoziumInstance · AgentRun · Ensemble · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
+                      sub="SympoziumInstance · AgentRun · Ensemble · Model · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
                       color="purple"
                     />
                     <Node label="API Server" sub="HTTP + WebSocket" color="orange" />
@@ -421,8 +421,29 @@ export default function Architecture() {
                 </Group>
               </div>
 
-              {/* Row 4: Node Probe */}
+              {/* Row 4: Local Model Inference + Node Probe */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <Group title="Local Model Inference · Model CRD" color="purple">
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Node
+                      label="Model Controller"
+                      sub="download → PVC → llama-server → Service"
+                      color="purple"
+                    />
+                    <Node
+                      label="llama-server"
+                      sub="Deployment + ClusterIP Service"
+                      color="purple"
+                      small
+                    />
+                  </div>
+                  <div className="mt-2 text-[10px] font-mono text-slate-500 space-y-0.5">
+                    <div>Declarative GGUF model deployment</div>
+                    <div>modelRef on AgentRun + Ensemble auto-resolves</div>
+                    <div>Node placement for GPU/CPU targeting</div>
+                  </div>
+                </Group>
+
                 <Group title="Node Probe · DaemonSet (opt-in)" color="yellow">
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node

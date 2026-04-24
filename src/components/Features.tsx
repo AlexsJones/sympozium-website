@@ -36,10 +36,10 @@ const features = [
     title: 'Ensembles',
     subtitle: 'Helm Charts for AI agents',
     description:
-      'Pre-configured bundles of agent personas — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team and devops-essentials ensembles.',
+      'Pre-configured bundles of agent personas — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team, devops-essentials, and local-inference ensembles.',
     highlights: [
       'One-click agent team deployment',
-      'Built-in packs: platform-team, devops-essentials',
+      'Built-in packs: platform-team, devops-essentials, local-inference',
       'Custom ensembles via YAML + kubectl apply',
       'Cascading cleanup via ownerReferences',
     ],
@@ -177,15 +177,33 @@ const features = [
     ),
   },
   {
+    title: 'Local Model Inference',
+    subtitle: 'No API keys required',
+    description:
+      'Deploy GGUF models directly inside your cluster via the Model CRD. Pick a preset (Qwen3 8B, Phi-3 Mini, and more), click Deploy, and the controller handles download → PVC → llama-server Deployment → ClusterIP Service. Reference models by name with modelRef on AgentRuns and Ensembles — ships with a "local-inference" ensemble that runs entirely on cluster-local models.',
+    highlights: [
+      'Declarative Model CRD with HuggingFace presets',
+      'Zero external dependencies — full data sovereignty',
+      'modelRef on AgentRuns and Ensembles',
+      'Node placement for GPU/CPU targeting',
+    ],
+    color: 'claw-purple',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+      </svg>
+    ),
+  },
+  {
     title: 'Any AI Provider',
     subtitle: 'Model agnostic',
     description:
-      'OpenAI, Anthropic, Azure OpenAI, Ollama, or any OpenAI-compatible endpoint. Configure per instance — no vendor lock-in. Run local models for full data sovereignty.',
+      'OpenAI, Anthropic, Azure OpenAI, Ollama, or any OpenAI-compatible endpoint. Configure per instance — no vendor lock-in. Or skip external providers entirely and run cluster-local models via the Model CRD.',
     highlights: [
       'OpenAI, Anthropic, Azure, Ollama',
       'Any OpenAI-compatible endpoint',
       'Per-instance provider config',
-      'Full data sovereignty with local models',
+      'Cluster-local models via Model CRD',
     ],
     color: 'primary',
     icon: (
