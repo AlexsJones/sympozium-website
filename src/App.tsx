@@ -4,6 +4,7 @@ import WhySympozium from './components/WhySympozium'
 import WhoItsFor from './components/WhoItsFor'
 import Workflows from './components/Workflows'
 import Features from './components/Features'
+import LocalInference from './components/LocalInference'
 import LlmFit from './components/LlmFit'
 import Architecture from './components/Architecture'
 import Comparison from './components/Comparison'
@@ -20,6 +21,7 @@ function App() {
       <Hero />
       <WhySympozium />
       <WhoItsFor />
+      <LocalInference />
       <Workflows />
       <Features />
       <LlmFit />

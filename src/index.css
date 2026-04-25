@@ -114,3 +114,11 @@ body {
 code {
   font-family: var(--font-mono);
 }
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -28; }
+}
+
+.animate-dash {
+  animation: dash-flow 1.5s linear infinite;
+}
