@@ -27,7 +27,7 @@ const crdStyles: Record<string, { card: string; name: string }> = {
 
 const crds = [
   {
-    name: 'SympoziumInstance',
+    name: 'Agent',
     analogy: 'Namespace / Tenant',
     description: 'Per-user gateway — channels, provider config, memory settings, skill bindings',
     color: 'kube-blue',
@@ -59,7 +59,7 @@ const crds = [
   {
     name: 'Ensemble',
     analogy: 'Helm Chart',
-    description: 'Pre-configured agent bundles — activating an ensemble stamps out instances, schedules, and memory for each persona',
+    description: 'Pre-configured agent bundles — activating an ensemble stamps out agents, schedules, and memory for each agent config',
     color: 'claw-cyan',
   },
   {
@@ -153,7 +153,7 @@ export default function CRDs() {
                   <span className="text-claw-purple">spec</span><span className="text-slate-500">:</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">description</span><span className="text-slate-500">:</span> <span className="text-claw-green">"Core platform engineering agents"</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">category</span><span className="text-slate-500">:</span> <span className="text-claw-green">platform</span>{'\n'}
-                  <span className="text-slate-500">  </span><span className="text-claw-purple">personas</span><span className="text-slate-500">:</span>{'\n'}
+                  <span className="text-slate-500">  </span><span className="text-claw-purple">agentConfigs</span><span className="text-slate-500">:</span>{'\n'}
                   <span className="text-slate-500">    - </span><span className="text-claw-purple">name</span><span className="text-slate-500">:</span> <span className="text-claw-green">security-guardian</span>{'\n'}
                   <span className="text-slate-500">      </span><span className="text-claw-purple">skills</span><span className="text-slate-500">:</span> <span className="text-slate-400">[</span><span className="text-claw-green">k8s-ops</span><span className="text-slate-400">]</span>{'\n'}
                   <span className="text-slate-500">      </span><span className="text-claw-purple">schedule</span><span className="text-slate-500">:</span>{'\n'}
@@ -170,7 +170,7 @@ export default function CRDs() {
           <div>
             <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-white">SympoziumSchedule: Recurring Tasks</h3>
-              <p className="text-sm text-slate-400 mt-1">Each persona gets its own schedule — heartbeats, sweeps, or cron</p>
+              <p className="text-sm text-slate-400 mt-1">Each agent config gets its own schedule — heartbeats, sweeps, or cron</p>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/5 bg-surface-light/50">
               <div className="flex items-center gap-2 px-4 py-3 bg-surface-lighter/50 border-b border-white/5">
@@ -186,7 +186,7 @@ export default function CRDs() {
                   <span className="text-claw-purple">metadata</span><span className="text-slate-500">:</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">name</span><span className="text-slate-500">:</span> <span className="text-claw-green">daily-standup</span>{'\n'}
                   <span className="text-claw-purple">spec</span><span className="text-slate-500">:</span>{'\n'}
-                  <span className="text-slate-500">  </span><span className="text-claw-purple">instanceRef</span><span className="text-slate-500">:</span> <span className="text-claw-green">alice</span>{'\n'}
+                  <span className="text-slate-500">  </span><span className="text-claw-purple">agentRef</span><span className="text-slate-500">:</span> <span className="text-claw-green">alice</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">schedule</span><span className="text-slate-500">:</span> <span className="text-claw-orange">"0 9 * * *"</span>      <span className="text-slate-600"># daily at 9am</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">type</span><span className="text-slate-500">:</span> <span className="text-claw-green">heartbeat</span>{'\n'}
                   <span className="text-slate-500">  </span><span className="text-claw-purple">task</span><span className="text-slate-500">:</span> <span className="text-claw-green">"Review overnight alerts"</span>{'\n'}

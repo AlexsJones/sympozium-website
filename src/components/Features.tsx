@@ -36,7 +36,7 @@ const features = [
     title: 'Ensembles',
     subtitle: 'Helm Charts for AI agents',
     description:
-      'Pre-configured bundles of agent personas — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team, devops-essentials, and local-inference ensembles.',
+      'Pre-configured bundles of agent configs — each with a system prompt, skills, tool policy, schedule, and memory seeds. Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically. Ships with platform-team, devops-essentials, and local-inference ensembles.',
     highlights: [
       'One-click agent team deployment',
       'Built-in packs: platform-team, devops-essentials, local-inference',
@@ -90,7 +90,7 @@ const features = [
     title: 'Persistent Memory',
     subtitle: 'Agents that remember',
     description:
-      'Each SympoziumInstance gets a dedicated memory server sidecar backed by SQLite with FTS5 full-text search on a PersistentVolume. Agents call memory_search, memory_store, and memory_list over HTTP — memories survive across ephemeral pod runs. A legacy ConfigMap-based fallback (MEMORY.md) is preserved for migration.',
+      'Each Agent gets a dedicated memory server sidecar backed by SQLite with FTS5 full-text search on a PersistentVolume. Agents call memory_search, memory_store, and memory_list over HTTP — memories survive across ephemeral pod runs. A legacy ConfigMap-based fallback (MEMORY.md) is preserved for migration.',
     highlights: [
       'SQLite + FTS5 on PersistentVolume',
       'memory_search · memory_store · memory_list',

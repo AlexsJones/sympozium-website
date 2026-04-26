@@ -5,7 +5,7 @@ import WhoItsFor from './components/WhoItsFor'
 import Workflows from './components/Workflows'
 import Features from './components/Features'
 import LocalInference from './components/LocalInference'
-import LlmFit from './components/LlmFit'
+
 import Architecture from './components/Architecture'
 import Comparison from './components/Comparison'
 import ComparisonKagent from './components/ComparisonKagent'
@@ -24,7 +24,7 @@ function App() {
       <LocalInference />
       <Workflows />
       <Features />
-      <LlmFit />
+
       <Architecture />
       <Comparison />
       <ComparisonKagent />

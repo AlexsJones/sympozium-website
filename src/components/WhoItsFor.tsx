@@ -1,4 +1,4 @@
-const personas = [
+const agentConfigs = [
   {
     role: 'SRE On-Call',
     pack: 'platform-team',
@@ -78,48 +78,48 @@ export default function WhoItsFor() {
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Sympozium ships with <span className="text-claw-cyan font-medium">built-in Ensembles</span> — pre-configured
-            bundles of agent personas, each with its own system prompt, skills, tool policy, schedule, and persistent memory.
+            bundles of agent configs, each with its own system prompt, skills, tool policy, schedule, and persistent memory.
             Activate an ensemble in the TUI, enter your API key, and the controller stamps out all agents automatically.
             Think of them as <span className="text-white font-medium">Helm Charts for AI agents</span>.
           </p>
         </div>
 
-        {/* Persona cards */}
+        {/* Agent config cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {personas.map((persona, i) => (
+          {agentConfigs.map((agentCfg, i) => (
             <div
               key={i}
               className="group relative rounded-2xl bg-surface-light/50 border border-white/5 hover:border-white/10 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
             >
               {/* Hover glow */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${persona.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${agentCfg.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
 
               {/* Header */}
               <div className="p-8 pb-0">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${persona.color} p-[1px] mb-5`}>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${agentCfg.color} p-[1px] mb-5`}>
                   <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center text-white">
-                    {persona.icon}
+                    {agentCfg.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">{persona.role}</h3>
+                <h3 className="text-xl font-bold text-white mb-1">{agentCfg.role}</h3>
                 <div className="flex flex-wrap gap-2 mb-4">
                   <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-claw-cyan/10 text-claw-cyan border border-claw-cyan/20">
-                    {persona.pack}
+                    {agentCfg.pack}
                   </span>
-                  {persona.skills.map((skill) => (
+                  {agentCfg.skills.map((skill) => (
                     <span key={skill} className="text-xs font-mono px-2 py-0.5 rounded-md bg-white/5 text-slate-400 border border-white/5">
                       {skill}
                     </span>
                   ))}
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed">{persona.description}</p>
+                <p className="text-slate-400 text-sm leading-relaxed">{agentCfg.description}</p>
               </div>
 
               {/* Example tasks */}
               <div className="p-8 pt-6">
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Example tasks</p>
                 <div className="space-y-2">
-                  {persona.tasks.map((task, j) => (
+                  {agentCfg.tasks.map((task, j) => (
                     <div key={j} className="flex items-start gap-2 text-sm text-slate-300">
                       <span className="text-claw-orange mt-0.5 shrink-0">&#x276F;</span>
                       <span className="font-mono text-xs leading-relaxed">{task}</span>
@@ -266,14 +266,14 @@ export default function WhoItsFor() {
               </div>
             </div>
             <p className="text-center text-xs text-slate-500 mt-3">
-              Each persona gets a SympoziumInstance, SympoziumSchedule, and seeded memory ConfigMap — all with ownerReferences for cascading cleanup.
+              Each agent config gets an Agent, SympoziumSchedule, and seeded memory ConfigMap — all with ownerReferences for cascading cleanup.
             </p>
           </div>
 
           {/* Custom pack callout */}
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-500">
-              Need something different? <span className="text-white font-medium">Write your own Ensemble</span> — define personas with custom system prompts, skills, schedules, and memory seeds, then <span className="font-mono text-claw-cyan text-xs">kubectl apply</span>.
+              Need something different? <span className="text-white font-medium">Write your own Ensemble</span> — define agent configs with custom system prompts, skills, schedules, and memory seeds, then <span className="font-mono text-claw-cyan text-xs">kubectl apply</span>.
             </p>
           </div>
         </div>

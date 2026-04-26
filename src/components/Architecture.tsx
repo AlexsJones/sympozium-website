@@ -183,7 +183,7 @@ export default function Architecture() {
               {
                 step: '5',
                 title: 'Web endpoints expose agents as APIs',
-                desc: 'Instances with the web-endpoint skill get a long-lived Deployment with a web-proxy sidecar. Envoy Gateway routes OpenAI-compatible and MCP requests, creating per-request AgentRun Jobs.',
+                desc: 'Agents with the web-endpoint skill get a long-lived Deployment with a web-proxy sidecar. Envoy Gateway routes OpenAI-compatible and MCP requests, creating per-request AgentRun Jobs.',
                 color: 'claw-orange',
                 icon: '\u{1F310}',
               },
@@ -197,7 +197,7 @@ export default function Architecture() {
               {
                 step: '7',
                 title: 'Everything is a K8s resource',
-                desc: 'Instances, runs, policies, skills, schedules, models, and MCP servers are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
+                desc: 'Agents, agent configs, runs, policies, skills, schedules, models, and MCP servers are all CRDs. Lifecycle is managed by controllers. Access is gated by admission webhooks. Network isolation is enforced by NetworkPolicy.',
                 color: 'claw-green',
                 icon: '☸️',
               },
@@ -294,7 +294,7 @@ export default function Architecture() {
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Node
                       label="Controller Manager"
-                      sub="SympoziumInstance · AgentRun · Ensemble · Model · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
+                      sub="Agent · AgentConfig · AgentRun · Ensemble · Model · SympoziumPolicy · SkillPack · SympoziumSchedule · MCPServer"
                       color="purple"
                     />
                     <Node label="API Server" sub="HTTP + WebSocket" color="orange" />

@@ -22,12 +22,12 @@ const rows = [
   {
     category: 'Multi-tenancy',
     kagent: 'Namespace-scoped CRDs, shared execution engine',
-    sympozium: 'SympoziumInstance CRD per tenant + namespace isolation + RBAC + admission webhooks',
+    sympozium: 'Agent CRD per tenant + namespace isolation + RBAC + admission webhooks',
   },
   {
     category: 'Agent packaging',
     kagent: 'Individual Agent CRDs defined one at a time',
-    sympozium: 'Ensembles — bundle personas, skills, schedules, and memory seeds in one kubectl apply',
+    sympozium: 'Ensembles — bundle agent configs, skills, schedules, and memory seeds in one kubectl apply',
   },
   {
     category: 'Policy & gating',

@@ -78,7 +78,7 @@ export default function GetStarted() {
               </div>
               <div className="mt-4 font-mono text-xs text-slate-500 bg-surface/40 rounded-lg p-4 border border-white/5">
                 <div className="text-claw-cyan">╔═══════════════════════════════════════════════════════╗</div>
-                <div className="text-claw-cyan">║{'  '}Sympozium · Personas{'                                 '}║</div>
+                <div className="text-claw-cyan">║{'  '}Sympozium · Ensembles{'                                '}║</div>
                 <div className="text-claw-cyan">╚═══════════════════════════════════════════════════════╝</div>
                 <div className="mt-2 space-y-1">
                   <div className="text-white"> NAME{'                  '}CATEGORY{'   '}AGENTS{'  '}PHASE</div>
@@ -88,8 +88,8 @@ export default function GetStarted() {
                 <div className="mt-2 text-slate-600"> Press Enter to activate → wizard → API key → done</div>
               </div>
               <p className="mt-3 text-sm text-slate-500">
-                The TUI opens on the <span className="text-claw-cyan font-medium">Personas</span> tab. Pick a pack, enter your API key, 
-                and the controller creates all agent instances, schedules, and memory automatically.
+                The TUI opens on the <span className="text-claw-cyan font-medium">Ensembles</span> tab. Pick a pack, enter your API key,
+                and the controller creates all agents, schedules, and memory automatically.
               </p>
             </div>
           </div>
@@ -104,16 +104,16 @@ export default function GetStarted() {
               <div className="font-mono text-xs text-slate-500 bg-surface/40 rounded-lg p-4 border border-white/5">
                 <div className="text-claw-cyan">✓</div>
                 <div className="mt-1 space-y-1">
-                  <div><span className="text-claw-green">✓</span> SympoziumInstance <span className="text-white">platform-team-security-guardian</span> created</div>
-                  <div><span className="text-claw-green">✓</span> SympoziumInstance <span className="text-white">platform-team-sre-watchdog</span> created</div>
-                  <div><span className="text-claw-green">✓</span> SympoziumInstance <span className="text-white">platform-team-platform-engineer</span> created</div>
+                  <div><span className="text-claw-green">✓</span> Agent <span className="text-white">platform-team-security-guardian</span> created</div>
+                  <div><span className="text-claw-green">✓</span> Agent <span className="text-white">platform-team-sre-watchdog</span> created</div>
+                  <div><span className="text-claw-green">✓</span> Agent <span className="text-white">platform-team-platform-engineer</span> created</div>
                   <div><span className="text-claw-green">✓</span> SympoziumSchedule <span className="text-slate-400">×3</span> created</div>
                   <div><span className="text-claw-green">✓</span> Memory ConfigMap <span className="text-slate-400">×3</span> seeded</div>
                 </div>
-                <div className="mt-2 text-slate-400">Ensemble <span className="text-claw-cyan">platform-team</span> → <span className="text-claw-green">Ready</span> (3/3 personas installed)</div>
+                <div className="mt-2 text-slate-400">Ensemble <span className="text-claw-cyan">platform-team</span> → <span className="text-claw-green">Ready</span> (3/3 agents deployed)</div>
               </div>
               <p className="mt-3 text-sm text-slate-500">
-                Each persona runs on its own schedule with dedicated skills, memory, and tool policies.
+                Each agent runs on its own schedule with dedicated skills, memory, and tool policies.
                 Submit ad-hoc tasks with <code className="text-claw-cyan">/run</code>, 
                 or let the heartbeats handle it.
               </p>

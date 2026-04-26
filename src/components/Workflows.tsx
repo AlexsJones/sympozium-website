@@ -25,7 +25,7 @@ export default function Workflows() {
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Workflows turn Ensembles from static bundles into coordinated teams.
-            Define <span className="text-white font-medium">typed relationships</span> between personas &mdash;
+            Define <span className="text-white font-medium">typed relationships</span> between agent configs &mdash;
             delegation, sequencing, supervision &mdash; and let agents hand off tasks,
             share knowledge, and run pipelines automatically.
           </p>
@@ -39,12 +39,12 @@ export default function Workflows() {
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
               <img
                 src="/workflow.png"
-                alt="Workflow canvas showing a research team with delegation and sequential relationships between Research Lead, Researcher, Writer, and Reviewer personas"
+                alt="Workflow canvas showing a research team with delegation and sequential relationships between Research Lead, Researcher, Writer, and Reviewer agent configs"
                 className="w-full h-auto"
               />
             </div>
             <p className="mt-4 text-sm text-slate-500 font-mono text-center">
-              Visual workflow canvas &mdash; drag-to-connect personas, pick relationship types, save to CRD
+              Visual workflow canvas &mdash; drag-to-connect agent configs, pick relationship types, save to CRD
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                One persona requests work from another and waits for the result before continuing.
+                One agent requests work from another and waits for the result before continuing.
                 The Research Lead delegates to the Researcher, gets findings back, then decides next steps.
               </p>
             </div>
@@ -87,7 +87,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Define strict ordering &mdash; one persona must finish before the next begins.
+                Define strict ordering &mdash; one agent must finish before the next begins.
                 Writer completes the draft, <em>then</em> Reviewer starts quality checks. No gaps, no race conditions.
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                A supervisor persona monitors others for progress tracking and reporting &mdash;
+                A supervisor agent monitors others for progress tracking and reporting &mdash;
                 without blocking or altering their execution. Full visibility, zero overhead.
               </p>
             </div>
@@ -130,14 +130,14 @@ export default function Workflows() {
                 A shared brain for every team
               </h3>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Each Ensemble gets a dedicated SQLite memory pool that all personas can read and write.
+                Each Ensemble gets a dedicated SQLite memory pool that all agents can read and write.
                 Facts discovered by the Researcher are instantly available to the Writer.
                 Feedback from the Reviewer shapes future research. Knowledge compounds across runs.
               </p>
               <ul className="space-y-3">
                 {[
-                  'Auto-attributed entries — every fact tagged with its source persona',
-                  'Per-persona access control — read-write or read-only',
+                  'Auto-attributed entries — every fact tagged with its source agent',
+                  'Per-agent access control — read-write or read-only',
                   'Auto-context injection — top results appear in system prompts',
                   'Persisted on PVC — survives pod restarts and redeployments',
                 ].map((item, i) => (
@@ -191,7 +191,7 @@ export default function Workflows() {
         <div className="mt-10 rounded-2xl border border-white/5 bg-surface-light/20 p-6">
           <div className="text-center mb-5">
             <h3 className="text-lg font-bold text-white">Live Status on the Canvas</h3>
-            <p className="text-sm text-slate-500">Real-time visual indicators show what every persona is doing right now</p>
+            <p className="text-sm text-slate-500">Real-time visual indicators show what every agent is doing right now</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
@@ -227,7 +227,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Each persona runs independently on its own schedule. No coordination overhead &mdash; ideal for diverse, independent tasks.
+                Each agent runs independently on its own schedule. No coordination overhead &mdash; ideal for diverse, independent tasks.
               </p>
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Personas execute in strict order defined by sequential edges. Perfect for review chains, approval flows, and staged processing.
+                Agents execute in strict order defined by sequential edges. Perfect for review chains, approval flows, and staged processing.
               </p>
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function Workflows() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Personas actively delegate tasks to each other at runtime. A lead breaks down work and assigns it to specialists dynamically.
+                Agents actively delegate tasks to each other at runtime. A lead breaks down work and assigns it to specialists dynamically.
               </p>
             </div>
           </div>
