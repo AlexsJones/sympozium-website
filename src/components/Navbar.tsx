@@ -25,12 +25,10 @@ export default function Navbar() {
 
   const links = [
     { label: "Who It's For", href: '#who' },
-    { label: 'Inference', href: '#local-inference' },
-    { label: 'Workflows', href: '#workflows' },
-    { label: 'Features', href: '#features' },
     { label: 'Architecture', href: '#architecture' },
+    { label: 'Workflows', href: '#workflows' },
+    { label: 'Inference', href: '#local-inference' },
     { label: 'Security', href: '#security' },
-    { label: 'Get Started', href: '#get-started' },
   ]
 
   const versusItems = [

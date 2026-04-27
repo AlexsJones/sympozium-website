@@ -3,15 +3,12 @@ import Hero from './components/Hero'
 import WhySympozium from './components/WhySympozium'
 import WhoItsFor from './components/WhoItsFor'
 import Workflows from './components/Workflows'
-import Features from './components/Features'
 import LocalInference from './components/LocalInference'
 
 import Architecture from './components/Architecture'
+import Security from './components/Security'
 import Comparison from './components/Comparison'
 import ComparisonKagent from './components/ComparisonKagent'
-import Security from './components/Security'
-import GetStarted from './components/GetStarted'
-import CRDs from './components/CRDs'
 import Footer from './components/Footer'
 
 function App() {
@@ -21,16 +18,12 @@ function App() {
       <Hero />
       <WhySympozium />
       <WhoItsFor />
-      <LocalInference />
-      <Workflows />
-      <Features />
-
       <Architecture />
+      <Workflows />
+      <LocalInference />
+      <Security />
       <Comparison />
       <ComparisonKagent />
-      <Security />
-      <CRDs />
-      <GetStarted />
       <Footer />
     </div>
   )
