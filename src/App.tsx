@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import WhySympozium from './components/WhySympozium'
 import WhoItsFor from './components/WhoItsFor'
 import Workflows from './components/Workflows'
+import Membrane from './components/Membrane'
 import LocalInference from './components/LocalInference'
 
 import Architecture from './components/Architecture'
@@ -20,6 +21,7 @@ function App() {
       <WhoItsFor />
       <Architecture />
       <Workflows />
+      <Membrane />
       <LocalInference />
       <Security />
       <Comparison />
