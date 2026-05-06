@@ -57,12 +57,24 @@ export default function WhySympozium() {
             Why Sympozium?
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Two powerful use cases.
+            Containers needed orchestration.
             <br />
             <span className="bg-gradient-to-r from-kube-blue to-claw-purple bg-clip-text text-transparent">
-              One Kubernetes-native platform.
+              Agents need coordination.
             </span>
           </h2>
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto mt-4">
+            Most multi-agent systems communicate through messages &mdash; strings of tokens one agent serialises
+            and another deserialises. Sympozium replaces this{' '}
+            <a href="https://axjns.dev/blog/sticky-note-problem" target="_blank" rel="noopener noreferrer"
+               className="text-claw-cyan hover:text-claw-cyan/80 underline underline-offset-2 decoration-claw-cyan/30">
+              sticky-note pattern
+            </a>{' '}
+            with shared situational awareness: a{' '}
+            <span className="text-white font-medium">synthetic membrane</span> that
+            gives agent teams selective permeability, structured handoffs, and shared memory &mdash;
+            all on Kubernetes.
+          </p>
         </div>
 
         {/* Two use cases — left / right split */}
@@ -80,11 +92,11 @@ export default function WhySympozium() {
               </div>
 
               <h3 className="text-2xl font-bold text-white mb-3">
-                Agent Fleet Orchestration
+                Coordinated Agent Teams
               </h3>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Run fleets of AI agents for <span className="text-claw-orange font-medium">any workload</span> — each
-                agent isolated in its own pod with dedicated RBAC, network policies, and persistent memory.
+                Run <span className="text-claw-orange font-medium">coordinated teams</span> of AI agents &mdash; each
+                isolated in its own pod with delegation, shared memory, selective permeability, and persistent state.
               </p>
 
               <ul className="space-y-3">
@@ -161,10 +173,12 @@ export default function WhySympozium() {
           <blockquote className="relative">
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-6xl text-claw-purple/20 font-serif">"</div>
             <p className="text-xl italic text-slate-300 leading-relaxed pt-8">
-              Give the agent tools, not trust. Whether it's orchestrating a fleet or administering
-              the cluster, skills get exactly the permissions they declare, for exactly as long as
-              the run lasts, and not a second longer.
+              Structured, gated, persistent communication is a prerequisite &mdash; not an accelerant &mdash;
+              for collective intelligence. Agents don't need better messages. They need a shared medium.
             </p>
+            <footer className="mt-4 text-sm text-slate-500">
+              &mdash; <a href="https://axjns.dev/research/synthetic-membrane/paper" target="_blank" rel="noopener noreferrer" className="text-claw-purple hover:text-claw-purple/80 underline underline-offset-2 decoration-claw-purple/30">The Synthetic Membrane</a> (research paper)
+            </footer>
           </blockquote>
         </div>
       </div>

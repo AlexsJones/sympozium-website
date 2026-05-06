@@ -220,19 +220,20 @@ export default function Hero() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-6">
               <span className="text-white">The </span>
               <span className="bg-gradient-to-r from-kube-blue via-primary to-claw-purple bg-clip-text text-transparent">
-                Kubernetes-Native
+                Coordination Layer
               </span>
               <br />
-              <span className="text-white">Agentic </span>
+              <span className="text-white">for </span>
               <span className="bg-gradient-to-r from-claw-orange to-claw-red bg-clip-text text-transparent">
-                Control Plane
+                Multi-Agent AI
               </span>
             </h1>
 
             <p className="text-lg sm:text-xl text-slate-300 font-light mb-4 leading-relaxed">
-              Run a <span className="text-claw-orange font-medium">fleet of AI agents</span> on Kubernetes.{' '}
-              <span className="text-claw-purple font-medium">Distributed inference</span>.{' '}
-              <span className="text-kube-blue font-medium">Administer your cluster</span> agentically.
+              Agents don't need better prompts. They need{' '}
+              <span className="text-claw-orange font-medium">shared situational awareness</span>.{' '}
+              <span className="text-claw-purple font-medium">Structured handoffs</span>.{' '}
+              <span className="text-kube-blue font-medium">Selective permeability</span>.
             </p>
 
             <p className="text-sm sm:text-base text-slate-400 mb-8 leading-relaxed">
@@ -240,7 +241,7 @@ export default function Hero() {
               Every policy is a <span className="text-claw-purple font-medium">CRD</span>.{' '}
               Every execution is a <span className="text-claw-green font-medium">Job</span>.
               <br className="hidden sm:block" />
-              Multi-tenant. Horizontally scalable. <span className="text-white font-semibold">Safe by design.</span>
+              Kubernetes-native. Multi-tenant. <span className="text-white font-semibold">Safe by design.</span>
             </p>
 
             {/* CTA Buttons */}
