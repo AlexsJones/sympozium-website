@@ -177,7 +177,7 @@ export default function WhySympozium() {
               for collective intelligence. Agents don't need better messages. They need a shared medium.
             </p>
             <footer className="mt-4 text-sm text-slate-500">
-              &mdash; <a href="https://axjns.dev/research/synthetic-membrane/paper" target="_blank" rel="noopener noreferrer" className="text-claw-purple hover:text-claw-purple/80 underline underline-offset-2 decoration-claw-purple/30">The Synthetic Membrane</a> (research paper)
+              &mdash; <a href="https://zenodo.org/records/20070699" target="_blank" rel="noopener noreferrer" className="text-claw-purple hover:text-claw-purple/80 underline underline-offset-2 decoration-claw-purple/30">The Synthetic Membrane</a> (Zenodo)
             </footer>
           </blockquote>
         </div>
