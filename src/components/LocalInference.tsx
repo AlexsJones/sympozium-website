@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 
+// ---------------------------------------------------------------------------
+// Model deploy pipeline
+// ---------------------------------------------------------------------------
+
 const PIPELINE_STEPS = [
   {
     label: 'kubectl apply',
@@ -9,26 +13,26 @@ const PIPELINE_STEPS = [
   },
   {
     label: 'Download GGUF',
-    sub: 'HuggingFace → Init Container',
-    icon: '\u{2B07}',
+    sub: 'HuggingFace \u2192 Init Container',
+    icon: '\u2B07',
     color: 'claw-orange',
   },
   {
     label: 'Create PVC',
     sub: 'Persistent model storage',
-    icon: '\u{1F4BE}',
+    icon: '\uD83D\uDCBE',
     color: 'claw-cyan',
   },
   {
     label: 'llama-server',
     sub: 'Deployment created',
-    icon: '\u{1F9E0}',
+    icon: '\uD83E\uDDE0',
     color: 'claw-purple',
   },
   {
     label: 'ClusterIP Service',
     sub: 'Internal endpoint ready',
-    icon: '\u{1F310}',
+    icon: '\uD83C\uDF10',
     color: 'claw-green',
   },
 ]
@@ -89,6 +93,31 @@ const colorClasses: Record<string, {
   },
 }
 
+// ---------------------------------------------------------------------------
+// Density node data for the visualization
+// ---------------------------------------------------------------------------
+
+interface DensityNode {
+  name: string
+  gpu: string
+  ram: string
+  backend: string
+  modelCount: number
+  topScore: number
+  stale: boolean
+}
+
+const DENSITY_NODES: DensityNode[] = [
+  { name: 'gpu-node-01', gpu: 'A100 80GB', ram: '256 GB', backend: 'CUDA', modelCount: 14, topScore: 98, stale: false },
+  { name: 'gpu-node-02', gpu: 'RTX 4090', ram: '128 GB', backend: 'CUDA', modelCount: 11, topScore: 85, stale: false },
+  { name: 'mac-mini-01', gpu: 'M4 Pro 24GB', ram: '64 GB', backend: 'Metal', modelCount: 8, topScore: 72, stale: false },
+  { name: 'cpu-node-01', gpu: '\u2014', ram: '32 GB', backend: 'CPU', modelCount: 3, topScore: 41, stale: true },
+]
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export default function LocalInference() {
   const [activeStep, setActiveStep] = useState(-1)
   const [loopCount, setLoopCount] = useState(0)
@@ -138,14 +167,12 @@ export default function LocalInference() {
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Deploy GGUF models with a single CRD. The controller downloads the model,
             provisions storage, spins up llama-server, and exposes a ClusterIP Service &mdash;
-            no API keys, no external calls, full data sovereignty. Enable distributed inference
-            across your fleet by deploying models to different nodes and referencing them
-            from any agent.
+            no API keys, no external calls, full data sovereignty.
           </p>
         </div>
 
         {/* Main content: YAML + animated pipeline */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-20">
           {/* Left: Model CRD YAML */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-claw-purple/20 via-claw-green/15 to-claw-cyan/20 rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-700" />
@@ -170,8 +197,8 @@ export default function LocalInference() {
                   <span className="text-slate-500">    </span><span className="text-kube-blue">requests:</span>{'\n'}
                   <span className="text-slate-500">      </span><span className="text-kube-blue">memory:</span><span className="text-claw-orange"> "8Gi"</span>{'\n'}
                   <span className="text-slate-500">      </span><span className="text-kube-blue">cpu:</span><span className="text-claw-orange"> "4"</span>{'\n'}
-                  <span className="text-slate-500">  </span><span className="text-kube-blue">nodeSelector:</span>{'\n'}
-                  <span className="text-slate-500">    </span><span className="text-kube-blue">gpu:</span><span className="text-claw-green"> "true"</span>{'\n'}
+                  <span className="text-slate-500">  </span><span className="text-slate-500"># Let the density scheduler pick the best node</span>{'\n'}
+                  <span className="text-slate-500">  </span><span className="text-kube-blue">placement:</span><span className="text-claw-cyan"> auto</span>{'\n'}
                   {'\n'}
                   <span className="text-slate-500"># Reference from any AgentRun or Ensemble:</span>{'\n'}
                   <span className="text-kube-blue">spec:</span>{'\n'}
@@ -297,7 +324,7 @@ export default function LocalInference() {
                     }
                   `}
                 >
-                  {activeStep >= PIPELINE_STEPS.length ? '\u{2705}' : '\u{1F512}'}
+                  {activeStep >= PIPELINE_STEPS.length ? '\u2705' : '\uD83D\uDD12'}
                 </div>
                 <div>
                   <div
@@ -328,139 +355,185 @@ export default function LocalInference() {
           </div>
         </div>
 
-        {/* Workflow canvas — model feeding the local-inference ensemble */}
-        <div className="mb-16">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              The{' '}
-              <span className="bg-gradient-to-r from-claw-purple to-claw-cyan bg-clip-text text-transparent">
-                local-inference
-              </span>{' '}
-              Ensemble
+        {/* ================================================================= */}
+        {/* Cluster Model Density */}
+        {/* ================================================================= */}
+
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-claw-cyan/10 border border-claw-cyan/20 text-claw-cyan text-sm font-medium mb-4">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+              </svg>
+              Cluster Model Density
+            </div>
+            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Know where every model{' '}
+              <span className="bg-gradient-to-r from-claw-cyan to-kube-blue bg-clip-text text-transparent">
+                fits best
+              </span>
             </h3>
-            <p className="text-sm text-slate-400 max-w-2xl mx-auto">
-              Ships out of the box &mdash; a ready-made agent team that runs entirely on cluster-local models.
-              No API keys, no external calls.
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+              The built-in <span className="text-white font-medium">llmfit DaemonSet</span> continuously
+              profiles every node's hardware — GPU VRAM, RAM, CPU, backend capabilities.
+              The controller uses this to place models instantly instead of spawning probe pods.
             </p>
           </div>
 
-          <div className="relative rounded-2xl bg-surface-light/20 border border-white/5 p-6 sm:p-10 overflow-hidden">
-            {/* Subtle grid background */}
-            <div className="absolute inset-0 grid-pattern opacity-30" />
+          {/* Before/after callout */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-claw-red/5 border border-claw-red/20">
+              <svg className="w-5 h-5 text-claw-red shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <div className="text-xs font-mono text-claw-red/70 uppercase tracking-wider">Before</div>
+                <div className="text-white font-bold">~3 min</div>
+                <div className="text-xs text-slate-500">probe-pod scheduling</div>
+              </div>
+            </div>
+            <svg className="w-8 h-8 text-slate-600 shrink-0 rotate-90 sm:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-claw-green/5 border border-claw-green/20">
+              <svg className="w-5 h-5 text-claw-green shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+              <div>
+                <div className="text-xs font-mono text-claw-green/70 uppercase tracking-wider">Now</div>
+                <div className="text-white font-bold">Instant</div>
+                <div className="text-xs text-slate-500">density cache lookup</div>
+              </div>
+            </div>
+          </div>
 
-            <div className="relative">
-              {/* Model card (top center) */}
-              <div className="flex justify-center mb-10">
-                <div className="relative group">
-                  <div className="absolute -inset-[2px] bg-gradient-to-b from-claw-green/50 to-claw-green/20 rounded-xl opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative rounded-xl bg-surface-light/80 border border-claw-green/30 backdrop-blur-sm px-8 py-6 min-w-[280px] sm:min-w-[340px]">
-                    <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-6 h-6 text-claw-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7" />
-                      </svg>
-                      <span className="text-xl font-bold text-white">Local Model</span>
+          {/* Density node cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+            {DENSITY_NODES.map((node) => {
+              const scoreColor =
+                node.topScore >= 80 ? 'text-claw-green' :
+                node.topScore >= 60 ? 'text-claw-cyan' :
+                node.topScore >= 40 ? 'text-claw-orange' :
+                'text-claw-red'
+              const barColor =
+                node.topScore >= 80 ? 'bg-claw-green' :
+                node.topScore >= 60 ? 'bg-claw-cyan' :
+                node.topScore >= 40 ? 'bg-claw-orange' :
+                'bg-claw-red'
+
+              return (
+                <div
+                  key={node.name}
+                  className={`
+                    rounded-xl border p-5 transition-all duration-300
+                    ${node.stale
+                      ? 'bg-white/[0.01] border-white/5 opacity-60'
+                      : 'bg-white/[0.02] border-white/5 hover:border-white/15'
+                    }
+                  `}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-mono text-slate-500 truncate">{node.name}</span>
+                    {node.stale && (
+                      <span className="text-[10px] font-mono text-claw-orange px-1.5 py-0.5 rounded bg-claw-orange/10 border border-claw-orange/20">
+                        stale
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Score bar */}
+                  <div className="mb-3">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <span className="text-xs text-slate-500">fitness</span>
+                      <span className={`text-lg font-bold ${scoreColor}`}>{node.topScore}</span>
                     </div>
-                    <div className="text-sm font-mono text-slate-400 mb-3">qwen3-0-6b-q8</div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-claw-green/10 border border-claw-green/30 text-claw-green text-sm font-medium mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-claw-green animate-pulse" />
-                      Ready
+                    <div className="h-1.5 rounded-full bg-white/5">
+                      <div
+                        className={`h-full rounded-full ${barColor} transition-all duration-700`}
+                        style={{ width: `${node.topScore}%` }}
+                      />
                     </div>
-                    <div className="text-xs font-mono text-slate-500 truncate">
-                      http://model-qwen3-0-6b-q8.sympozium...
+                  </div>
+
+                  <div className="space-y-1.5 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">GPU</span>
+                      <span className="text-slate-300 font-mono">{node.gpu}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">RAM</span>
+                      <span className="text-slate-300 font-mono">{node.ram}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Backend</span>
+                      <span className="text-slate-300 font-mono">{node.backend}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Models fit</span>
+                      <span className="text-white font-bold">{node.modelCount}</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              )
+            })}
+          </div>
 
-              {/* Connection hub dot */}
-              <div className="flex justify-center mb-2">
-                <div className="w-3 h-3 rounded-full bg-claw-purple/60 ring-4 ring-claw-purple/20" />
-              </div>
-
-              {/* Dashed lines visual (CSS-based for reliability) */}
-              <div className="flex justify-center mb-2">
-                <div className="flex items-end gap-16 sm:gap-32 md:gap-48">
-                  <div className="flex flex-col items-center">
-                    <div className="w-px h-10 border-l-2 border-dashed border-claw-purple/30" />
-                    <svg className="w-3 h-3 text-claw-purple/50" fill="currentColor" viewBox="0 0 12 12">
-                      <path d="M6 9L2 4h8L6 9z" />
+          {/* Density feature highlights */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-2xl bg-surface-light/30 border border-white/5 hover:border-white/15 transition-all duration-300 overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-claw-cyan to-transparent" />
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-claw-cyan">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
                     </svg>
-                    <div className="w-3 h-3 rounded-full bg-slate-500/40 ring-2 ring-slate-500/20 -mt-0.5" />
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-px h-10 border-l-2 border-dashed border-claw-purple/30" />
-                    <svg className="w-3 h-3 text-claw-purple/50" fill="currentColor" viewBox="0 0 12 12">
-                      <path d="M6 9L2 4h8L6 9z" />
+                  </span>
+                  <h4 className="text-base font-bold text-white">GPU-Aware Scheduling</h4>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Composite scoring ranks nodes by VRAM, backend preference (CUDA, Metal, ROCm), estimated TPS, and available memory.
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-surface-light/30 border border-white/5 hover:border-white/15 transition-all duration-300 overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-claw-purple to-transparent" />
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-claw-purple">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5.659 13.84A2.25 2.25 0 005 15.432v2.318a2.25 2.25 0 002.25 2.25h9.5A2.25 2.25 0 0019 17.75v-2.318a2.25 2.25 0 00-.659-1.591l-3.432-3.432a2.25 2.25 0 01-.659-1.591V3.104" />
                     </svg>
-                    <div className="w-3 h-3 rounded-full bg-slate-500/40 ring-2 ring-slate-500/20 -mt-0.5" />
-                  </div>
+                  </span>
+                  <h4 className="text-base font-bold text-white">Simulate Before Deploy</h4>
                 </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Preview capacity impact per node before deploying. The <code className="text-claw-purple/80">density/simulate</code> API shows remaining memory and ranked placements.
+                </p>
               </div>
+            </div>
 
-              {/* Agent config cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                {/* Local Assistant */}
-                <div className="relative group">
-                  <div className="absolute -inset-[2px] bg-gradient-to-b from-claw-green/30 to-claw-green/10 rounded-xl opacity-60 group-hover:opacity-90 transition-opacity" />
-                  <div className="relative rounded-xl bg-surface-light/80 border border-claw-green/20 backdrop-blur-sm px-6 py-5">
-                    <div className="text-xs font-mono text-slate-500 mb-1.5">local-inference</div>
-                    <div className="text-lg font-bold text-white mb-1">Local Assistant</div>
-                    <div className="text-sm font-mono text-slate-400 mb-4">assistant</div>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
-                        qwen3-0-6b-q8
-                      </span>
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-claw-purple/10 border border-claw-purple/20 text-xs font-mono text-claw-purple">
-                        memory
-                      </span>
-                    </div>
-                    <div className="text-[11px] font-mono text-slate-600 mt-3">local-inference-assistant</div>
-                  </div>
+            <div className="rounded-2xl bg-surface-light/30 border border-white/5 hover:border-white/15 transition-all duration-300 overflow-hidden">
+              <div className="h-1 bg-gradient-to-r from-claw-green to-transparent" />
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-claw-green">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+                    </svg>
+                  </span>
+                  <h4 className="text-base font-bold text-white">Live Eviction</h4>
                 </div>
-
-                {/* Local Coder */}
-                <div className="relative group">
-                  <div className="absolute -inset-[2px] bg-gradient-to-b from-claw-green/30 to-claw-green/10 rounded-xl opacity-60 group-hover:opacity-90 transition-opacity" />
-                  <div className="relative rounded-xl bg-surface-light/80 border border-claw-green/20 backdrop-blur-sm px-6 py-5">
-                    <div className="flex items-start justify-between mb-1.5">
-                      <div className="text-xs font-mono text-slate-500">local-inference</div>
-                      <div className="inline-flex items-center gap-1.5 text-xs font-mono text-claw-green">
-                        <span className="w-2 h-2 rounded-full bg-claw-green animate-pulse" />
-                        Done
-                      </div>
-                    </div>
-                    <div className="text-lg font-bold text-white mb-1">Local Coder</div>
-                    <div className="text-sm font-mono text-slate-400 mb-4">coder</div>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
-                        qwen3-0-6b-q8
-                      </span>
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-claw-green/10 border border-claw-green/20 text-xs font-mono text-claw-green">
-                        software-dev
-                      </span>
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-claw-purple/10 border border-claw-purple/20 text-xs font-mono text-claw-purple">
-                        memory
-                      </span>
-                    </div>
-                    <div className="text-[11px] font-mono text-slate-600 mt-3">local-inference-coder</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Delegation label between cards */}
-              <div className="hidden md:flex justify-center -mt-[72px] pointer-events-none">
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-surface/80 border border-claw-cyan/20 backdrop-blur-sm">
-                  <svg className="w-3.5 h-3.5 text-claw-cyan/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-                  </svg>
-                  <span className="text-[11px] font-mono text-claw-cyan/70">delegates to</span>
-                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  When a node's fitness degrades past a threshold, the controller automatically re-places affected models onto healthier nodes.
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom highlights */}
+        {/* Bottom highlights — original cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Data Sovereignty */}
           <div className="rounded-2xl bg-surface-light/30 border border-white/5 hover:border-white/15 transition-all duration-300 overflow-hidden">
@@ -498,20 +571,20 @@ export default function LocalInference() {
             </div>
           </div>
 
-          {/* GPU/CPU Targeting */}
+          {/* Cost Attribution */}
           <div className="rounded-2xl bg-surface-light/30 border border-white/5 hover:border-white/15 transition-all duration-300 overflow-hidden">
-            <div className="h-1 bg-gradient-to-r from-claw-cyan to-transparent" />
+            <div className="h-1 bg-gradient-to-r from-claw-orange to-transparent" />
             <div className="p-6">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-claw-cyan">
+                <span className="text-claw-orange">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-                <h4 className="text-base font-bold text-white">GPU/CPU Targeting</h4>
+                <h4 className="text-base font-bold text-white">Cost Attribution</h4>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Use nodeSelector and resource requests to place models on GPU nodes, or run quantized models on CPU-only clusters.
+                Per-model, per-namespace resource attribution via the density API. Know exactly what each model costs across GPU, memory, and compute.
               </p>
             </div>
           </div>

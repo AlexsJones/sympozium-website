@@ -470,103 +470,19 @@ export default function Membrane() {
           </div>
         </div>
 
-        {/* Six-layer feature cards */}
-        <div className="mb-20">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">
-            Six layers of{' '}
-            <span className="bg-gradient-to-r from-claw-cyan to-claw-green bg-clip-text text-transparent">
-              selective control
-            </span>
-          </h3>
-          <p className="text-sm text-slate-400 max-w-2xl mx-auto text-center mb-10">
-            Each layer is optional and composable. Enable only what you need &mdash; the membrane is entirely backward-compatible with plain shared memory.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {LAYERS.map((layer) => {
-              const c = colorClasses[layer.color]
-              return (
-                <div
-                  key={layer.title}
-                  className={`rounded-2xl bg-surface-light/30 border border-white/5 ${c.hoverBorder} transition-all duration-300 overflow-hidden`}
-                >
-                  <div className={`h-1 bg-gradient-to-r ${c.gradientBar} to-transparent`} />
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className={c.text}>
-                        {layer.icon}
-                      </span>
-                      <h4 className="text-base font-bold text-white">{layer.title}</h4>
-                    </div>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-3">
-                      {layer.desc}
-                    </p>
-                    <div className="rounded-lg bg-surface/60 border border-white/5 px-3 py-2">
-                      <code className={`text-xs font-mono ${c.text}`}>{layer.snippet}</code>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Full YAML config */}
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-claw-cyan/20 via-claw-purple/15 to-claw-green/20 rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-700" />
-          <div className="relative rounded-2xl border border-white/10 bg-surface/90 backdrop-blur-sm overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.02]">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-claw-red/60" />
-                <div className="w-3 h-3 rounded-full bg-claw-orange/60" />
-                <div className="w-3 h-3 rounded-full bg-claw-green/60" />
-              </div>
-              <span className="text-xs font-mono text-slate-500 ml-2">ensemble-membrane.yaml</span>
-            </div>
-            <pre className="p-5 text-sm font-mono leading-relaxed overflow-x-auto">
-              <code>
-                <span className="text-kube-blue">apiVersion:</span><span className="text-slate-300"> sympozium.ai/v1alpha1</span>{'\n'}
-                <span className="text-kube-blue">kind:</span><span className="text-claw-purple"> Ensemble</span>{'\n'}
-                <span className="text-kube-blue">metadata:</span>{'\n'}
-                <span className="text-slate-500">  </span><span className="text-kube-blue">name:</span><span className="text-claw-orange"> research-team</span>{'\n'}
-                <span className="text-kube-blue">spec:</span>{'\n'}
-                <span className="text-slate-500">  </span><span className="text-kube-blue">sharedMemory:</span>{'\n'}
-                <span className="text-slate-500">    </span><span className="text-kube-blue">enabled:</span><span className="text-claw-green"> true</span>{'\n'}
-                <span className="text-slate-500">    </span><span className="text-kube-blue">membrane:</span>{'\n'}
-                {'\n'}
-                <span className="text-slate-500">      </span><span className="text-slate-500"># Visibility &amp; tag filtering</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">defaultVisibility:</span><span className="text-claw-cyan"> public</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">permeability:</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">- agentConfig:</span><span className="text-claw-orange"> researcher</span>{'\n'}
-                <span className="text-slate-500">          </span><span className="text-kube-blue">defaultVisibility:</span><span className="text-claw-cyan"> trusted</span>{'\n'}
-                <span className="text-slate-500">          </span><span className="text-kube-blue">exposeTags:</span><span className="text-slate-300"> ["findings", "data"]</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">- agentConfig:</span><span className="text-claw-orange"> reviewer</span>{'\n'}
-                <span className="text-slate-500">          </span><span className="text-kube-blue">defaultVisibility:</span><span className="text-claw-cyan"> private</span>{'\n'}
-                {'\n'}
-                <span className="text-slate-500">      </span><span className="text-slate-500"># Named trust boundaries</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">trustGroups:</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">- name:</span><span className="text-claw-purple"> core</span>{'\n'}
-                <span className="text-slate-500">          </span><span className="text-kube-blue">agentConfigs:</span><span className="text-slate-300"> ["researcher", "writer"]</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">- name:</span><span className="text-claw-purple"> editorial</span>{'\n'}
-                <span className="text-slate-500">          </span><span className="text-kube-blue">agentConfigs:</span><span className="text-slate-300"> ["writer", "reviewer"]</span>{'\n'}
-                {'\n'}
-                <span className="text-slate-500">      </span><span className="text-slate-500"># Cost ceiling</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">tokenBudget:</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">maxTokens:</span><span className="text-claw-orange"> 100000</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">action:</span><span className="text-claw-green"> halt</span>{'\n'}
-                {'\n'}
-                <span className="text-slate-500">      </span><span className="text-slate-500"># Failure isolation</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">circuitBreaker:</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">consecutiveFailures:</span><span className="text-claw-red"> 3</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">cooldownDuration:</span><span className="text-claw-orange"> "10m"</span>{'\n'}
-                {'\n'}
-                <span className="text-slate-500">      </span><span className="text-slate-500"># Knowledge freshness</span>{'\n'}
-                <span className="text-slate-500">      </span><span className="text-kube-blue">timeDecay:</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">ttl:</span><span className="text-claw-cyan"> "168h"</span>{'\n'}
-                <span className="text-slate-500">        </span><span className="text-kube-blue">decayFunction:</span><span className="text-claw-cyan"> linear</span>
-              </code>
-            </pre>
-          </div>
+        {/* Paper link */}
+        <div className="text-center">
+          <a
+            href="https://zenodo.org/records/15510783"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-claw-cyan transition-colors"
+          >
+            Read the synthetic membrane paper
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
