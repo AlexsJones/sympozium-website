@@ -13,31 +13,77 @@ import {
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 
-/* ── colour tokens ─────────────────────────────────── */
+/* ── colour tokens — industrial palette ─────────────── */
 const C = {
-  gateway:  { bg: '#1a1a2e', border: '#6366f1', text: '#a5b4fc' },
-  node:     { bg: '#0f2a1a', border: '#22c55e', text: '#86efac' },
-  model:    { bg: '#0f2a1a', border: '#22c55e', text: '#86efac' },
-  provider: { bg: '#2a1a0f', border: '#f97316', text: '#fdba74' },
-  ensemble: { bg: '#1a1a2e', border: '#8b5cf6', text: '#c4b5fd' },
-  agent:    { bg: '#1a1a2e', border: '#8b5cf6', text: '#c4b5fd' },
-  collapsed:{ bg: '#111827', border: '#374151', text: '#6b7280' },
+  gateway:  { bg: '#1a1a18', border: '#c4532a', text: '#f0ece4' },
+  node:     { bg: '#1a1a18', border: '#f0ece4', text: '#f0ece4' },
+  model:    { bg: '#1a1a18', border: '#8a8c82', text: '#f0ece4' },
+  provider: { bg: '#1a1a18', border: '#c4532a', text: '#c4532a' },
+  ensemble: { bg: '#1a1a18', border: '#f0ece4', text: '#f0ece4' },
+  agent:    { bg: '#111110', border: '#8a8c82', text: '#f0ece4' },
+  collapsed:{ bg: '#111110', border: '#333330', text: '#8a8c82' },
 }
 
 /* ── Badge ────────────────────────────────────────── */
-function Badge({ label, color = 'green' }: { label: string; color?: string }) {
+function Badge({ label, color = 'default' }: { label: string; color?: string }) {
   const colours: Record<string, string> = {
-    green:  'bg-claw-green/20 text-claw-green border-claw-green/30',
-    blue:   'bg-kube-blue/20 text-kube-blue border-kube-blue/30',
-    orange: 'bg-claw-orange/20 text-claw-orange border-claw-orange/30',
-    purple: 'bg-claw-purple/20 text-claw-purple border-claw-purple/30',
-    slate:  'bg-slate-700/40 text-slate-400 border-slate-600/30',
+    green:   'bg-[#2d7a4f]/20 text-[#2d7a4f] border-[#2d7a4f]/30',
+    blue:    'bg-[#f0ece4]/10 text-[#f0ece4] border-[#f0ece4]/20',
+    orange:  'bg-[#c4532a]/20 text-[#c4532a] border-[#c4532a]/30',
+    purple:  'bg-[#f0ece4]/10 text-[#f0ece4] border-[#f0ece4]/20',
+    slate:   'bg-[#333330] text-[#8a8c82] border-[#333330]',
+    default: 'bg-[#333330] text-[#8a8c82] border-[#333330]',
   }
   return (
-    <span className={`text-[9px] font-medium px-1.5 py-0.5 rounded border ${colours[color] ?? colours.slate}`}>
+    <span className={`text-[9px] font-mono font-medium px-1.5 py-0.5 border ${colours[color] ?? colours.default}`}>
       {label}
     </span>
   )
+}
+
+/* ── Industrial SVG icons ────────────────────────── */
+const ICONS: Record<string, React.ReactNode> = {
+  gateway: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <rect x="1" y="1" width="14" height="14" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="8" y1="1" x2="8" y2="15" stroke="currentColor" strokeWidth="1" />
+      <line x1="1" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1" />
+    </svg>
+  ),
+  node: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <rect x="2" y="2" width="12" height="12" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="5" y="5" width="6" height="6" fill="currentColor" />
+    </svg>
+  ),
+  model: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <rect x="3" y="3" width="10" height="10" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="8" y1="1" x2="8" y2="3" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="1" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="13" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  provider: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="6" y="6" width="4" height="4" fill="currentColor" />
+    </svg>
+  ),
+  ensemble: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <rect x="1" y="5" width="5" height="5" stroke="currentColor" strokeWidth="1.2" />
+      <rect x="6" y="5" width="5" height="5" stroke="currentColor" strokeWidth="1.2" />
+      <rect x="10" y="5" width="5" height="5" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  ),
+  agent: (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+      <rect x="4" y="4" width="8" height="8" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="7" y="7" width="2" height="2" fill="currentColor" />
+    </svg>
+  ),
 }
 
 /* ── Custom node component ────────────────────────── */
@@ -52,22 +98,22 @@ function TopologyNode({ data }: NodeProps) {
   }
 
   const c = C[d.nodeType as keyof typeof C] ?? C.collapsed
+  const handleStyle = { background: c.border, borderColor: '#1a1a18', width: 8, height: 8 }
 
-  // Collapsed ensemble — smaller, muted
   if (d.nodeType === 'collapsed') {
     return (
       <div
-        className="rounded-lg border px-3 py-2 min-w-[120px] text-center cursor-grab"
+        className="border px-3 py-2 min-w-[120px] text-center cursor-grab font-mono"
         style={{ background: c.bg, borderColor: c.border }}
       >
-        <Handle type="target" position={Position.Top} className="!w-2 !h-2 !bg-slate-600 !border-slate-500" />
-        <Handle type="source" position={Position.Bottom} className="!w-2 !h-2 !bg-slate-600 !border-slate-500" />
+        <Handle type="target" position={Position.Top} style={handleStyle} />
+        <Handle type="source" position={Position.Bottom} style={handleStyle} />
         <div className="flex items-center justify-center gap-1.5">
           <span className="text-[10px]" style={{ color: c.text }}>
-            {'\u{1F465}'} {d.label}
+            {d.label}
           </span>
           {d.count && (
-            <span className="text-[9px] text-slate-500">{d.count}</span>
+            <span className="text-[9px] font-mono" style={{ color: '#c4532a' }}>[{d.count}]</span>
           )}
         </div>
       </div>
@@ -76,37 +122,29 @@ function TopologyNode({ data }: NodeProps) {
 
   return (
     <div
-      className="rounded-xl border shadow-lg min-w-[140px] cursor-grab"
+      className="border min-w-[140px] cursor-grab font-mono"
       style={{ background: c.bg, borderColor: c.border }}
     >
-      <Handle type="target" position={Position.Top} className="!w-2.5 !h-2.5 !border-2" style={{ background: c.border, borderColor: c.bg }} />
-      <Handle type="source" position={Position.Bottom} className="!w-2.5 !h-2.5 !border-2" style={{ background: c.border, borderColor: c.bg }} />
-      <Handle type="target" position={Position.Left} className="!w-2.5 !h-2.5 !border-2" style={{ background: c.border, borderColor: c.bg }} />
-      <Handle type="source" position={Position.Right} className="!w-2.5 !h-2.5 !border-2" style={{ background: c.border, borderColor: c.bg }} />
+      <Handle type="target" position={Position.Top} style={handleStyle} />
+      <Handle type="source" position={Position.Bottom} style={handleStyle} />
+      <Handle type="target" position={Position.Left} style={handleStyle} />
+      <Handle type="source" position={Position.Right} style={handleStyle} />
 
       <div className="px-3 py-2.5">
-        {/* icon + label */}
         <div className="flex items-center gap-2 mb-1">
-          {d.nodeType === 'gateway'  && <span className="text-sm">{'\u{2699}\uFE0F'}</span>}
-          {d.nodeType === 'node'     && <span className="text-sm">{'\u{1F5A5}\uFE0F'}</span>}
-          {d.nodeType === 'model'    && <span className="text-sm">{'\u{1F9E0}'}</span>}
-          {d.nodeType === 'provider' && <span className="text-sm">{'\u{2699}\uFE0F'}</span>}
-          {d.nodeType === 'ensemble' && <span className="text-sm">{'\u{1F465}'}</span>}
-          {d.nodeType === 'agent'    && <span className="text-sm">{'\u{1F464}'}</span>}
+          <span style={{ color: c.text }}>{ICONS[d.nodeType] ?? ICONS.agent}</span>
           <span className="text-xs font-bold" style={{ color: c.text }}>
             {d.label}
           </span>
           {d.statusColor && (
-            <span className={`w-2 h-2 rounded-full ${d.statusColor}`} />
+            <span className="w-2 h-2" style={{ background: d.statusColor === 'bg-claw-green' ? '#2d7a4f' : d.statusColor === 'bg-claw-red' ? '#c4532a' : '#8a8c82' }} />
           )}
         </div>
 
-        {/* subtitle */}
         {d.subtitle && (
-          <div className="text-[10px] text-slate-500 mb-1.5">{d.subtitle}</div>
+          <div className="text-[10px] mb-1.5" style={{ color: '#8a8c82' }}>{d.subtitle}</div>
         )}
 
-        {/* badges */}
         {d.badges && d.badges.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-1">
             {d.badges.map((b, i) => (
@@ -123,7 +161,7 @@ function TopologyNode({ data }: NodeProps) {
 function LegendDot({ color, label }: { color: string; label: string }) {
   return (
     <span className="flex items-center gap-1.5">
-      <span className={`w-2.5 h-2.5 rounded-full ${color}`} />
+      <span className="w-2.5 h-2.5" style={{ background: color }} />
       <span>{label}</span>
     </span>
   )
@@ -132,14 +170,12 @@ function LegendDot({ color, label }: { color: string; label: string }) {
 /* ── Main component ───────────────────────────────── */
 export default function TopologyDemo() {
   const initialNodes: Node[] = useMemo(() => [
-    // Gateway
     {
       id: 'gateway',
       type: 'topology',
       position: { x: 350, y: 0 },
       data: { label: 'Gateway', nodeType: 'gateway', subtitle: 'Not Configured' },
     },
-    // K8s Node
     {
       id: 'node1',
       type: 'topology',
@@ -154,7 +190,6 @@ export default function TopologyDemo() {
         ],
       },
     },
-    // Model pod
     {
       id: 'model1',
       type: 'topology',
@@ -169,7 +204,6 @@ export default function TopologyDemo() {
         ],
       },
     },
-    // Provider
     {
       id: 'provider1',
       type: 'topology',
@@ -180,18 +214,12 @@ export default function TopologyDemo() {
         badges: [{ label: 'API', color: 'orange' }],
       },
     },
-    // Ensemble — research-team
     {
       id: 'ensemble1',
       type: 'topology',
       position: { x: 180, y: 380 },
-      data: {
-        label: 'research-team',
-        nodeType: 'ensemble',
-        statusColor: 'bg-claw-green',
-      },
+      data: { label: 'research-team', nodeType: 'ensemble', statusColor: 'bg-claw-green' },
     },
-    // Agents
     {
       id: 'agent-lead',
       type: 'topology',
@@ -216,7 +244,6 @@ export default function TopologyDemo() {
       position: { x: 200, y: 560 },
       data: { label: 'Reviewer', nodeType: 'agent', statusColor: 'bg-claw-red' },
     },
-    // Collapsed ensembles
     {
       id: 'ens-platform',
       type: 'topology',
@@ -243,16 +270,20 @@ export default function TopologyDemo() {
     },
   ], [])
 
+  const edgeDefaults = {
+    labelStyle: { fill: '#8a8c82', fontSize: 10, fontFamily: "'JetBrains Mono', monospace" },
+    labelBgStyle: { fill: '#1a1a18', fillOpacity: 0.9 },
+    labelBgPadding: [4, 2] as [number, number],
+  }
+
   const initialEdges: Edge[] = useMemo(() => [
-    // Node → Model
     {
       id: 'e-node-model',
       source: 'node1',
       target: 'model1',
       animated: true,
-      style: { stroke: '#22c55e', strokeWidth: 1.5 },
+      style: { stroke: '#8a8c82', strokeWidth: 1.5 },
     },
-    // Model → Provider (inference)
     {
       id: 'e-model-provider',
       source: 'model1',
@@ -260,36 +291,27 @@ export default function TopologyDemo() {
       sourceHandle: 'right',
       targetHandle: 'left',
       label: 'inference',
-      labelStyle: { fill: '#94a3b8', fontSize: 10, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [4, 2] as [number, number],
-      style: { stroke: '#f97316', strokeWidth: 1.5 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#f97316', width: 14, height: 14 },
+      ...edgeDefaults,
+      style: { stroke: '#c4532a', strokeWidth: 1.5 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#c4532a', width: 14, height: 14 },
     },
-    // Ensemble → Model (inference)
     {
       id: 'e-ens-model',
       source: 'ensemble1',
       target: 'model1',
       label: 'inference',
-      labelStyle: { fill: '#94a3b8', fontSize: 10, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [4, 2] as [number, number],
+      ...edgeDefaults,
       animated: true,
-      style: { stroke: '#3b82f6', strokeWidth: 1.5, strokeDasharray: '6 3' },
+      style: { stroke: '#f0ece4', strokeWidth: 1.5, strokeDasharray: '6 3' },
     },
-    // Agents → inference edges
     {
       id: 'e-writer-provider',
       source: 'agent-writer',
       target: 'provider1',
       label: 'inference',
-      labelStyle: { fill: '#94a3b8', fontSize: 10, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [4, 2] as [number, number],
-      style: { stroke: '#f97316', strokeWidth: 1, strokeDasharray: '4 4' },
+      ...edgeDefaults,
+      style: { stroke: '#c4532a', strokeWidth: 1, strokeDasharray: '4 4' },
     },
-    // Agent relationships
     {
       id: 'e-lead-researcher',
       source: 'agent-lead',
@@ -297,11 +319,9 @@ export default function TopologyDemo() {
       sourceHandle: 'right',
       targetHandle: 'left',
       label: 'delegation',
-      labelStyle: { fill: '#c4b5fd', fontSize: 9, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [3, 2] as [number, number],
-      style: { stroke: '#8b5cf6', strokeWidth: 1.5 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6', width: 12, height: 12 },
+      ...edgeDefaults,
+      style: { stroke: '#f0ece4', strokeWidth: 1.5 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#f0ece4', width: 12, height: 12 },
     },
     {
       id: 'e-researcher-writer',
@@ -310,32 +330,26 @@ export default function TopologyDemo() {
       sourceHandle: 'right',
       targetHandle: 'left',
       label: 'delegation',
-      labelStyle: { fill: '#c4b5fd', fontSize: 9, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [3, 2] as [number, number],
-      style: { stroke: '#8b5cf6', strokeWidth: 1.5 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6', width: 12, height: 12 },
+      ...edgeDefaults,
+      style: { stroke: '#f0ece4', strokeWidth: 1.5 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#f0ece4', width: 12, height: 12 },
     },
     {
       id: 'e-writer-reviewer',
       source: 'agent-writer',
       target: 'agent-reviewer',
       label: 'sequential',
-      labelStyle: { fill: '#fdba74', fontSize: 9, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [3, 2] as [number, number],
-      style: { stroke: '#f97316', strokeWidth: 1.5, strokeDasharray: '4 4' },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#f97316', width: 12, height: 12 },
+      ...edgeDefaults,
+      style: { stroke: '#c4532a', strokeWidth: 1.5, strokeDasharray: '4 4' },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#c4532a', width: 12, height: 12 },
     },
     {
       id: 'e-lead-reviewer',
       source: 'agent-lead',
       target: 'agent-reviewer',
       label: 'supervision',
-      labelStyle: { fill: '#fde047', fontSize: 9, fontFamily: 'monospace' },
-      labelBgStyle: { fill: '#0f172a', fillOpacity: 0.8 },
-      labelBgPadding: [3, 2] as [number, number],
-      style: { stroke: '#eab308', strokeWidth: 1, strokeDasharray: '2 3' },
+      ...edgeDefaults,
+      style: { stroke: '#8a8c82', strokeWidth: 1, strokeDasharray: '2 3' },
     },
   ], [])
 
@@ -344,13 +358,10 @@ export default function TopologyDemo() {
 
   const nodeTypes = useMemo(() => ({ topology: TopologyNode }), [])
 
-  const onInit = useCallback(() => {
-    // noop — layout is static
-  }, [])
+  const onInit = useCallback(() => {}, [])
 
   return (
     <div className="w-full">
-      {/* Title */}
       <div className="text-center mb-6">
         <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Cluster Topology</h3>
         <p className="text-sm text-slate-400">
@@ -358,8 +369,7 @@ export default function TopologyDemo() {
         </p>
       </div>
 
-      {/* React Flow canvas */}
-      <div className="rounded-2xl border border-white/10 overflow-hidden" style={{ height: 520 }}>
+      <div className="border border-[#333330] overflow-hidden" style={{ height: 520 }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -371,20 +381,19 @@ export default function TopologyDemo() {
           minZoom={0.4}
           maxZoom={1.5}
           proOptions={{ hideAttribution: true }}
-          className="!bg-[#0a0e1a]"
+          className="!bg-[#111110]"
         >
-          <Background color="#1e293b" gap={24} size={1} />
+          <Background color="#c4532a" gap={48} size={1.5} />
         </ReactFlow>
       </div>
 
-      {/* Legend */}
-      <div className="mt-4 flex flex-wrap justify-center gap-4 text-[10px] font-mono text-slate-500">
-        <LegendDot color="bg-indigo-400" label="Gateway" />
-        <LegendDot color="bg-green-400" label="K8s Nodes" />
-        <LegendDot color="bg-orange-400" label="Providers" />
-        <LegendDot color="bg-green-500" label="Models (Pod)" />
-        <LegendDot color="bg-purple-400" label="Ensembles" />
-        <LegendDot color="bg-purple-300" label="Agents" />
+      <div className="mt-4 flex flex-wrap justify-center gap-4 text-[10px] font-mono text-[#8a8c82]">
+        <LegendDot color="#c4532a" label="Gateway" />
+        <LegendDot color="#f0ece4" label="K8s Nodes" />
+        <LegendDot color="#c4532a" label="Providers" />
+        <LegendDot color="#8a8c82" label="Models (Pod)" />
+        <LegendDot color="#f0ece4" label="Ensembles" />
+        <LegendDot color="#8a8c82" label="Agents" />
       </div>
     </div>
   )
