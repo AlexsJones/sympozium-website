@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import ThemeToggle from './ThemeToggle'
+import ThemeIcon from './ThemeIcon'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -31,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <img src="/icon.png" alt="Sympozium" className="w-8 h-8 rounded-lg object-cover" />
+            <ThemeIcon className="w-8 h-8 rounded-lg object-cover" />
             <span className="text-xl font-bold text-white group-hover:text-primary-light transition-colors">
               sympozium<span className="text-kube-blue">.ai</span>
             </span>
@@ -50,8 +52,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA + GitHub */}
+          {/* CTA + GitHub + Theme */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <a
               href="https://github.com/sympozium-ai/sympozium"
             >

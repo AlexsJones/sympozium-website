@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background -->
+  <rect width="200" height="200" rx="24" fill="#0a0f0d"/>
+
+  <!-- 6-arm starburst — jade palette -->
+  <!-- Top center arm (brightest mint) -->
+  <line x1="100" y1="100" x2="100" y2="32" stroke="#6ee7b7" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Top-right arm -->
+  <line x1="100" y1="100" x2="155" y2="48" stroke="#4ade80" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Bottom-right chevron arm -->
+  <polyline points="100,100 152,138 132,168" fill="none" stroke="#3dd68c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bottom center arm (amber accent) -->
+  <line x1="100" y1="100" x2="100" y2="168" stroke="#d4a537" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Bottom-left chevron arm -->
+  <polyline points="100,100 48,138 68,168" fill="none" stroke="#2ba86d" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Top-left arm -->
+  <line x1="100" y1="100" x2="45" y2="48" stroke="#34d399" stroke-width="12" stroke-linecap="round"/>
+</svg>

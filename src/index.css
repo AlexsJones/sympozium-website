@@ -1,6 +1,28 @@
 @import "tailwindcss";
 
 @theme {
+  /* Default: Neo Industrial */
+  --color-primary: #f0ece4;
+  --color-primary-dark: #d4cfc6;
+  --color-primary-light: #ffffff;
+  --color-accent: #e8562a;
+  --color-accent-light: #f06a3f;
+  --color-surface: #1a1a18;
+  --color-surface-light: #242422;
+  --color-surface-lighter: #333330;
+  --color-kube-blue: #f0ece4;
+  --color-kube-blue-dark: #d4cfc6;
+  --color-claw-orange: #e8562a;
+  --color-claw-purple: #f0ece4;
+  --color-claw-cyan: #8a8c82;
+  --color-claw-green: #f0ece4;
+  --color-claw-red: #e8562a;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Theme: Classic (original indigo & orange) */
+[data-theme="classic"] {
   --color-primary: #6366f1;
   --color-primary-dark: #4f46e5;
   --color-primary-light: #818cf8;
@@ -16,8 +38,6 @@
   --color-claw-cyan: #06b6d4;
   --color-claw-green: #10b981;
   --color-claw-red: #ef4444;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 html {
@@ -26,9 +46,68 @@ html {
 
 body {
   margin: 0;
-  background-color: #0f172a;
+  background-color: var(--color-surface);
   color: #e2e8f0;
 }
+
+/* Theme: Obsidian & Jade */
+[data-theme="jade"] {
+  --color-primary: #3dd68c;
+  --color-primary-dark: #2ba86d;
+  --color-primary-light: #6ee7b7;
+  --color-accent: #d4a537;
+  --color-accent-light: #e5b84a;
+  --color-surface: #0a0f0d;
+  --color-surface-light: #141c19;
+  --color-surface-lighter: #1f2e29;
+  --color-kube-blue: #3dd68c;
+  --color-kube-blue-dark: #2ba86d;
+  --color-claw-orange: #d4a537;
+  --color-claw-purple: #6ee7b7;
+  --color-claw-cyan: #2dd4bf;
+  --color-claw-green: #3dd68c;
+  --color-claw-red: #ef4444;
+}
+
+/* Theme: Graphite & Teal */
+[data-theme="teal"] {
+  --color-primary: #2dd4bf;
+  --color-primary-dark: #0f9b8a;
+  --color-primary-light: #5eead4;
+  --color-accent: #a78bfa;
+  --color-accent-light: #c4b5fd;
+  --color-surface: #0c0c0e;
+  --color-surface-light: #18181b;
+  --color-surface-lighter: #27272a;
+  --color-kube-blue: #2dd4bf;
+  --color-kube-blue-dark: #0f9b8a;
+  --color-claw-orange: #a78bfa;
+  --color-claw-purple: #5eead4;
+  --color-claw-cyan: #67e8f9;
+  --color-claw-green: #2dd4bf;
+  --color-claw-red: #ef4444;
+}
+
+/* Theme: Carbon & Phosphor */
+[data-theme="phosphor"] {
+  --color-primary: #22c55e;
+  --color-primary-dark: #16a34a;
+  --color-primary-light: #4ade80;
+  --color-accent: #7dd3fc;
+  --color-accent-light: #bae6fd;
+  --color-surface: #080a0c;
+  --color-surface-light: #12161a;
+  --color-surface-lighter: #1c2228;
+  --color-kube-blue: #22c55e;
+  --color-kube-blue-dark: #16a34a;
+  --color-claw-orange: #7dd3fc;
+  --color-claw-purple: #4ade80;
+  --color-claw-cyan: #7dd3fc;
+  --color-claw-green: #22c55e;
+  --color-claw-red: #ef4444;
+}
+
+/* (Industrial colors are now the @theme default) */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -50,21 +129,21 @@ body {
 }
 
 .gradient-border {
-  background: linear-gradient(135deg, #6366f1, #06b6d4, #f97316, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-claw-cyan), var(--color-accent, #f97316), var(--color-claw-purple));
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
 }
 
 .glow-blue {
-  box-shadow: 0 0 40px rgba(50, 108, 229, 0.3), 0 0 80px rgba(50, 108, 229, 0.1);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--color-kube-blue) 30%, transparent), 0 0 80px color-mix(in srgb, var(--color-kube-blue) 10%, transparent);
 }
 
 .glow-purple {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--color-claw-purple) 30%, transparent), 0 0 80px color-mix(in srgb, var(--color-claw-purple) 10%, transparent);
 }
 
 .glow-orange {
-  box-shadow: 0 0 40px rgba(249, 115, 22, 0.3), 0 0 80px rgba(249, 115, 22, 0.1);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--color-claw-orange) 30%, transparent), 0 0 80px color-mix(in srgb, var(--color-claw-orange) 10%, transparent);
 }
 
 @keyframes float {
@@ -86,10 +165,26 @@ body {
 }
 
 .grid-pattern {
-  background-image: 
-    linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+/* Organic cellular pattern for jade theme */
+[data-theme="jade"] .grid-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' seed='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='140'%3E%3Cpath d='M60 5 L110 35 L110 95 L60 125 L10 95 L10 35 Z' fill='none' stroke='%233dd68c' stroke-width='0.5' opacity='0.06'/%3E%3Cpath d='M60 20 L95 42 L95 88 L60 110 L25 88 L25 42 Z' fill='none' stroke='%233dd68c' stroke-width='0.3' opacity='0.04'/%3E%3Ccircle cx='60' cy='65' r='2' fill='%233dd68c' opacity='0.05'/%3E%3Ccircle cx='10' cy='35' r='1.5' fill='%233dd68c' opacity='0.04'/%3E%3Ccircle cx='110' cy='95' r='1.5' fill='%233dd68c' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px, 120px 140px;
+}
+
+/* Industrial grid — crosshair marks at intersections */
+[data-theme="industrial"] .grid-pattern {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cline x1='24' y1='20' x2='24' y2='28' stroke='%23e8562a' stroke-width='0.5' opacity='0.2'/%3E%3Cline x1='20' y1='24' x2='28' y2='24' stroke='%23e8562a' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E"),
+    linear-gradient(rgba(240, 236, 228, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 236, 228, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 .terminal {
@@ -113,6 +208,438 @@ body {
 
 code {
   font-family: var(--font-mono);
+}
+
+/* Theme-specific backgrounds — hidden by default */
+.organic-bg,
+.industrial-bg {
+  display: none;
+  color: var(--color-primary);
+}
+[data-theme="jade"] .organic-bg {
+  display: block;
+}
+[data-theme="industrial"] .industrial-bg {
+  display: block;
+}
+
+/* Industrial typography — serif headings, mono everything else */
+[data-theme="industrial"] {
+  --font-sans: 'JetBrains Mono', 'Fira Code', monospace;
+  font-feature-settings: 'ss01' on;
+}
+
+[data-theme="industrial"] h1,
+[data-theme="industrial"] h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+[data-theme="industrial"] h3,
+[data-theme="industrial"] h4 {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Body text and labels — mono, slightly spaced */
+[data-theme="industrial"] p,
+[data-theme="industrial"] span,
+[data-theme="industrial"] a,
+[data-theme="industrial"] li,
+[data-theme="industrial"] label,
+[data-theme="industrial"] button {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Uppercase treatment for small/label text */
+[data-theme="industrial"] .text-xs,
+[data-theme="industrial"] .text-sm {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Nav links — serif, normal case */
+[data-theme="industrial"] nav a {
+  font-family: 'Instrument Serif', Georgia, serif;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1rem;
+}
+
+/* CTA buttons — mono uppercase with bracket feel */
+[data-theme="industrial"] a[href="#get-started"],
+[data-theme="industrial"] .gradient-border {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+/* Gradient text doesn't suit this theme — force solid */
+[data-theme="industrial"] .bg-clip-text {
+  -webkit-text-fill-color: unset;
+  background: none;
+  color: var(--color-primary);
+}
+/* On cream panels, gradient text needs to be dark, not cream */
+[data-theme="industrial"] section#who .bg-clip-text,
+[data-theme="industrial"] section#local-inference .bg-clip-text {
+  color: #e8562a;
+}
+
+/* ── Industrial layout — three-tone panels, grid overlay, graphic dividers ── */
+
+/* Push everything down for the ticker */
+[data-theme="industrial"] nav {
+  top: 28px;
+}
+
+/* All sections get grid overlay + border */
+[data-theme="industrial"] section {
+  border-top: 2px solid #333330;
+  position: relative;
+}
+
+/* Visible grid overlay on all dark sections */
+[data-theme="industrial"] section:nth-of-type(odd) {
+  background-image:
+    linear-gradient(rgba(240, 236, 228, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 236, 228, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Cream/light panels — targeted by ID ── */
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference {
+  background-color: #eae6de;
+  border-top-color: #c8c4bc;
+  color: #1a1a18;
+  background-image:
+    linear-gradient(rgba(26, 26, 24, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 24, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+[data-theme="industrial"] section#who h1,
+[data-theme="industrial"] section#who h2,
+[data-theme="industrial"] section#who h3,
+[data-theme="industrial"] section#who h4,
+[data-theme="industrial"] section#who .text-white,
+[data-theme="industrial"] section#local-inference h1,
+[data-theme="industrial"] section#local-inference h2,
+[data-theme="industrial"] section#local-inference h3,
+[data-theme="industrial"] section#local-inference h4,
+[data-theme="industrial"] section#local-inference .text-white {
+  color: #1a1a18;
+}
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference p,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference span,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference li,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .text-slate-300,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .text-slate-400 {
+  color: #3a3a36;
+}
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .border-white\/5,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .border-white\/10 {
+  border-color: rgba(26, 26, 24, 0.1);
+}
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .bg-surface-light\/20,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .bg-surface\/50,
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference .bg-surface-light {
+  background-color: rgba(26, 26, 24, 0.05);
+}
+
+/* ── Bold orange accent panels (sections 4, 8 — key feature sections) ── */
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison {
+  background-color: #e8562a;
+  border-top-color: #c44820;
+  color: #1a1a18;
+  background-image:
+    linear-gradient(rgba(26, 26, 24, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 24, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison h1,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison h2,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison h3,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison h4,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .text-white {
+  color: #ffffff;
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison p,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison span,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison li {
+  color: rgba(255, 255, 255, 0.85);
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .text-slate-300,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .text-slate-400 {
+  color: rgba(255, 255, 255, 0.7);
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .border-white\/5,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .bg-surface-light\/20,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .bg-surface\/50,
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .bg-surface-light {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+/* Orange panel gradient text override */
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison .bg-clip-text {
+  color: #ffffff;
+}
+
+/* ── Section labels — bracket notation ── */
+[data-theme="industrial"] section::before {
+  content: '[ ' attr(id) ' ]';
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #8a8c82;
+  z-index: 1;
+}
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference::before {
+  color: #8a8880;
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison::before {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Chevron arrow dividers between sections ── */
+[data-theme="industrial"] section::after {
+  content: '>>> >>> >>>';
+  position: absolute;
+  bottom: -1px;
+  left: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: #e8562a;
+  opacity: 0.5;
+  z-index: 2;
+  transform: translateY(50%);
+  background: inherit;
+  padding: 0 8px;
+}
+[data-theme="industrial"] section#who,
+[data-theme="industrial"] section#local-inference::after {
+  background: #eae6de;
+}
+[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#comparison::after {
+  color: #1a1a18;
+  background: #e8562a;
+}
+
+/* ── Corner crosshair marks on sections ── */
+[data-theme="industrial"] section > .max-w-7xl {
+  position: relative;
+}
+[data-theme="industrial"] section > .max-w-7xl::before,
+[data-theme="industrial"] section > .max-w-7xl::after {
+  content: '+';
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #e8562a;
+  opacity: 0.3;
+  line-height: 1;
+}
+[data-theme="industrial"] section > .max-w-7xl::before {
+  top: 0;
+  left: -8px;
+}
+[data-theme="industrial"] section > .max-w-7xl::after {
+  top: 0;
+  right: -8px;
+}
+
+/* ── Cream panel card overrides — ensure cards are readable ── */
+[data-theme="industrial"] section#who .bg-surface-light\/50,
+[data-theme="industrial"] section#who .bg-surface-light\/30,
+[data-theme="industrial"] section#who .bg-surface-light\/20,
+[data-theme="industrial"] section#local-inference .bg-surface-light\/50,
+[data-theme="industrial"] section#local-inference .bg-surface-light\/30,
+[data-theme="industrial"] section#local-inference .bg-surface-light\/20 {
+  background-color: #ffffff;
+  border-color: rgba(26, 26, 24, 0.12);
+}
+[data-theme="industrial"] section#who .bg-surface-light,
+[data-theme="industrial"] section#local-inference .bg-surface-light {
+  background-color: #1a1a18;
+}
+/* Card text on cream panels */
+[data-theme="industrial"] section#who .text-slate-400,
+[data-theme="industrial"] section#local-inference .text-slate-400 {
+  color: #5a5a54;
+}
+[data-theme="industrial"] section#who .text-slate-500,
+[data-theme="industrial"] section#local-inference .text-slate-500 {
+  color: #6a6a64;
+}
+[data-theme="industrial"] section#who .text-slate-300,
+[data-theme="industrial"] section#local-inference .text-slate-300 {
+  color: #3a3a36;
+}
+/* Skill/tag badges on cream cards */
+[data-theme="industrial"] section#who .bg-white\/5,
+[data-theme="industrial"] section#local-inference .bg-white\/5 {
+  background-color: rgba(26, 26, 24, 0.06);
+}
+/* Gradient backgrounds inside cards on cream */
+[data-theme="industrial"] section#who [class*="bg-gradient-to-br"][class*="from-claw"],
+[data-theme="industrial"] section#who [class*="bg-gradient-to-br"][class*="from-kube"],
+[data-theme="industrial"] section#local-inference [class*="bg-gradient-to-br"][class*="from-claw"],
+[data-theme="industrial"] section#local-inference [class*="bg-gradient-to-br"][class*="from-kube"] {
+  opacity: 0;
+}
+/* Chevron markers */
+[data-theme="industrial"] section#who .text-claw-orange,
+[data-theme="industrial"] section#local-inference .text-claw-orange {
+  color: #e8562a;
+}
+
+/* ── Footer ── */
+[data-theme="industrial"] footer {
+  border-color: #333330;
+}
+
+/* ── Hide blur/glow effects — too soft ── */
+[data-theme="industrial"] .blur-\[120px\],
+[data-theme="industrial"] .blur-\[150px\] {
+  display: none;
+}
+
+/* ── CTA buttons — strong differentiation ── */
+[data-theme="industrial"] a[href="#get-started"],
+[data-theme="industrial"] a[href="#get-started"] > div {
+  background: #e8562a !important;
+  border-radius: 2px;
+  box-shadow: none;
+}
+[data-theme="industrial"] a[href="#get-started"]:hover,
+[data-theme="industrial"] a[href="#get-started"]:hover > div {
+  background: #d04e24 !important;
+}
+[data-theme="industrial"] a[href="#get-started"] span {
+  color: #ffffff !important;
+}
+/* GitHub / secondary button — visible border */
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"] {
+  background: transparent !important;
+  border: 2px solid #f0ece4 !important;
+  border-radius: 2px;
+  color: #f0ece4 !important;
+}
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"]:hover {
+  background: #f0ece4 !important;
+  color: #1a1a18 !important;
+}
+
+/* ── Scrollbar for industrial ── */
+[data-theme="industrial"] ::-webkit-scrollbar-track {
+  background: #1a1a18;
+}
+[data-theme="industrial"] ::-webkit-scrollbar-thumb {
+  background: #e8562a;
+  border-radius: 0;
+}
+
+/* ── Rounded corners → sharp on industrial ── */
+[data-theme="industrial"] .rounded-2xl,
+[data-theme="industrial"] .rounded-xl,
+[data-theme="industrial"] .rounded-lg {
+  border-radius: 2px;
+}
+
+/* ── Ticker bar ── */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.industrial-ticker {
+  display: none;
+}
+[data-theme="industrial"] .industrial-ticker {
+  display: flex;
+}
+.industrial-ticker-scroll {
+  animation: ticker-scroll 40s linear infinite;
+}
+
+/* ── Stamp rotation ── */
+@keyframes industrial-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.industrial-stamp {
+  animation: industrial-rotate 120s linear infinite;
+}
+.industrial-stamp-delay {
+  animation-delay: -60s;
+  animation-direction: reverse;
+}
+
+@keyframes organic-drift {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(15px, -20px) rotate(2deg) scale(1.02); }
+  50% { transform: translate(-10px, -35px) rotate(-1deg) scale(0.98); }
+  75% { transform: translate(-20px, -15px) rotate(1.5deg) scale(1.01); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@keyframes organic-dot-drift {
+  0% { transform: translate(0, 0); opacity: 0.04; }
+  33% { transform: translate(30px, -20px); opacity: 0.06; }
+  66% { transform: translate(-15px, -40px); opacity: 0.03; }
+  100% { transform: translate(0, 0); opacity: 0.04; }
+}
+
+.organic-shape {
+  animation: organic-drift 25s ease-in-out infinite;
+}
+.organic-shape-delay-1 { animation-delay: -5s; animation-duration: 30s; }
+.organic-shape-delay-2 { animation-delay: -10s; animation-duration: 28s; }
+.organic-shape-delay-3 { animation-delay: -15s; animation-duration: 32s; }
+.organic-shape-delay-4 { animation-delay: -20s; animation-duration: 27s; }
+
+.organic-dots {
+  animation: organic-dot-drift 18s ease-in-out infinite;
 }
 
 @keyframes dash-flow {

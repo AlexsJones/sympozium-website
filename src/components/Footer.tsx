@@ -1,3 +1,5 @@
+import ThemeIcon from './ThemeIcon'
+
 export default function Footer() {
   return (
     <footer className="relative border-t border-white/5">
@@ -52,7 +54,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <img src="/icon.png" alt="Sympozium" className="w-9 h-9 rounded-lg object-cover" />
+              <ThemeIcon className="w-9 h-9 rounded-lg object-cover" />
               <span className="text-xl font-bold text-white">
                 sympozium<span className="text-kube-blue">.ai</span>
               </span>

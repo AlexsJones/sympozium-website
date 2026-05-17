@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <!-- Background -->
+  <rect width="600" height="160" fill="#1a1a18"/>
+  <rect x="3" y="3" width="594" height="154" fill="none" stroke="#333330" stroke-width="1"/>
+
+  <!-- Corner brackets -->
+  <path d="M6 24V6h18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M594 24V6h-18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M6 136v18h18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M594 136v18h-18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+
+  <!-- Corner dots -->
+  <rect x="6" y="6" width="4" height="4" fill="#e8562a"/>
+  <rect x="590" y="6" width="4" height="4" fill="#e8562a"/>
+  <rect x="6" y="150" width="4" height="4" fill="#e8562a"/>
+  <rect x="590" y="150" width="4" height="4" fill="#e8562a"/>
+
+  <!-- SY monogram mark -->
+  <text x="72" y="112" text-anchor="middle" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-size="72" font-weight="900" fill="#f0ece4" letter-spacing="-2">
+    SY
+  </text>
+  <rect x="28" y="120" width="88" height="5" fill="#e8562a"/>
+
+  <!-- Divider line -->
+  <line x1="136" y1="30" x2="136" y2="130" stroke="#333330" stroke-width="1"/>
+
+  <!-- Wordmark -->
+  <text x="158" y="88" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="48" font-weight="700" fill="#f0ece4" letter-spacing="2">
+    SYMPOZIUM<tspan fill="#e8562a">.AI</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="160" y="116" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#8a8c82" letter-spacing="4">
+    KUBERNETES-NATIVE AGENTIC CONTROL PLANE
+  </text>
+
+  <!-- Crosshair ticks -->
+  <line x1="298" y1="3" x2="302" y2="3" stroke="#e8562a" stroke-width="1"/>
+  <line x1="298" y1="157" x2="302" y2="157" stroke="#e8562a" stroke-width="1"/>
+  <line x1="3" y1="78" x2="3" y2="82" stroke="#e8562a" stroke-width="1"/>
+  <line x1="597" y1="78" x2="597" y2="82" stroke="#e8562a" stroke-width="1"/>
+</svg>
