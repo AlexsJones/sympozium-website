@@ -485,6 +485,57 @@ code {
   color: #e8562a;
 }
 
+/* ── Code blocks on cream panels — high contrast syntax colors ── */
+[data-theme="industrial"] section#who pre,
+[data-theme="industrial"] section#local-inference pre {
+  background-color: #1a1a18;
+  border: 1px solid #333330;
+  border-radius: 2px;
+}
+[data-theme="industrial"] section#who pre code .text-kube-blue,
+[data-theme="industrial"] section#local-inference pre code .text-kube-blue,
+[data-theme="industrial"] section#who pre .text-kube-blue,
+[data-theme="industrial"] section#local-inference pre .text-kube-blue {
+  color: #c4532a !important;
+}
+[data-theme="industrial"] section#who pre .text-slate-300,
+[data-theme="industrial"] section#local-inference pre .text-slate-300 {
+  color: #f0ece4 !important;
+}
+[data-theme="industrial"] section#who pre .text-slate-500,
+[data-theme="industrial"] section#local-inference pre .text-slate-500 {
+  color: #8a8c82 !important;
+}
+[data-theme="industrial"] section#who pre .text-claw-purple,
+[data-theme="industrial"] section#local-inference pre .text-claw-purple {
+  color: #f0ece4 !important;
+}
+[data-theme="industrial"] section#who pre .text-claw-orange,
+[data-theme="industrial"] section#local-inference pre .text-claw-orange {
+  color: #c4532a !important;
+}
+[data-theme="industrial"] section#who pre .text-claw-green,
+[data-theme="industrial"] section#local-inference pre .text-claw-green {
+  color: #8a8c82 !important;
+}
+[data-theme="industrial"] section#who pre .text-claw-cyan,
+[data-theme="industrial"] section#local-inference pre .text-claw-cyan {
+  color: #f0ece4 !important;
+}
+/* Code block container on cream — dark background */
+[data-theme="industrial"] section#who .bg-surface\/90,
+[data-theme="industrial"] section#local-inference .bg-surface\/90 {
+  background-color: #1a1a18 !important;
+}
+[data-theme="industrial"] section#who .bg-white\/\[0\.02\],
+[data-theme="industrial"] section#local-inference .bg-white\/\[0\.02\] {
+  background-color: rgba(240, 236, 228, 0.04);
+}
+/* File name label in code block header */
+[data-theme="industrial"] section#local-inference .border-b.border-white\/5 span {
+  color: #8a8c82 !important;
+}
+
 /* ── Footer ── */
 [data-theme="industrial"] footer {
   border-color: #333330;
