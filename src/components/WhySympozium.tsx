@@ -1,8 +1,13 @@
 const platformBenefits = [
   {
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        {/* Cube / Pod — blocky */}
+        <rect x="3" y="8" width="18" height="13" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        <polyline points="3,8 12,3 21,8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="12" y1="3" x2="12" y2="14" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="3" y1="8" x2="12" y2="14" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="21" y1="8" x2="12" y2="14" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
     title: 'Every Agent is a Pod',
@@ -11,8 +16,10 @@ const platformBenefits = [
   },
   {
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        {/* Shield — angular */}
+        <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.25 5.25-1.1 9-6 9-11.25V6L12 2z" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        <rect x="10" y="9" width="4" height="4" fill="currentColor" />
       </svg>
     ),
     title: 'Safe by Design',
@@ -21,8 +28,13 @@ const platformBenefits = [
   },
   {
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9m10.5-6v4.5m0-4.5h-4.5m4.5 0L15 9m-10.5 6v4.5m0-4.5h4.5m-4.5 0L9 15m10.5 6v-4.5m0 4.5h-4.5m4.5 0L15 15" />
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        {/* Expand / Scale — arrows out */}
+        <path d="M3 3h6v2H5v4H3V3z" fill="currentColor" />
+        <path d="M21 3h-6v2h4v4h2V3z" fill="currentColor" />
+        <path d="M3 21h6v-2H5v-4H3v6z" fill="currentColor" />
+        <path d="M21 21h-6v-2h4v-4h2v6z" fill="currentColor" />
+        <rect x="9" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.5" fill="none" />
       </svg>
     ),
     title: 'Horizontally Scalable',
@@ -31,9 +43,14 @@ const platformBenefits = [
   },
   {
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        {/* Eye / crosshair — surveillance style */}
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        <circle cx="12" cy="12" r="3" fill="currentColor" />
+        <line x1="12" y1="1" x2="12" y2="5" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="1" y1="12" x2="5" y2="12" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="19" y1="12" x2="23" y2="12" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
     title: 'Full Observability',
@@ -85,8 +102,17 @@ export default function WhySympozium() {
             <div className="relative">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-claw-orange to-claw-red p-[1px] mb-6">
                 <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                    {/* Three connected nodes — agent team */}
+                    <rect x="2" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="9" y="2" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="16" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="9" y1="8" x2="5" y2="9" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="15" y1="8" x2="19" y2="9" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="4" y="11" width="2" height="2" fill="currentColor" />
+                    <rect x="11" y="4" width="2" height="2" fill="currentColor" />
+                    <rect x="18" y="11" width="2" height="2" fill="currentColor" />
                   </svg>
                 </div>
               </div>
@@ -121,8 +147,12 @@ export default function WhySympozium() {
             <div className="relative">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-kube-blue to-claw-cyan p-[1px] mb-6">
                 <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.42 15.17l-5.384 3.181 1.028-5.993L2.114 7.63l6.016-.874L11.42 1.5l2.692 5.256 6.016.874-4.95 4.728 1.028 5.993z" />
+                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                    {/* Kubernetes wheel / cluster — angular */}
+                    <rect x="4" y="4" width="16" height="16" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" strokeWidth="1" />
+                    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="1" />
+                    <rect x="10" y="10" width="4" height="4" fill="currentColor" />
                   </svg>
                 </div>
               </div>

@@ -4,10 +4,33 @@ import { useState, useEffect } from 'react'
 // Constants
 // ---------------------------------------------------------------------------
 
+const AGENT_ICONS = [
+  // Researcher — crosshair/search
+  <svg key="r" className="w-7 h-7 mx-auto" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="12" y1="2" x2="12" y2="6" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="12" y1="18" x2="12" y2="22" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="2" y1="12" x2="6" y2="12" stroke="currentColor" strokeWidth="1.5" />
+    <line x1="18" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="10" y="10" width="4" height="4" fill="currentColor" />
+  </svg>,
+  // Writer — pen/edit
+  <svg key="w" className="w-7 h-7 mx-auto" viewBox="0 0 24 24" fill="none">
+    <path d="M3 21h18" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M5 17L17 5l2 2L7 19H5v-2z" stroke="currentColor" strokeWidth="1.5" fill="none" />
+    <rect x="15" y="5" width="4" height="4" transform="rotate(-45 17 5)" fill="currentColor" />
+  </svg>,
+  // Reviewer — eye/inspect
+  <svg key="v" className="w-7 h-7 mx-auto" viewBox="0 0 24 24" fill="none">
+    <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" stroke="currentColor" strokeWidth="1.5" />
+    <rect x="9" y="9" width="6" height="6" fill="currentColor" />
+  </svg>,
+]
+
 const AGENTS = [
-  { name: 'Researcher', icon: '\u{1F50D}', color: 'kube-blue', trustGroup: 'core' },
-  { name: 'Writer', icon: '\u{270D}\u{FE0F}', color: 'claw-orange', trustGroup: 'core' },
-  { name: 'Reviewer', icon: '\u{1F441}\u{FE0F}', color: 'claw-purple', trustGroup: 'review' },
+  { name: 'Researcher', color: 'kube-blue', trustGroup: 'core' },
+  { name: 'Writer', color: 'claw-orange', trustGroup: 'core' },
+  { name: 'Reviewer', color: 'claw-purple', trustGroup: 'review' },
 ]
 
 interface AnimStep {
@@ -64,8 +87,9 @@ const LAYERS = [
     desc: 'Tag entries as public, trusted, or private. Each agent sees only what its clearance allows.',
     color: 'claw-cyan',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Filter / funnel — angular */}
+        <path d="M2 3h16l-5 6v6l-2 2v-8L2 3z" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
     snippet: 'defaultVisibility: trusted',
@@ -75,8 +99,16 @@ const LAYERS = [
     desc: 'Named groups of agents that share trusted entries. Cross-group access is denied by default.',
     color: 'claw-purple',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Three linked squares */}
+        <rect x="1" y="7" width="5" height="5" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="8" y="7" width="5" height="5" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="14" y="7" width="5" height="5" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="6" y1="9.5" x2="8" y2="9.5" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="13" y1="9.5" x2="14" y2="9.5" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="3" y="9" width="1.5" height="1.5" fill="currentColor" />
+        <rect x="10" y="9" width="1.5" height="1.5" fill="currentColor" />
+        <rect x="16" y="9" width="1.5" height="1.5" fill="currentColor" />
       </svg>
     ),
     snippet: 'core: [researcher, writer]',
@@ -86,8 +118,12 @@ const LAYERS = [
     desc: 'Set a total token ceiling for the ensemble. The membrane halts new runs before the budget blows out.',
     color: 'claw-orange',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Meter / gauge */}
+        <rect x="2" y="4" width="16" height="12" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="4" y="8" width="3" height="6" fill="currentColor" />
+        <rect x="8.5" y="6" width="3" height="8" fill="currentColor" opacity="0.6" />
+        <rect x="13" y="10" width="3" height="4" fill="currentColor" opacity="0.3" />
       </svg>
     ),
     snippet: 'maxTokens: 50000',
@@ -97,8 +133,10 @@ const LAYERS = [
     desc: 'If delegation keeps failing, the membrane trips and stops cascading failures automatically.',
     color: 'claw-red',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.412 15.655L9.75 21.75l3.745-4.012M9.257 13.5H3.75l2.659-2.849m2.048-2.194L14.25 2.25 12 10.5h8.25l-4.707 5.043M8.457 8.457L3 3m5.457 5.457l7.086 7.086m0 0L21 21" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Lightning bolt / break */}
+        <path d="M11 2L5 10h4l-2 8 8-10h-5l3-6z" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="3" y1="3" x2="17" y2="17" stroke="currentColor" strokeWidth="2" />
       </svg>
     ),
     snippet: 'consecutiveFailures: 3',
@@ -108,8 +146,12 @@ const LAYERS = [
     desc: 'Old memory entries fade from search results over time. Recent knowledge is prioritised automatically.',
     color: 'kube-blue',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Clock — square */}
+        <rect x="2" y="2" width="16" height="16" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="10" y1="5" x2="10" y2="10" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="10" y1="10" x2="14" y2="10" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="9" y="9" width="2" height="2" fill="currentColor" />
       </svg>
     ),
     snippet: 'ttl: "168h"',
@@ -119,8 +161,13 @@ const LAYERS = [
     desc: 'Every entry records who created it and what it derived from. Full attribution chains for auditability.',
     color: 'claw-green',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a48.667 48.667 0 00-1.232 8.568M12 2.25A2.25 2.25 0 009.75 4.5v.75a2.25 2.25 0 001.5 2.122M12 2.25A2.25 2.25 0 0114.25 4.5v.75a2.25 2.25 0 01-1.5 2.122m-1.5-2.872V4.5m0 0a2.25 2.25 0 002.25 2.25M12 4.5a2.25 2.25 0 01-2.25 2.25" />
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+        {/* Chain / link */}
+        <rect x="2" y="6" width="6" height="8" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="12" y="6" width="6" height="8" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="8" y1="10" x2="12" y2="10" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="4" y="9" width="2" height="2" fill="currentColor" />
+        <rect x="14" y="9" width="2" height="2" fill="currentColor" />
       </svg>
     ),
     snippet: 'provenance: enabled',
@@ -232,8 +279,9 @@ export default function Membrane() {
         {/* Section header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-claw-cyan/10 border border-claw-cyan/20 text-claw-cyan text-sm font-medium mb-4">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="1" width="14" height="14" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 2" />
+              <rect x="6" y="6" width="4" height="4" fill="currentColor" />
             </svg>
             Synthetic Membrane
           </div>
@@ -299,7 +347,7 @@ export default function Membrane() {
                           }
                         `}
                       >
-                        <div className="text-2xl mb-2">{agent.icon}</div>
+                        <div className={`mb-2 transition-colors duration-500 ${isActive ? c.text : 'text-slate-400'}`}>{AGENT_ICONS[i]}</div>
                         <div className={`text-sm font-bold transition-colors duration-500 ${isActive ? c.text : 'text-white'}`}>
                           {agent.name}
                         </div>

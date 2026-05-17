@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <!-- Background — sharp, dark -->
+  <rect width="600" height="160" fill="#1a1a18"/>
+
+  <!-- Border frame -->
+  <rect x="3" y="3" width="594" height="154" fill="none" stroke="#333330" stroke-width="1"/>
+
+  <!-- Corner brackets — orange -->
+  <path d="M6 24V6h18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M594 24V6h-18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M6 136v18h18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+  <path d="M594 136v18h-18" fill="none" stroke="#e8562a" stroke-width="2.5"/>
+
+  <!-- Corner dots -->
+  <rect x="6" y="6" width="4" height="4" fill="#e8562a"/>
+  <rect x="590" y="6" width="4" height="4" fill="#e8562a"/>
+  <rect x="6" y="150" width="4" height="4" fill="#e8562a"/>
+  <rect x="590" y="150" width="4" height="4" fill="#e8562a"/>
+
+  <!-- Icon starburst (centered vertically at x=80) -->
+  <g transform="translate(45, 15) scale(0.65)">
+    <line x1="100" y1="100" x2="100" y2="38" stroke="#f0ece4" stroke-width="10" stroke-linecap="square"/>
+    <line x1="100" y1="100" x2="152" y2="52" stroke="#f0ece4" stroke-width="10" stroke-linecap="square"/>
+    <line x1="100" y1="100" x2="152" y2="148" stroke="#f0ece4" stroke-width="10" stroke-linecap="square"/>
+    <line x1="100" y1="100" x2="100" y2="162" stroke="#e8562a" stroke-width="10" stroke-linecap="square"/>
+    <line x1="100" y1="100" x2="48" y2="148" stroke="#f0ece4" stroke-width="10" stroke-linecap="square"/>
+    <line x1="100" y1="100" x2="48" y2="52" stroke="#f0ece4" stroke-width="10" stroke-linecap="square"/>
+    <rect x="94" y="94" width="12" height="12" fill="#e8562a"/>
+  </g>
+
+  <!-- Wordmark — mono, uppercase -->
+  <text x="175" y="88" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="48" font-weight="700" fill="#f0ece4" letter-spacing="2">
+    SYMPOZIUM<tspan fill="#e8562a">.AI</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="177" y="116" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#8a8c82" letter-spacing="4">
+    KUBERNETES-NATIVE AGENTIC CONTROL PLANE
+  </text>
+
+  <!-- Crosshair ticks on edges -->
+  <line x1="298" y1="3" x2="302" y2="3" stroke="#e8562a" stroke-width="1"/>
+  <line x1="298" y1="157" x2="302" y2="157" stroke="#e8562a" stroke-width="1"/>
+  <line x1="3" y1="78" x2="3" y2="82" stroke="#e8562a" stroke-width="1"/>
+  <line x1="597" y1="78" x2="597" y2="82" stroke="#e8562a" stroke-width="1"/>
+</svg>
