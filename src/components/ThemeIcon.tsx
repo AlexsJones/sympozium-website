@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 
 const ICONS: Record<string, string> = {
-  jade: '/icon.svg',
   industrial: '/icon-industrial.svg',
+  classic: '/icon.png',
+  jade: '/icon.svg',
 }
 
 export default function ThemeIcon({ className }: { className?: string }) {
-  const [src, setSrc] = useState('/icon.png')
+  const [src, setSrc] = useState('/icon-industrial.svg')
 
   useEffect(() => {
     const update = () => {
-      const theme = document.documentElement.getAttribute('data-theme') || 'default'
+      const theme = document.documentElement.getAttribute('data-theme') || 'industrial'
       setSrc(ICONS[theme] || '/icon.png')
     }
     update()

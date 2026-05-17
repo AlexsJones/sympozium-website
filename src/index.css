@@ -1,6 +1,28 @@
 @import "tailwindcss";
 
 @theme {
+  /* Default: Neo Industrial */
+  --color-primary: #f0ece4;
+  --color-primary-dark: #d4cfc6;
+  --color-primary-light: #ffffff;
+  --color-accent: #e8562a;
+  --color-accent-light: #f06a3f;
+  --color-surface: #1a1a18;
+  --color-surface-light: #242422;
+  --color-surface-lighter: #333330;
+  --color-kube-blue: #f0ece4;
+  --color-kube-blue-dark: #d4cfc6;
+  --color-claw-orange: #e8562a;
+  --color-claw-purple: #f0ece4;
+  --color-claw-cyan: #8a8c82;
+  --color-claw-green: #f0ece4;
+  --color-claw-red: #e8562a;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Theme: Classic (original indigo & orange) */
+[data-theme="classic"] {
   --color-primary: #6366f1;
   --color-primary-dark: #4f46e5;
   --color-primary-light: #818cf8;
@@ -16,8 +38,6 @@
   --color-claw-cyan: #06b6d4;
   --color-claw-green: #10b981;
   --color-claw-red: #ef4444;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 html {
@@ -87,24 +107,7 @@ body {
   --color-claw-red: #ef4444;
 }
 
-/* Theme: Neo Industrial — three-tone: charcoal / cream / bold orange */
-[data-theme="industrial"] {
-  --color-primary: #f0ece4;
-  --color-primary-dark: #d4cfc6;
-  --color-primary-light: #ffffff;
-  --color-accent: #e8562a;
-  --color-accent-light: #f06a3f;
-  --color-surface: #1a1a18;
-  --color-surface-light: #242422;
-  --color-surface-lighter: #333330;
-  --color-kube-blue: #f0ece4;
-  --color-kube-blue-dark: #d4cfc6;
-  --color-claw-orange: #e8562a;
-  --color-claw-purple: #f0ece4;
-  --color-claw-cyan: #8a8c82;
-  --color-claw-green: #f0ece4;
-  --color-claw-red: #e8562a;
-}
+/* (Industrial colors are now the @theme default) */
 
 ::-webkit-scrollbar {
   width: 8px;

@@ -2,8 +2,14 @@ import { useState, useEffect, useRef } from 'react'
 
 const themes = [
   {
-    id: 'default',
-    name: 'Current',
+    id: 'industrial',
+    name: 'Neo Industrial',
+    description: 'Black, cream & orange',
+    swatch: ['#1a1a18', '#eae6de', '#e8562a'],
+  },
+  {
+    id: 'classic',
+    name: 'Classic',
     description: 'Indigo & Orange',
     swatch: ['#6366f1', '#f97316'],
   },
@@ -25,21 +31,15 @@ const themes = [
     description: 'Infrastructure-inspired',
     swatch: ['#22c55e', '#7dd3fc'],
   },
-  {
-    id: 'industrial',
-    name: 'Neo Industrial',
-    description: 'Black, cream & orange',
-    swatch: ['#1a1a18', '#eae6de', '#e8562a'],
-  },
 ] as const
 
 export default function ThemeToggle() {
   const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('default')
+  const [active, setActive] = useState('industrial')
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const saved = localStorage.getItem('sympozium-theme') || 'default'
+    const saved = localStorage.getItem('sympozium-theme') || 'industrial'
     setActive(saved)
     document.documentElement.setAttribute('data-theme', saved)
   }, [])
