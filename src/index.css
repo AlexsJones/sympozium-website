@@ -361,61 +361,12 @@ code {
   background-color: rgba(26, 26, 24, 0.05);
 }
 
-/* ── Bold orange accent panels (sections 4, 8 — key feature sections) ── */
+/* ── Accent panels — dark with orange left border + top stripe ── */
 [data-theme="industrial"] section#workflows,
 [data-theme="industrial"] section#comparison {
-  background-color: #e8562a;
-  border-top-color: #c44820;
-  color: #1a1a18;
-  background-image:
-    linear-gradient(rgba(26, 26, 24, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 26, 24, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison h1,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison h2,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison h3,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison h4,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .text-white {
-  color: #ffffff;
-}
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison p,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison span,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison li {
-  color: rgba(255, 255, 255, 0.85);
-}
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .text-slate-300,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .text-slate-400 {
-  color: rgba(255, 255, 255, 0.7);
-}
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .border-white\/5,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .border-white\/10 {
-  border-color: rgba(0, 0, 0, 0.12);
-}
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .bg-surface-light\/20,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .bg-surface\/50,
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .bg-surface-light {
-  background-color: rgba(0, 0, 0, 0.08);
-}
-/* Orange panel gradient text override */
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison .bg-clip-text {
-  color: #ffffff;
+  background-color: #111110;
+  border-top: 4px solid #c4532a;
+  border-left: 4px solid #c4532a;
 }
 
 /* ── Section labels — bracket notation ── */
@@ -435,9 +386,9 @@ code {
 [data-theme="industrial"] section#local-inference::before {
   color: #8a8880;
 }
-[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#workflows::before,
 [data-theme="industrial"] section#comparison::before {
-  color: rgba(255, 255, 255, 0.5);
+  color: #c4532a;
 }
 
 /* ── Chevron arrow dividers between sections ── */
@@ -460,10 +411,10 @@ code {
 [data-theme="industrial"] section#local-inference::after {
   background: #eae6de;
 }
-[data-theme="industrial"] section#workflows,
+[data-theme="industrial"] section#workflows::after,
 [data-theme="industrial"] section#comparison::after {
-  color: #1a1a18;
-  background: #e8562a;
+  color: #c4532a;
+  background: #111110;
 }
 
 /* ── Corner crosshair marks on sections ── */
@@ -559,15 +510,26 @@ code {
 [data-theme="industrial"] a[href="#get-started"] span {
   color: #ffffff !important;
 }
-/* GitHub / secondary button — visible border */
+/* GitHub buttons — cream border, inner gradient divs hidden */
 [data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"] {
   background: transparent !important;
   border: 2px solid #f0ece4 !important;
   border-radius: 2px;
   color: #f0ece4 !important;
 }
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"] > div {
+  background: transparent !important;
+}
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"] span {
+  color: #f0ece4 !important;
+}
 [data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"]:hover {
   background: #f0ece4 !important;
+  color: #1a1a18 !important;
+}
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"]:hover > div,
+[data-theme="industrial"] a[href="https://github.com/sympozium-ai/sympozium"]:hover span {
+  background: transparent !important;
   color: #1a1a18 !important;
 }
 
