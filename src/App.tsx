@@ -12,6 +12,7 @@ import LocalInference from './components/LocalInference'
 import Architecture from './components/Architecture'
 import Security from './components/Security'
 import Comparison from './components/Comparison'
+import GetStarted from './components/GetStarted'
 import Footer from './components/Footer'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <LocalInference />
       <Security />
       <Comparison />
+      <GetStarted />
       <Footer />
     </div>
   )
