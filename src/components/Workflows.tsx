@@ -1,3 +1,5 @@
+import WorkflowCanvas from './WorkflowCanvas'
+
 export default function Workflows() {
   return (
     <section id="workflows" className="relative py-32 overflow-hidden">
@@ -37,11 +39,7 @@ export default function Workflows() {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-claw-purple/20 via-claw-orange/20 to-claw-cyan/20 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
-              <img
-                src="/workflow.png"
-                alt="Workflow canvas showing a research team with delegation and sequential relationships between Research Lead, Researcher, Writer, and Reviewer agent configs"
-                className="w-full h-auto"
-              />
+              <WorkflowCanvas />
             </div>
             <p className="mt-4 text-sm text-slate-500 font-mono text-center">
               Visual workflow canvas &mdash; drag-to-connect agent configs, pick relationship types, save to CRD
