@@ -24,7 +24,7 @@ const platformBenefits = [
     ),
     title: 'Safe by Design',
     description:
-      'NetworkPolicy deny-all egress, non-root SecurityContext, admission webhooks, ephemeral RBAC per run. Optional gVisor / Kata kernel isolation.',
+      'AI safety enforced in infrastructure: the membrane governs what agents share and coordinate, backed by deny-all egress, admission webhooks, and ephemeral RBAC per run.',
   },
   {
     icon: (
@@ -89,8 +89,8 @@ export default function WhySympozium() {
             </a>{' '}
             with shared situational awareness: a{' '}
             <span className="text-white font-medium">synthetic membrane</span> that
-            gives agent teams selective permeability, structured handoffs, and shared memory &mdash;
-            all on Kubernetes.
+            governs what agent teams share, where it travels, and when &mdash;
+            selective permeability, structured handoffs, and shared memory, all on Kubernetes.
           </p>
         </div>
 

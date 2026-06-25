@@ -270,7 +270,7 @@ code {
 }
 
 /* CTA buttons — mono uppercase with bracket feel */
-[data-theme="industrial"] a[href="#get-started"],
+[data-theme="industrial"] .cta-install,
 [data-theme="industrial"] .gradient-border {
   font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
@@ -361,12 +361,10 @@ code {
   background-color: rgba(26, 26, 24, 0.05);
 }
 
-/* ── Accent panels — dark with orange left border + top stripe ── */
-[data-theme="industrial"] section#workflows,
-[data-theme="industrial"] section#comparison {
+/* ── Accent panels — dark with full-width orange top stripe ── */
+[data-theme="industrial"] section#workflows {
   background-color: #111110;
   border-top: 4px solid #c4532a;
-  border-left: 4px solid #c4532a;
 }
 
 /* ── Section labels — bracket notation ── */
@@ -386,8 +384,7 @@ code {
 [data-theme="industrial"] section#local-inference::before {
   color: #8a8880;
 }
-[data-theme="industrial"] section#workflows::before,
-[data-theme="industrial"] section#comparison::before {
+[data-theme="industrial"] section#workflows::before {
   color: #c4532a;
 }
 
@@ -411,8 +408,7 @@ code {
 [data-theme="industrial"] section#local-inference::after {
   background: #eae6de;
 }
-[data-theme="industrial"] section#workflows::after,
-[data-theme="industrial"] section#comparison::after {
+[data-theme="industrial"] section#workflows::after {
   color: #c4532a;
   background: #111110;
 }
@@ -580,17 +576,17 @@ code {
 }
 
 /* ── CTA buttons — strong differentiation ── */
-[data-theme="industrial"] a[href="#get-started"],
-[data-theme="industrial"] a[href="#get-started"] > div {
+[data-theme="industrial"] .cta-install,
+[data-theme="industrial"] .cta-install > div {
   background: #e8562a !important;
   border-radius: 2px;
   box-shadow: none;
 }
-[data-theme="industrial"] a[href="#get-started"]:hover,
-[data-theme="industrial"] a[href="#get-started"]:hover > div {
+[data-theme="industrial"] .cta-install:hover,
+[data-theme="industrial"] .cta-install:hover > div {
   background: #d04e24 !important;
 }
-[data-theme="industrial"] a[href="#get-started"] span {
+[data-theme="industrial"] .cta-install span {
   color: #ffffff !important;
 }
 /* GitHub buttons — cream border, inner gradient divs hidden */

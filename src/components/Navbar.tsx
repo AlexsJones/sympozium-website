@@ -13,12 +13,10 @@ export default function Navbar() {
   }, [])
 
   const links = [
-    { label: "Who It's For", href: '#who' },
     { label: 'Architecture', href: '#architecture' },
     { label: 'Workflows', href: '#workflows' },
-    { label: 'Inference', href: '#local-inference' },
+    { label: 'Membrane', href: '#membrane' },
     { label: 'Security', href: '#security' },
-    { label: 'Versus', href: '#comparison' },
   ]
 
   return (
@@ -64,8 +62,10 @@ export default function Navbar() {
               GitHub
             </a>
             <a
-              href="#get-started"
-              className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-kube-blue to-claw-purple rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all hover:scale-105"
+              href="https://deploy.sympozium.ai/docs/getting-started/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-install px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-kube-blue to-claw-purple rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all hover:scale-105"
             >
               Install Now
             </a>

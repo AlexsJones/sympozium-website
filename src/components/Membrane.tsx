@@ -293,9 +293,11 @@ export default function Membrane() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Agents in a team can now control what they share with each other.
-            Think of it like putting a cell membrane around your agent team &mdash;
-            things pass through selectively, not indiscriminately.
+            AI safety starts with control over coordination. The membrane governs
+            <span className="text-white"> what</span> agents share,
+            <span className="text-white"> where</span> it travels, and
+            <span className="text-white"> when</span> &mdash; a cell membrane around your agent team,
+            so information passes through selectively, never indiscriminately.
           </p>
         </div>
 

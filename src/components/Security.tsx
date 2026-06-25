@@ -125,7 +125,8 @@ export default function Security() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            OpenClaw runs agents as in-process monoliths with shared memory, standing permissions, and file-based state.
+            Containment is the foundation of <span className="text-white font-semibold">AI safety</span>:
+            an agent can only share, reach, or act on what its boundary allows.
             Sympozium enforces <span className="text-white font-semibold">defence-in-depth at every layer</span> — from
             network isolation to per-run RBAC to admission-time policy enforcement.
             Every agent gets exactly the permissions it declares, for exactly as long as the run lasts, and not a second longer.
