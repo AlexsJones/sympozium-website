@@ -16,20 +16,25 @@ export default function Workflows() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
             </svg>
-            Structured Handoffs
+            Agentic Workflows
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Agents that work
+            Containers needed orchestration.
             <br />
             <span className="bg-gradient-to-r from-claw-orange to-claw-purple bg-clip-text text-transparent">
-              together, not just side by side.
+              Agents need coordination.
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Workflows turn Ensembles from static bundles into coordinated teams.
-            Define <span className="text-white font-medium">typed relationships</span> between agent configs &mdash;
-            delegation, sequencing, supervision &mdash; and let agents hand off tasks,
-            share knowledge, and run pipelines automatically.
+            Most multi-agent systems communicate through messages &mdash; strings of tokens one agent
+            serialises and another deserialises. Sympozium replaces this{' '}
+            <a href="https://axjns.dev/blog/sticky-note-problem" target="_blank" rel="noopener noreferrer"
+               className="text-claw-cyan hover:text-claw-cyan/80 underline underline-offset-2 decoration-claw-cyan/30">
+              sticky-note pattern
+            </a>{' '}
+            with <span className="text-white font-medium">typed relationships</span> &mdash; delegation,
+            sequencing, supervision &mdash; and shared memory, so agents work{' '}
+            <span className="text-white font-medium">together, not just side by side</span>.
           </p>
         </div>
 
@@ -110,6 +115,94 @@ export default function Workflows() {
                 A supervisor agent monitors others for progress tracking and reporting &mdash;
                 without blocking or altering their execution. Full visibility, zero overhead.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Two use cases — left / right split */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20">
+          {/* LEFT: Coordinated Agent Teams */}
+          <div className="relative rounded-2xl border border-claw-orange/20 bg-surface-light/30 p-8 sm:p-10 overflow-hidden group hover:border-claw-orange/40 transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-br from-claw-orange/5 via-transparent to-transparent" />
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-claw-orange to-claw-red p-[1px] mb-6">
+                <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                    {/* Three connected nodes — agent team */}
+                    <rect x="2" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="9" y="2" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="16" y="9" width="6" height="6" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="9" y1="8" x2="5" y2="9" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="15" y1="8" x2="19" y2="9" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="4" y="11" width="2" height="2" fill="currentColor" />
+                    <rect x="11" y="4" width="2" height="2" fill="currentColor" />
+                    <rect x="18" y="11" width="2" height="2" fill="currentColor" />
+                  </svg>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Coordinated Agent Teams
+              </h3>
+              <p className="text-slate-400 leading-relaxed mb-6">
+                Run <span className="text-claw-orange font-medium">coordinated teams</span> of AI agents &mdash; each
+                isolated in its own pod with delegation, shared memory, scoped visibility, and persistent state.
+              </p>
+
+              <ul className="space-y-3">
+                {[
+                  'Customer support bots across Telegram, Slack, Discord, WhatsApp',
+                  'Code review agents that triage issues and ship PRs',
+                  'Data pipeline agents with scheduled sweeps',
+                  'Research teams with delegation, sequencing, and shared memory',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
+                    <span className="text-claw-orange mt-0.5 shrink-0">&#x276F;</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* RIGHT: Agentic Cluster Administration */}
+          <div className="relative rounded-2xl border border-kube-blue/20 bg-surface-light/30 p-8 sm:p-10 overflow-hidden group hover:border-kube-blue/40 transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-br from-kube-blue/5 via-transparent to-transparent" />
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-kube-blue to-claw-cyan p-[1px] mb-6">
+                <div className="w-full h-full rounded-xl bg-surface-light flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
+                    {/* Kubernetes wheel / cluster — angular */}
+                    <rect x="4" y="4" width="16" height="16" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" strokeWidth="1" />
+                    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="1" />
+                    <rect x="10" y="10" width="4" height="4" fill="currentColor" />
+                  </svg>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Agentic Cluster Administration
+              </h3>
+              <p className="text-slate-400 leading-relaxed mb-6">
+                Point agents <span className="text-kube-blue font-medium">inward at the cluster itself</span> — equipped
+                with kubectl, Helm, and custom skills in isolated sidecars with ephemeral, least-privilege RBAC.
+              </p>
+
+              <ul className="space-y-3">
+                {[
+                  'Diagnose crash-looping pods and failing deployments',
+                  'Scale workloads, drain nodes, provision namespaces',
+                  'Triage overnight alerts and remediate issues on schedule',
+                  'Scan for privilege escalation, hardcoded secrets, missing policies',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
+                    <span className="text-kube-blue mt-0.5 shrink-0">&#x276F;</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -271,6 +364,20 @@ export default function Workflows() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Quote */}
+        <div className="mt-16 max-w-3xl mx-auto text-center">
+          <blockquote className="relative">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-6xl text-claw-purple/20 font-serif">"</div>
+            <p className="text-xl italic text-slate-300 leading-relaxed pt-8">
+              Structured, gated, persistent communication is a prerequisite &mdash; not an accelerant &mdash;
+              for collective intelligence. Agents don't need better messages. They need a shared medium.
+            </p>
+            <footer className="mt-4 text-sm text-slate-500">
+              &mdash; <a href="https://zenodo.org/records/20070699" target="_blank" rel="noopener noreferrer" className="text-claw-purple hover:text-claw-purple/80 underline underline-offset-2 decoration-claw-purple/30">The Synthetic Membrane</a> (Zenodo)
+            </footer>
+          </blockquote>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import TopologyDemo from './TopologyDemo'
+import RunLifecycle from './RunLifecycle'
 import TransmissionDiagram from './TransmissionDiagram'
 
 const highlights = [
@@ -13,6 +13,10 @@ const highlights = [
   {
     title: 'Sealed network path',
     desc: 'Deny-all egress NetworkPolicy: agents reach skills, memory, and the bus only through the IPC bridge.',
+  },
+  {
+    title: 'Models are claimed, not placed',
+    desc: 'Agents declare a ModelClaim; llmfit-dra and the stock kube-scheduler decide where compute happens. Sympozium never picks a node.',
   },
 ]
 
@@ -77,9 +81,16 @@ export default function Architecture() {
           <TransmissionDiagram />
         </div>
 
-        {/* Interactive Topology */}
+        {/* Lifecycle of a single run */}
         <div className="max-w-6xl mx-auto">
-          <TopologyDemo />
+          <div className="text-center mb-6">
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">One run, start to finish</h3>
+            <p className="text-sm text-slate-400">
+              From <span className="font-mono text-slate-300">kubectl apply</span> to garbage collection —
+              every step is a Kubernetes resource, gated on the way in and revoked on the way out
+            </p>
+          </div>
+          <RunLifecycle />
         </div>
       </div>
     </section>

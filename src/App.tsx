@@ -4,9 +4,8 @@ import IndustrialBackground from './components/IndustrialBackground'
 import IndustrialTicker from './components/IndustrialTicker'
 import Hero from './components/Hero'
 import Architecture from './components/Architecture'
-import WhySympozium from './components/WhySympozium'
 import Workflows from './components/Workflows'
-import Membrane from './components/Membrane'
+import LlmFit from './components/LlmFit'
 import Security from './components/Security'
 import Footer from './components/Footer'
 
@@ -19,9 +18,8 @@ function App() {
       <Navbar />
       <Hero />
       <Architecture />
-      <WhySympozium />
       <Workflows />
-      <Membrane />
+      <LlmFit />
       <Security />
       <Footer />
     </div>

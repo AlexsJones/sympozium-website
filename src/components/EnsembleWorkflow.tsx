@@ -1,6 +1,6 @@
 /**
  * EnsembleWorkflow — animated SVG showing an ensemble of agents coordinating
- * through the synthetic membrane. Illustrates the four relationship types:
+ * inside a policy-governed boundary. Illustrates the four relationship types:
  *   • delegate  (lead hands work to specialists)
  *   • sequence  (ordered hand-off between agents)
  *   • supervise (observe without interfering — control)
@@ -14,7 +14,7 @@ const DELEGATE = 'var(--color-claw-purple)'
 const SEQUENCE = 'var(--color-claw-orange)'
 const SUPERVISE = 'var(--color-claw-cyan)'
 const SHARE = 'var(--color-claw-green)'
-const MEMBRANE = 'var(--color-claw-cyan)'
+const BOUNDARY = 'var(--color-claw-cyan)'
 
 // ── Agent card ──────────────────────────────────────────────────────────────
 function Agent({
@@ -109,7 +109,7 @@ export default function EnsembleWorkflow() {
         </div>
 
         <svg viewBox="0 0 440 486" className="w-full h-auto" role="img"
-          aria-label="An ensemble of agents coordinating through a synthetic membrane via delegation, sequencing, supervision, and shared memory.">
+          aria-label="An ensemble of agents coordinating inside a policy-governed boundary via delegation, sequencing, supervision, and shared memory.">
           <defs>
             <marker id="ew-arrow" viewBox="0 0 10 10" refX="8.5" refY="5"
               markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -117,18 +117,18 @@ export default function EnsembleWorkflow() {
             </marker>
           </defs>
 
-          {/* ── Membrane boundary ── */}
+          {/* ── Ensemble boundary ── */}
           <rect x={28} y={158} width={384} height={314} rx={20}
             fill="none" strokeWidth={1.5} strokeDasharray="6 6"
-            style={{ stroke: MEMBRANE, strokeOpacity: 0.45 }}>
+            style={{ stroke: BOUNDARY, strokeOpacity: 0.45 }}>
             <animate attributeName="stroke-dashoffset" values="0;-24" dur="3s" repeatCount="indefinite" />
           </rect>
-          {/* Membrane label chip */}
+          {/* Boundary label chip */}
           <rect x={150} y={150} width={140} height={18} rx={9}
-            fill="var(--color-surface)" style={{ stroke: MEMBRANE, strokeOpacity: 0.4 }} strokeWidth={1} />
+            fill="var(--color-surface)" style={{ stroke: BOUNDARY, strokeOpacity: 0.4 }} strokeWidth={1} />
           <text x={220} y={162} fontSize={9} textAnchor="middle"
             fontFamily="'JetBrains Mono', monospace" letterSpacing="0.08em"
-            style={{ fill: MEMBRANE }}>synthetic membrane</text>
+            style={{ fill: BOUNDARY }}>ensemble boundary</text>
 
           {/* ── Relationship edges ── (drawn under nodes) */}
           {/* delegate: lead → researcher / writer */}
