@@ -16,7 +16,7 @@ const themes = [
   {
     id: 'jade',
     name: 'Obsidian & Jade',
-    description: 'Membrane-inspired',
+    description: 'Organic-inspired',
     swatch: ['#3dd68c', '#d4a537'],
   },
   {

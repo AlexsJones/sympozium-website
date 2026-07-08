@@ -48,8 +48,8 @@ function FullStack() {
         <StackArrow />
         <StackChip
           color="claw-purple"
-          label="GPU Node"
-          sub="qwen3-8b"
+          label="Model"
+          sub="claimed, not placed"
           icon={
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <rect x="5" y="5" width="14" height="14" stroke="currentColor" strokeWidth="1.5" />
@@ -111,8 +111,8 @@ export default function Hero() {
             <p className="text-lg sm:text-xl text-slate-300 font-light mb-4 leading-relaxed">
               Agents don't need better prompts. They need{' '}
               <span className="text-claw-orange font-medium">shared situational awareness</span>,{' '}
-              <span className="text-claw-purple font-medium">structured handoffs</span>, and a{' '}
-              <span className="text-kube-blue font-medium">permeable membrane</span> that governs{' '}
+              <span className="text-claw-purple font-medium">structured handoffs</span>, and{' '}
+              <span className="text-kube-blue font-medium">policy</span> that governs{' '}
               <span className="text-white font-medium">what</span> they share,{' '}
               <span className="text-white font-medium">where</span>, and{' '}
               <span className="text-white font-medium">when</span>.

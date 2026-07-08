@@ -14,8 +14,8 @@ export default function Navbar() {
 
   const links = [
     { label: 'Architecture', href: '#architecture' },
-    { label: 'Workflows', href: '#workflows' },
-    { label: 'Membrane', href: '#membrane' },
+    { label: 'Agentic Workflows', href: '#workflows' },
+    { label: 'Models', href: '#models' },
     { label: 'Security', href: '#security' },
   ]
 
