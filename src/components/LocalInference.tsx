@@ -167,7 +167,9 @@ export default function LocalInference() {
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Deploy GGUF models with a single CRD. The controller downloads the model,
             provisions storage, spins up llama-server, and exposes a ClusterIP Service &mdash;
-            no API keys, no external calls, full data sovereignty.
+            no API keys, no external calls, full data sovereignty. Placement is claimed, not
+            decided here: with llmfit-dra installed, the stock scheduler puts each model on
+            silicon that can actually run it.
           </p>
         </div>
 
