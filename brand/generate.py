@@ -32,6 +32,13 @@ CREAM2    = "#ede6da"  # cream
 ORANGE2   = "#e8502a"  # orange
 SLATE2    = "#8fa3b0"  # slate — secondary labels only
 
+# Palette v3 — light data-plate revision (brand sheet v2, 2026-07-09)
+ORANGE3 = "#c24a1a"
+SAND3   = "#cbb89a"
+BROWN3  = "#2b1e17"
+INK3    = "#111111"
+PAPER3  = "#f2eee6"
+
 
 # ── Type engine: JetBrains Mono outlined to paths (no font dependency in
 #    the emitted SVGs; fonts vendored under fonts/ with their OFL licence).
@@ -281,25 +288,22 @@ def emit_wordmark():
         write(f"wordmark/wordmark-ai-{variant}.svg", svg(round(w1 + gap + w2 + pad * 2), 60, body))
 
 
-# ── Direction 4 — the Plate (data-plate slotted S, from the brand sheet) ────
+# ── Direction 4 — the Plate (v2 — classic interlock S, brand sheet v2) ─────
 
 def mark_plate(primary, accent=None):
-    """Slotted-plate S on the 8×8 modular grid: three kerf cuts (enclosed /
-    open-right with a centre bridge / open-left) and a detached dash floating
-    off the right edge — the signature detail. Mono by design; orange lives
-    in labels, never in the mark."""
+    """Slab-built S with the classic '5-shape' topology — upper-LEFT and
+    lower-RIGHT connectors (the v1 enclosed slot + side dash read as a G) —
+    plus one interlock notch per slab, 180° rotationally symmetric. Mono by
+    design; orange lives in labels, never in the mark."""
     rects = [
-        (4, 10, 86, 22),    # top slab
-        (4, 32, 20, 8),     # slot-1 left margin (slot enclosed)
-        (82, 32, 8, 8),     # slot-1 right margin
-        (4, 40, 86, 12),    # band
-        (31, 52, 11, 8),    # slot-2 centre bridge (open both sides)
-        (4, 60, 86, 12),    # band
-        (57, 72, 33, 12),   # slot-3 right remainder (open left)
-        (4, 84, 86, 26),    # bottom slab (2X)
-        (96, 52, 18, 8),    # detached dash
+        (8, 6, 104, 26),    # top slab
+        (8, 32, 50, 16),    # upper-left connector
+        (58, 32, 16, 8),    # stepped tooth off the connector
+        (8, 48, 104, 24),   # middle bar
+        (62, 72, 50, 16),   # lower-right connector
+        (46, 80, 16, 8),    # stepped tooth — exact 180° twin
+        (8, 88, 104, 26),   # bottom slab
     ]
-    # same-colour hairline stroke kills antialiasing seams where rects abut
     return "\n".join(
         f'  <rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{primary}" '
         f'stroke="{primary}" stroke-width="0.8"/>'
@@ -309,23 +313,23 @@ def mark_plate(primary, accent=None):
 
 def emit_plate():
     name = "plate"
-    write(f"{name}/mark-dark.svg", svg(120, 120, mark_plate(CREAM2)))
-    write(f"{name}/mark-light.svg", svg(120, 120, mark_plate(CHARCOAL2)))
+    write(f"{name}/mark-light.svg", svg(120, 120, mark_plate(BROWN3)))
+    write(f"{name}/mark-dark.svg", svg(120, 120, mark_plate(PAPER3)))
     write(f"{name}/mark-mono.svg", svg(120, 120, mark_plate("currentColor")))
 
-    # github avatar tile
-    inner = f'''  <rect x="6" y="6" width="228" height="228" fill="none" stroke="#2a2620" stroke-width="2"/>
+    # github avatar tile — paper data-plate chip
+    inner = f'''  <rect x="5" y="5" width="230" height="230" fill="none" stroke="{SAND3}" stroke-width="2"/>
   <g transform="translate(42 42) scale(1.3)">
-{mark_plate(CREAM2)}
+{mark_plate(BROWN3)}
   </g>'''
-    write(f"{name}/github-avatar.svg", svg(240, 240, inner, background=CHARCOAL2))
+    write(f"{name}/github-avatar.svg", svg(240, 240, inner, background=PAPER3))
 
-    # primary lockup, per the sheet: mark | SYMPOZIUM / AGENTIC CONTROL PLANE / ( K8S-NATIVE )
-    for variant, fg, sub, acc in (("dark", CREAM2, CREAM2, ORANGE2), ("light", CHARCOAL2, CHARCOAL2, ORANGE2)):
+    # primary lockup: mark | SYMPOZIUM / AGENTIC CONTROL PLANE / ( K8S-NATIVE )
+    for variant, fg in (("light", BROWN3), ("dark", PAPER3)):
         wm_size = 46 / cap_height(1.0, "ChakraPetch-Bold")
         wm, wm_w = type_svg("SYMPOZIUM", wm_size, fg, weight="ChakraPetch-Bold", tracking=0.02)
-        l1, l1_w = type_svg("AGENTIC CONTROL PLANE", 14.5, sub, weight="IBMPlexMono-Medium", tracking=0.14)
-        l2, l2_w = type_svg("( K8S-NATIVE )", 14.5, acc, weight="IBMPlexMono-Medium", tracking=0.14)
+        l1, l1_w = type_svg("AGENTIC CONTROL PLANE", 14.5, fg, weight="IBMPlexMono-Medium", tracking=0.14)
+        l2, l2_w = type_svg("( K8S-NATIVE )", 14.5, ORANGE3, weight="IBMPlexMono-Medium", tracking=0.14)
         mark_h, pad = 96, 26
         total_w = mark_h + pad + 14 + max(wm_w, l1_w) + 8
         body = f'''  <g transform="scale({mark_h/120:.4f})">
@@ -343,36 +347,36 @@ def emit_plate():
   </g>'''
         write(f"{name}/logo-horizontal-{variant}.svg", svg(round(total_w), mark_h, body))
 
-    # wordmarks in Chakra Petch
-    for variant, fg, acc in (("dark", CREAM2, ORANGE2), ("light", CHARCOAL2, ORANGE2)):
+    # wordmarks
+    for variant, fg in (("light", BROWN3), ("dark", PAPER3)):
         size = 48 / cap_height(1.0, "ChakraPetch-Bold")
         wpath, wwidth = type_svg("SYMPOZIUM", size, fg, weight="ChakraPetch-Bold", tracking=0.02)
         write(f"{name}/wordmark-{variant}.svg", svg(round(wwidth + 4), 60,
               f'  <g transform="translate(2 52)">\n{wpath}\n  </g>'))
 
-    # social card 1280×640 — data-plate style with spec footer
+    # social card 1280×640 — light data-plate with spec footer
     wm_size = 66 / cap_height(1.0, "ChakraPetch-Bold")
-    wm, wm_w = type_svg("SYMPOZIUM", wm_size, CREAM2, weight="ChakraPetch-Bold", tracking=0.02)
-    tag, _ = type_svg("AGENTIC CONTROL PLANE", 22, SLATE2, weight="IBMPlexMono-Medium", tracking=0.16)
-    k8s, _ = type_svg("( K8S-NATIVE )", 22, ORANGE2, weight="IBMPlexMono-Medium", tracking=0.16)
+    wm, _ = type_svg("SYMPOZIUM", wm_size, BROWN3, weight="ChakraPetch-Bold", tracking=0.02)
+    tag, _ = type_svg("AGENTIC CONTROL PLANE", 22, BROWN3, weight="IBMPlexMono-Medium", tracking=0.16)
+    k8s, _ = type_svg("( K8S-NATIVE )", 22, ORANGE3, weight="IBMPlexMono-Medium", tracking=0.16)
     cells = [("APPLICATION:", "CONTROL PLANE"), ("CLASS:", "MULTI-AGENT"),
              ("STATUS:", "ACTIVE"), ("SPEC REF:", "SYM-BRAND-001"), ("REV:", "A")]
     xw = 1160 / len(cells)
     footer = []
     for i, (k, v) in enumerate(cells):
         x = 60 + i * xw
-        kp, _ = type_svg(k, 13, SLATE2, weight="IBMPlexMono-Regular", tracking=0.10)
-        vp, _ = type_svg(v, 16, ORANGE2 if k == "STATUS:" else CREAM2, weight="IBMPlexMono-Medium", tracking=0.06)
-        footer.append(f'  <rect x="{x:g}" y="548" width="{xw:g}" height="62" fill="none" stroke="#2a2620" stroke-width="1"/>')
+        kp, _ = type_svg(k, 13, "#8a7a64", weight="IBMPlexMono-Regular", tracking=0.10)
+        vp, _ = type_svg(v, 16, ORANGE3 if k == "STATUS:" else BROWN3, weight="IBMPlexMono-Medium", tracking=0.06)
+        footer.append(f'  <rect x="{x:g}" y="548" width="{xw:g}" height="62" fill="none" stroke="{SAND3}" stroke-width="1"/>')
         footer.append(f'  <g transform="translate({x + 14:g} 574)">\n{kp}\n  </g>')
         footer.append(f'  <g transform="translate({x + 14:g} 598)">\n{vp}\n  </g>')
-    card = f'''  <rect x="10" y="10" width="1260" height="620" fill="none" stroke="#2a2620" stroke-width="1"/>
-  <rect x="1150" y="10" width="120" height="90" fill="{ORANGE2}"/>
+    card = f'''  <rect x="10" y="10" width="1260" height="620" fill="none" stroke="{SAND3}" stroke-width="1"/>
+  <rect x="1150" y="10" width="120" height="90" fill="{ORANGE3}"/>
   <g transform="translate(1180 72)">
-{type_svg("01", 42, CHARCOAL2, weight="ChakraPetch-Bold")[0]}
+{type_svg("01", 42, PAPER3, weight="ChakraPetch-Bold")[0]}
   </g>
   <g transform="translate(110 180) scale(2.1)">
-{mark_plate(CREAM2)}
+{mark_plate(BROWN3)}
   </g>
   <g transform="translate(440 330)">
 {wm}
@@ -384,7 +388,7 @@ def emit_plate():
 {k8s}
   </g>
 {chr(10).join(footer)}'''
-    write(f"{name}/social-card.svg", svg(1280, 640, card, background=CHARCOAL2))
+    write(f"{name}/social-card.svg", svg(1280, 640, card, background=PAPER3))
 
 
 if __name__ == "__main__":
