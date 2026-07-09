@@ -17,6 +17,7 @@ export default function Navbar() {
     { label: 'Agentic Workflows', href: '#workflows' },
     { label: 'Models', href: '#models' },
     { label: 'Security', href: '#security' },
+    { label: 'Docs', href: 'https://deploy.sympozium.ai/docs/', external: true },
   ]
 
   return (
@@ -43,6 +44,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-white/5 transition-all"
               >
                 {link.label}
@@ -93,6 +95,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg"
                 onClick={() => setMobileOpen(false)}
               >
