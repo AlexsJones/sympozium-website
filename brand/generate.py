@@ -291,23 +291,38 @@ def emit_wordmark():
 # ── Direction 4 — the Plate (v2 — classic interlock S, brand sheet v2) ─────
 
 def mark_plate(primary, accent=None):
-    """Slab-built S with the classic '5-shape' topology — upper-LEFT and
-    lower-RIGHT connectors (the v1 enclosed slot + side dash read as a G) —
-    plus one interlock notch per slab, 180° rotationally symmetric. Mono by
-    design; orange lives in labels, never in the mark."""
+    """Interlocking slab S, vectorized from the reference: four full-width
+    bars with stepped connectors — the gap under the top bar is bridged on
+    the left third, the gap above the bottom bar on the left third AND right
+    two-thirds. 180°-rotationally symmetric. Mono by design; orange lives in
+    labels, never in the mark.
+
+    Grid: ink spans x 8..112 (width 104) over the 120 box; the left/right
+    step columns fall at the measured 0.33 and 0.67 fractions of that span."""
+    # Column boundaries (measured 0.34 / 0.69 of the ink span) and the four
+    # y-bands. left third = 0..xa, right two-thirds = xb..R.
+    L, R = 6, 114                 # ink left / right
+    xa = L + round(0.34 * (R - L))   # ≈43  — left-third edge
+    xb = L + round(0.69 * (R - L))   # ≈81  — right-two-thirds edge
+    W = R - L
+    # y grid: 20 rows in the reference → thick bars 4 rows, tongues 3, gaps 1.
+    u = 108 / 20.0                # row unit over the 6..114 span
+    def yb(r): return round(6 + r * u, 1)
     rects = [
-        (8, 6, 104, 26),    # top slab
-        (8, 32, 50, 16),    # upper-left connector
-        (58, 32, 16, 8),    # stepped tooth off the connector
-        (8, 48, 104, 24),   # middle bar
-        (62, 72, 50, 16),   # lower-right connector
-        (46, 80, 16, 8),    # stepped tooth — exact 180° twin
-        (8, 88, 104, 26),   # bottom slab
+        (L,  yb(0),  W,      yb(4)  - yb(0)),   # top bar (rows 0-3)
+        (L,  yb(4),  W,      yb(5)  - yb(4)),   # top bar row-4 left part...
+        (xb, yb(4),  R - xb, yb(5)  - yb(4)),   # ...and right part (notch between)
+        (L,  yb(6),  xa - L, yb(7)  - yb(6)),   # left tongue (row 6)
+        (L,  yb(7),  W,      yb(9)  - yb(7)),   # upper-mid bar (rows 7-8)
+        (L,  yb(10), W,      yb(12) - yb(10)),  # lower-mid bar (rows 10-11)
+        (xb, yb(12), R - xb, yb(15) - yb(12)),  # right tongue (rows 12-14)
+        (L,  yb(15), xa - L, yb(16) - yb(15)),  # left tongue (row 15)
+        (L,  yb(16), W,      yb(20) - yb(16)),  # bottom bar (rows 16-19)
     ]
     return "\n".join(
-        f'  <rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{primary}" '
+        f'  <rect x="{x}" y="{yy}" width="{w}" height="{h}" fill="{primary}" '
         f'stroke="{primary}" stroke-width="0.8"/>'
-        for (x, y, w, h) in rects
+        for (x, yy, w, h) in rects
     )
 
 
