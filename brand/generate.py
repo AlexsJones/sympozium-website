@@ -26,7 +26,53 @@ RUST     = "#c4532a"   # accent on light
 EMBER    = "#e8562a"   # accent on dark
 BONE_BG  = "#eae6de"   # light-mode background
 
-# ── Blocky stencil letterset ────────────────────────────────────────────────
+
+# ── Type engine: JetBrains Mono outlined to paths (no font dependency in
+#    the emitted SVGs; fonts vendored under fonts/ with their OFL licence).
+#    Regenerate inside a venv with `pip install fonttools`.
+_FONTS = {}
+
+def _font(weight):
+    if weight not in _FONTS:
+        from fontTools.ttLib import TTFont
+        _FONTS[weight] = TTFont(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", f"JetBrainsMono-{weight}.ttf"))
+    return _FONTS[weight]
+
+
+def text_path(text, size, weight="ExtraBold", tracking=0.045):
+    """Outline text to a single SVG path d-string at cap-height-aligned
+    baseline y=0. Returns (d, width). tracking is em-fraction added per gap."""
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    from fontTools.misc.transform import Transform
+    f = _font(weight)
+    glyph_set = f.getGlyphSet()
+    cmap = f.getBestCmap()
+    scale = size / f["head"].unitsPerEm
+    ds, x = [], 0.0
+    for i, ch in enumerate(text):
+        gname = cmap[ord(ch)]
+        pen = SVGPathPen(glyph_set)
+        glyph_set[gname].draw(TransformPen(pen, Transform(scale, 0, 0, -scale, x, 0)))
+        if pen.getCommands():
+            ds.append(pen.getCommands())
+        x += f["hmtx"][gname][0] * scale
+        if i < len(text) - 1:
+            x += tracking * size
+    return " ".join(ds), x
+
+
+def cap_height(size, weight="ExtraBold"):
+    f = _font(weight)
+    return f["OS/2"].sCapHeight * size / f["head"].unitsPerEm
+
+
+def type_svg(text, size, fill, weight="ExtraBold", tracking=0.045):
+    d, w = text_path(text, size, weight, tracking)
+    return f'  <path d="{d}" fill="{fill}"/>', w
+
+
+# ── Blocky stencil letterset (legacy, kept for riffing — no longer emitted) ────────────────────────────────────────────────
 # Each glyph: (width, [(x, y, w, h), ...]) on a 20-high grid, 4px bar unit.
 GLYPHS = {
     "S": (16, [(0, 0, 16, 4), (0, 4, 4, 4), (0, 8, 16, 4), (12, 12, 4, 4), (0, 16, 16, 4)]),
@@ -158,26 +204,29 @@ def emit_direction(name, fn):
   </g>'''
     write(f"{name}/github-avatar.svg", svg(240, 240, inner, background=CHARCOAL))
 
-    # horizontal lockups: mark + SYMPOZIUM
-    for variant, primary, accent, bg in (
-        ("dark", BONE, EMBER, None),
-        ("light", PANEL, RUST, None),
+    # horizontal lockups: mark + SYMPOZIUM (JetBrains Mono ExtraBold, outlined)
+    for variant, primary, accent in (
+        ("dark", BONE, EMBER),
+        ("light", PANEL, RUST),
     ):
-        wrects, warc, wwidth = word_rects("SYMPOZIUM", 0, 0, 2.2, accent_chars="Z")
-        mark_size, pad = 88, 34
-        total_w = mark_size + pad + wwidth + 8
-        body = f'''  <g transform="translate(0 {(88-88)/2:g}) scale({88/120:.4f})">
+        size = 40 / (cap_height(1.0))  # cap height = 40
+        wpath, wwidth = type_svg("SYMPOZIUM", size, primary)[0], text_path("SYMPOZIUM", size)[1]
+        mark_size, pad = 88, 30
+        baseline = (88 + 40) / 2
+        total_w = mark_size + pad + wwidth + 6
+        body = f'''  <g transform="scale({88/120:.4f})">
 {fn(primary, accent)}
   </g>
-  <g transform="translate({mark_size + pad} {(88 - 44) / 2:g})">
-{rects_svg(wrects, primary)}
-{rects_svg(warc, accent)}
+  <g transform="translate({mark_size + pad} {baseline:g})">
+{wpath}
   </g>'''
-        write(f"{name}/logo-horizontal-{variant}.svg", svg(int(total_w), 88, body))
+        write(f"{name}/logo-horizontal-{variant}.svg", svg(round(total_w), 88, body))
 
     # social card 1280×640
-    wrects, warc, wwidth = word_rects("SYMPOZIUM", 0, 0, 3.6, accent_chars="Z")
-    trects, tarc, twidth = word_rects("THE COORDINATION LAYER FOR MULTI-AGENT AI", 0, 0, 0.95)
+    wm_size = 64 / cap_height(1.0)              # wordmark cap height 64
+    wm_path, _ = type_svg("SYMPOZIUM", wm_size, BONE)[0], 0
+    tag_path = type_svg("THE COORDINATION LAYER FOR MULTI-AGENT AI", 21, OLIVE, weight="Medium", tracking=0.10)[0]
+    tick_path = type_svg("AGENTS ARE PODS — POLICY IS CRDS — MODELS ARE CLAIMED", 17, OLIVE, weight="Medium", tracking=0.08)[0]
     card = f'''  <defs>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
       <rect x="23" y="23" width="2" height="2" fill="{LINE}"/>
@@ -192,25 +241,36 @@ def emit_direction(name, fn):
   <g transform="translate(120 172) scale(1.9)">
 {fn(BONE, EMBER)}
   </g>
-  <g transform="translate(392 244)">
-{rects_svg(wrects, BONE)}
-{rects_svg(warc, EMBER)}
+  <g transform="translate(392 300)">
+{wm_path}
   </g>
-  <g transform="translate(394 344)">
-{rects_svg(trects, OLIVE)}
+  <g transform="translate(394 352)">
+{tag_path}
   </g>
   <rect x="60" y="540" width="1160" height="1" fill="{LINE}"/>
-  <g transform="translate(60 556)">
-{rects_svg(word_rects("AGENTS ARE PODS - POLICY IS CRDS - MODELS ARE CLAIMED", 0, 0, 0.9)[0], OLIVE)}
+  <g transform="translate(60 578)">
+{tick_path}
   </g>'''
     write(f"{name}/social-card.svg", svg(1280, 640, card, background=CHARCOAL))
 
 
 def emit_wordmark():
     for variant, primary, accent in (("dark", BONE, EMBER), ("light", PANEL, RUST)):
-        wrects, warc, wwidth = word_rects("SYMPOZIUM", 0, 0, 2.6, accent_chars="Z")
-        body = rects_svg(wrects, primary) + "\n" + rects_svg(warc, accent)
-        write(f"wordmark/wordmark-{variant}.svg", svg(int(wwidth), 52, body))
+        size = 48 / cap_height(1.0)             # cap height 48
+        base, pad = 48 + 4, 2
+        wpath, wwidth = type_svg("SYMPOZIUM", size, primary)
+        body = f'  <g transform="translate({pad} {base})">\n{wpath}\n  </g>'
+        write(f"wordmark/wordmark-{variant}.svg", svg(round(wwidth + pad * 2), 60, body))
+
+        # .AI suffix variant, ember accent (echoes the navbar treatment)
+        d1, w1 = text_path("SYMPOZIUM", size)
+        d2, w2 = text_path(".AI", size)
+        gap = 0.045 * size
+        body = (f'  <g transform="translate({pad} {base})">\n'
+                f'  <path d="{d1}" fill="{primary}"/>\n'
+                f'  <g transform="translate({w1 + gap} 0)"><path d="{d2}" fill="{accent}"/></g>\n'
+                f'  </g>')
+        write(f"wordmark/wordmark-ai-{variant}.svg", svg(round(w1 + gap + w2 + pad * 2), 60, body))
 
 
 if __name__ == "__main__":
