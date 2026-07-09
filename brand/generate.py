@@ -26,17 +26,25 @@ RUST     = "#c4532a"   # accent on light
 EMBER    = "#e8562a"   # accent on dark
 BONE_BG  = "#eae6de"   # light-mode background
 
+# Palette v2 — data-plate revision (brand sheet 2026-07-09)
+CHARCOAL2 = "#16130f"  # warmer deep charcoal
+CREAM2    = "#ede6da"  # cream
+ORANGE2   = "#e8502a"  # orange
+SLATE2    = "#8fa3b0"  # slate — secondary labels only
+
 
 # ── Type engine: JetBrains Mono outlined to paths (no font dependency in
 #    the emitted SVGs; fonts vendored under fonts/ with their OFL licence).
 #    Regenerate inside a venv with `pip install fonttools`.
 _FONTS = {}
 
-def _font(weight):
-    if weight not in _FONTS:
+def _font(name):
+    """name: bare weight = JetBrainsMono-<w>; otherwise a full file stem."""
+    if name not in _FONTS:
         from fontTools.ttLib import TTFont
-        _FONTS[weight] = TTFont(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", f"JetBrainsMono-{weight}.ttf"))
-    return _FONTS[weight]
+        stem = f"JetBrainsMono-{name}" if "-" not in name else name
+        _FONTS[name] = TTFont(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", stem + ".ttf"))
+    return _FONTS[name]
 
 
 def text_path(text, size, weight="ExtraBold", tracking=0.045):
@@ -273,8 +281,115 @@ def emit_wordmark():
         write(f"wordmark/wordmark-ai-{variant}.svg", svg(round(w1 + gap + w2 + pad * 2), 60, body))
 
 
+# ── Direction 4 — the Plate (data-plate slotted S, from the brand sheet) ────
+
+def mark_plate(primary, accent=None):
+    """Slotted-plate S on the 8×8 modular grid: three kerf cuts (enclosed /
+    open-right with a centre bridge / open-left) and a detached dash floating
+    off the right edge — the signature detail. Mono by design; orange lives
+    in labels, never in the mark."""
+    rects = [
+        (4, 10, 86, 22),    # top slab
+        (4, 32, 20, 8),     # slot-1 left margin (slot enclosed)
+        (82, 32, 8, 8),     # slot-1 right margin
+        (4, 40, 86, 12),    # band
+        (31, 52, 11, 8),    # slot-2 centre bridge (open both sides)
+        (4, 60, 86, 12),    # band
+        (57, 72, 33, 12),   # slot-3 right remainder (open left)
+        (4, 84, 86, 26),    # bottom slab (2X)
+        (96, 52, 18, 8),    # detached dash
+    ]
+    # same-colour hairline stroke kills antialiasing seams where rects abut
+    return "\n".join(
+        f'  <rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{primary}" '
+        f'stroke="{primary}" stroke-width="0.8"/>'
+        for (x, y, w, h) in rects
+    )
+
+
+def emit_plate():
+    name = "plate"
+    write(f"{name}/mark-dark.svg", svg(120, 120, mark_plate(CREAM2)))
+    write(f"{name}/mark-light.svg", svg(120, 120, mark_plate(CHARCOAL2)))
+    write(f"{name}/mark-mono.svg", svg(120, 120, mark_plate("currentColor")))
+
+    # github avatar tile
+    inner = f'''  <rect x="6" y="6" width="228" height="228" fill="none" stroke="#2a2620" stroke-width="2"/>
+  <g transform="translate(42 42) scale(1.3)">
+{mark_plate(CREAM2)}
+  </g>'''
+    write(f"{name}/github-avatar.svg", svg(240, 240, inner, background=CHARCOAL2))
+
+    # primary lockup, per the sheet: mark | SYMPOZIUM / AGENTIC CONTROL PLANE / ( K8S-NATIVE )
+    for variant, fg, sub, acc in (("dark", CREAM2, CREAM2, ORANGE2), ("light", CHARCOAL2, CHARCOAL2, ORANGE2)):
+        wm_size = 46 / cap_height(1.0, "ChakraPetch-Bold")
+        wm, wm_w = type_svg("SYMPOZIUM", wm_size, fg, weight="ChakraPetch-Bold", tracking=0.02)
+        l1, l1_w = type_svg("AGENTIC CONTROL PLANE", 14.5, sub, weight="IBMPlexMono-Medium", tracking=0.14)
+        l2, l2_w = type_svg("( K8S-NATIVE )", 14.5, acc, weight="IBMPlexMono-Medium", tracking=0.14)
+        mark_h, pad = 96, 26
+        total_w = mark_h + pad + 14 + max(wm_w, l1_w) + 8
+        body = f'''  <g transform="scale({mark_h/120:.4f})">
+{mark_plate(fg)}
+  </g>
+  <rect x="{mark_h + pad - 14:g}" y="8" width="2" height="{mark_h - 16}" fill="{fg}" opacity="0.35"/>
+  <g transform="translate({mark_h + pad} 46)">
+{wm}
+  </g>
+  <g transform="translate({mark_h + pad + 2} 70)">
+{l1}
+  </g>
+  <g transform="translate({mark_h + pad + 2} 90)">
+{l2}
+  </g>'''
+        write(f"{name}/logo-horizontal-{variant}.svg", svg(round(total_w), mark_h, body))
+
+    # wordmarks in Chakra Petch
+    for variant, fg, acc in (("dark", CREAM2, ORANGE2), ("light", CHARCOAL2, ORANGE2)):
+        size = 48 / cap_height(1.0, "ChakraPetch-Bold")
+        wpath, wwidth = type_svg("SYMPOZIUM", size, fg, weight="ChakraPetch-Bold", tracking=0.02)
+        write(f"{name}/wordmark-{variant}.svg", svg(round(wwidth + 4), 60,
+              f'  <g transform="translate(2 52)">\n{wpath}\n  </g>'))
+
+    # social card 1280×640 — data-plate style with spec footer
+    wm_size = 66 / cap_height(1.0, "ChakraPetch-Bold")
+    wm, wm_w = type_svg("SYMPOZIUM", wm_size, CREAM2, weight="ChakraPetch-Bold", tracking=0.02)
+    tag, _ = type_svg("AGENTIC CONTROL PLANE", 22, SLATE2, weight="IBMPlexMono-Medium", tracking=0.16)
+    k8s, _ = type_svg("( K8S-NATIVE )", 22, ORANGE2, weight="IBMPlexMono-Medium", tracking=0.16)
+    cells = [("APPLICATION:", "CONTROL PLANE"), ("CLASS:", "MULTI-AGENT"),
+             ("STATUS:", "ACTIVE"), ("SPEC REF:", "SYM-BRAND-001"), ("REV:", "A")]
+    xw = 1160 / len(cells)
+    footer = []
+    for i, (k, v) in enumerate(cells):
+        x = 60 + i * xw
+        kp, _ = type_svg(k, 13, SLATE2, weight="IBMPlexMono-Regular", tracking=0.10)
+        vp, _ = type_svg(v, 16, ORANGE2 if k == "STATUS:" else CREAM2, weight="IBMPlexMono-Medium", tracking=0.06)
+        footer.append(f'  <rect x="{x:g}" y="548" width="{xw:g}" height="62" fill="none" stroke="#2a2620" stroke-width="1"/>')
+        footer.append(f'  <g transform="translate({x + 14:g} 574)">\n{kp}\n  </g>')
+        footer.append(f'  <g transform="translate({x + 14:g} 598)">\n{vp}\n  </g>')
+    card = f'''  <rect x="10" y="10" width="1260" height="620" fill="none" stroke="#2a2620" stroke-width="1"/>
+  <rect x="1150" y="10" width="120" height="90" fill="{ORANGE2}"/>
+  <g transform="translate(1180 72)">
+{type_svg("01", 42, CHARCOAL2, weight="ChakraPetch-Bold")[0]}
+  </g>
+  <g transform="translate(110 180) scale(2.1)">
+{mark_plate(CREAM2)}
+  </g>
+  <g transform="translate(440 330)">
+{wm}
+  </g>
+  <g transform="translate(444 384)">
+{tag}
+  </g>
+  <g transform="translate(444 424)">
+{k8s}
+  </g>
+{chr(10).join(footer)}'''
+    write(f"{name}/social-card.svg", svg(1280, 640, card, background=CHARCOAL2))
+
+
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     for name, fn in MARKS.items():
         emit_direction(name, fn)
     emit_wordmark()
+    emit_plate()
