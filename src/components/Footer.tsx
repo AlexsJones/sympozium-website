@@ -53,6 +53,8 @@ export default function Footer() {
                 { label: 'k8sgpt', href: 'https://k8sgpt.ai' },
                 { label: 'OpenClaw', href: 'https://openclaw.ai' },
                 { label: 'llmfit', href: 'https://github.com/AlexsJones/llmfit' },
+                { label: 'Celln', href: 'https://github.com/sympozium-ai/celln' },
+                { label: 'Ergoz', href: 'https://github.com/sympozium-ai/ergoz' },
               ].map((link) => (
                 <li key={link.label}>
                   <a
@@ -75,6 +77,7 @@ export default function Footer() {
                 { label: 'Getting Started', href: 'https://deploy.sympozium.ai/docs/getting-started/' },
                 { label: 'Architecture', href: 'https://deploy.sympozium.ai/docs/architecture/' },
                 { label: 'Skill Authoring Guide', href: 'https://deploy.sympozium.ai/docs/skills/' },
+                { label: 'AgentHarness', href: 'https://deploy.sympozium.ai/docs/guides/agentharness/' },
               ].map((link) => (
                 <li key={link.label}>
                   <a

@@ -64,8 +64,8 @@ function FullStack() {
         <StackArrow />
         <StackChip
           color="claw-green"
-          label="Agent Pod"
-          sub="ephemeral"
+          label="Agent Runtime"
+          sub="isolated workload"
           icon={
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <path d="M13 2L4 14h7v8l9-12h-7l0-8z" stroke="currentColor" strokeWidth="1.5" fill="none" />
@@ -119,9 +119,10 @@ export default function Hero() {
             </p>
 
             <p className="text-sm sm:text-base text-slate-400 mb-8 leading-relaxed">
-              Every agent is an <span className="text-claw-cyan font-medium">ephemeral Pod</span>.{' '}
+              Every agent runs in an <span className="text-claw-cyan font-medium">isolated workload</span>.{' '}
               Every policy is a <span className="text-claw-purple font-medium">CRD</span>.{' '}
-              Every execution is a <span className="text-claw-green font-medium">Job</span>.
+              Ephemeral AgentRuns are <span className="text-claw-green font-medium">Jobs</span>; interactive sessions are{' '}
+              <span className="text-claw-orange font-medium">HarnessSessions</span>.
               <br className="hidden sm:block" />
               Kubernetes-native. Multi-tenant. <span className="text-white font-semibold">Safe by design.</span>
             </p>

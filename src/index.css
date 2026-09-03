@@ -690,3 +690,50 @@ code {
 .animate-dash {
   animation: dash-flow 1.5s linear infinite;
 }
+
+
+/* ── Family stack (Why) ── */
+.family-stack-rail {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 9px;
+  width: 2px;
+  background: #333330;
+}
+
+.family-stack-token {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: #e8562a;
+  border: 2px solid #f0ece4;
+  animation: family-stack-token 9s ease-in-out infinite;
+}
+
+@keyframes family-stack-token {
+  0%, 8% { top: 4%; }
+  18%, 26% { top: 24%; }
+  36%, 44% { top: 44%; }
+  54%, 62% { top: 64%; }
+  72%, 84% { top: 86%; }
+  100% { top: 4%; }
+}
+
+.family-plate {
+  border-radius: 2px;
+}
+
+.family-dock {
+  border-radius: 2px;
+  min-height: 280px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .family-stack-token {
+    animation: none;
+    top: 4%;
+  }
+}
