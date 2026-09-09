@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import EnsembleWorkflow from './EnsembleWorkflow'
 
 /* ── Compact "full stack" strip — the layers an agent runs on ── */
@@ -79,9 +80,9 @@ function FullStack() {
 
 /* ── Hero section ── */
 
-export default function Hero() {
+export default function Hero({ media }: { media?: ReactNode }) {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden grid-pattern">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden grid-pattern">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-kube-blue/20 rounded-full blur-[120px] animate-pulse-glow" />
@@ -90,7 +91,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className={`grid grid-cols-1 ${media ? "lg:grid-cols-[0.8fr_1.2fr] gap-7 lg:gap-10" : "lg:grid-cols-2 gap-12 lg:gap-16"} items-center`}>
           {/* Left: headline + CTAs */}
           <div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-5">
@@ -106,9 +107,9 @@ export default function Hero() {
             </h1>
 
             {/* Full-stack strip — sits with the headline */}
-            <FullStack />
+            {!media && <FullStack />}
 
-            <p className="text-lg sm:text-xl text-slate-300 font-light mb-4 leading-relaxed">
+            <p className={`${media ? "text-sm sm:text-base" : "text-lg sm:text-xl"} text-slate-300 font-light mb-4 leading-relaxed`}>
               Agents don't need better prompts. They need{' '}
               <span className="text-claw-orange font-medium">shared situational awareness</span>,{' '}
               <span className="text-claw-purple font-medium">structured handoffs</span>, and{' '}
@@ -118,7 +119,7 @@ export default function Hero() {
               <span className="text-white font-medium">when</span>.
             </p>
 
-            <p className="text-sm sm:text-base text-slate-400 mb-8 leading-relaxed">
+            <p className={`${media ? "hidden lg:block text-sm" : "text-sm sm:text-base"} text-slate-400 mb-8 leading-relaxed`}>
               Every agent runs in an <span className="text-claw-cyan font-medium">isolated workload</span>.{' '}
               Every policy is a <span className="text-claw-purple font-medium">CRD</span>.{' '}
               Ephemeral AgentRuns are <span className="text-claw-green font-medium">Jobs</span>; interactive sessions are{' '}
@@ -159,7 +160,7 @@ export default function Hero() {
           </div>
 
           {/* Right: animated ensemble workflow */}
-          <EnsembleWorkflow />
+          {media ?? <EnsembleWorkflow />}
         </div>
       </div>
 

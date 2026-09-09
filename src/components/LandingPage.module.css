@@ -1,0 +1,9 @@
+.figure { width: 100%; min-width: 0; }
+.video { display: block; width: 100%; height: auto; background: #09090b; border: 1px solid var(--color-surface-lighter); object-fit: contain; }
+.caption { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 14px; font: 10px var(--font-mono); line-height: 1.7; color: #b7b6af; }
+.caption a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
+.transcript { margin-top: 10px; font-size: 10px; color: #999b93; line-height: 1.8; }
+.transcript summary { cursor: pointer; width: fit-content; }
+.transcript p { margin-top: 10px; max-width: 650px; }
+.figure :is(a, summary, video):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+@media (max-width: 640px) { .caption { flex-wrap: wrap; gap: 5px; } }
