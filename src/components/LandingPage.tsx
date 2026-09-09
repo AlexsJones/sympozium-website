@@ -11,20 +11,20 @@ function LandingVideo() {
   return <figure className={s.figure}>
     <video
       className={s.video}
-      width={960}
-      height={736}
+      width={1350}
+      height={1036}
       autoPlay
       muted
       loop
       playsInline
       controls
       preload="auto"
-      poster="/video/sympozium-harness-tasks-poster.jpg"
+      poster="/video/sympozium-harness-tasks-hd-poster.jpg"
       aria-label="Sympozium native cells: live conversation context, bounded tool execution, returned results, and disposable work cells"
       aria-describedby="video-description"
     >
-      <source src="/video/sympozium-harness-tasks.mp4" type="video/mp4" />
-      <a href="/video/sympozium-harness-tasks.mp4">Watch the native cells animation</a>
+      <source src="/video/sympozium-harness-tasks-hd.mp4" type="video/mp4" />
+      <a href="/video/sympozium-harness-tasks-hd.mp4">Watch the native cells animation</a>
     </video>
     <figcaption id="video-description" className={s.caption}>
       <span>Keep the context. Bound the work.</span>
